@@ -1,0 +1,7 @@
+<svg width="400" height="400" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Team Bild Platzhalter Benjamin Nöst</title>
+  <desc id="desc">Neutrales Porträt als austauschbarer Platzhalter.</desc>
+  <rect width="400" height="400" rx="200" fill="#DCEAF2"/>
+  <circle cx="200" cy="160" r="72" fill="#AFC6D4"/>
+  <path d="M84 344C95 266 142 228 200 228C258 228 305 266 316 344" fill="#0F4B73"/>
+</svg>

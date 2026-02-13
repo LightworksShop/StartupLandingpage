@@ -1,0 +1,27 @@
+# Landingpage – Inhalt und Entwicklung
+
+## Zweck
+
+Diese Datei dokumentiert, wie Inhalte und Assets der Flow-Landingpage gepflegt werden.
+
+## Dateien
+
+- `index.html`: Struktur und Sektionen des Onepagers
+- `styles.css`: komplettes Layout/Design (responsive)
+- `content.js`: alle Inhalte (Texte für Listen/Cards/Team)
+- `app.js`: Rendering aus `content.js`, Mobile-Menü, Formular-Mailto
+- `assets/images/*`: austauschbare Bildplatzhalter (lokal)
+- `impressum.html` und `datenschutz.html`: verlinkte Rechtsseiten (Platzhalter)
+
+## Inhaltspflege
+
+1. Liste, Karten oder Teamdaten direkt in `content.js` ändern.
+2. Bilder nur über die Pfade in `content.js` austauschen.
+3. In `index.html` keine Bild-URL hart codieren.
+
+## Hinweise vor Livegang
+
+- Impressum und Datenschutz rechtlich finalisieren.
+- E-Mail-Adresse und Firmendaten prüfen.
+- Platzhalterbilder durch finale Bilder ersetzen.
+- Optional echte Formularverarbeitung statt `mailto` integrieren.
