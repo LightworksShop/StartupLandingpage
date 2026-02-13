@@ -39,6 +39,7 @@ body {
   line-height: 1.5;
   color: var(--color-text);
   background: var(--color-bg);
+  padding-top: var(--header-total-height);
 }
 
 a {
@@ -143,13 +144,15 @@ p {
 }
 
 .site-header {
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
   z-index: 100;
   background: #f3f4f6;
   backdrop-filter: none;
   border-bottom: 0;
-  transition: min-height 180ms ease;
+  overflow: hidden;
 }
 
 .contact-bar {
@@ -178,9 +181,10 @@ p {
   display: flex;
   align-items: center;
   gap: 20px;
-  min-height: var(--nav-height);
+  height: var(--nav-height);
   background: transparent;
-  transition: min-height 180ms ease;
+  transition: height 220ms ease, gap 220ms ease;
+  will-change: height;
 }
 
 .logo {
@@ -191,11 +195,7 @@ p {
 .logo img {
   height: var(--logo-height);
   width: auto;
-  transition: height 180ms ease;
-}
-
-.site-header.is-scrolled .header-inner {
-  min-height: var(--nav-height-scrolled);
+  transition: height 220ms ease;
 }
 
 .site-header.is-scrolled .logo img {
@@ -208,6 +208,7 @@ p {
   gap: 22px;
   font-weight: 400;
   color: #2b323b;
+  transition: gap 220ms ease, font-size 220ms ease;
 }
 
 .desktop-nav a:hover,
@@ -217,6 +218,35 @@ p {
 
 .header-cta {
   margin-left: 8px;
+  transition: padding 220ms ease;
+}
+
+.site-header.is-scrolled .header-inner {
+  height: var(--nav-height-scrolled);
+  gap: 16px;
+}
+
+.site-header.is-scrolled .desktop-nav {
+  gap: 16px;
+  font-size: 0.95rem;
+}
+
+.site-header.is-scrolled .header-cta {
+  padding: 10px 16px;
+}
+
+#header-shrink-sentinel {
+  position: relative;
+  height: 1px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .header-inner,
+  .logo img,
+  .desktop-nav,
+  .header-cta {
+    transition: none;
+  }
 }
 
 .menu-toggle {

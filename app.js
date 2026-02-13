@@ -159,36 +159,31 @@ function setupPilotForm() {
 
 function setupHeaderShrink() {
   const header = document.querySelector(".site-header");
+  const sentinel = document.getElementById("header-shrink-sentinel");
   if (!header) {
     return;
   }
 
-  const ENTER_SCROLL_Y = 80;
-  const EXIT_SCROLL_Y = 40;
-  let ticking = false;
-
-  function updateHeaderState() {
-    const current = header.classList.contains("is-scrolled");
-    const y = window.scrollY;
-
-    // Hysteresis prevents rapid toggling around a single threshold.
-    const next = current ? y > EXIT_SCROLL_Y : y > ENTER_SCROLL_Y;
-    if (next !== current) {
-      header.classList.toggle("is-scrolled", next);
-    }
-
-    ticking = false;
+  function setScrolledState(isScrolled) {
+    header.classList.toggle("is-scrolled", isScrolled);
   }
 
-  function onScroll() {
-    if (ticking) {
-      return;
-    }
-    ticking = true;
-    requestAnimationFrame(updateHeaderState);
+  if ("IntersectionObserver" in window && sentinel) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const [entry] = entries;
+        // Shrink once we are past ~70px scroll depth.
+        setScrolledState(!entry.isIntersecting);
+      },
+      { rootMargin: "-70px 0px 0px 0px", threshold: 0 }
+    );
+    observer.observe(sentinel);
+    return;
   }
 
-  updateHeaderState();
+  // Fallback for very old browsers.
+  const onScroll = () => setScrolledState(window.scrollY > 70);
+  onScroll();
   window.addEventListener("scroll", onScroll, { passive: true });
 }
 
