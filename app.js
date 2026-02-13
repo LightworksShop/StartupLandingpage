@@ -155,6 +155,22 @@ function setupPilotForm() {
   });
 }
 
+function setupHeaderShrink() {
+  const header = document.querySelector(".site-header");
+  if (!header) {
+    return;
+  }
+
+  function updateHeaderState() {
+    const isScrolled = window.scrollY > 24;
+    header.classList.toggle("is-scrolled", isScrolled);
+  }
+
+  updateHeaderState();
+  window.addEventListener("scroll", updateHeaderState, { passive: true });
+}
+
 renderContent();
 setupMenu();
 setupPilotForm();
+setupHeaderShrink();
