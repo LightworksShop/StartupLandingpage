@@ -12,7 +12,9 @@ function renderImage({ src, alt, fallback }, className = "") {
 
 function renderContent() {
   const trustBullets = document.getElementById("trust-bullets");
-  trustBullets.innerHTML = createListItems(flowContent.trustBullets);
+  if (trustBullets) {
+    trustBullets.innerHTML = createListItems(flowContent.trustBullets);
+  }
 
   const heroVisual = document.getElementById("hero-visual");
   heroVisual.innerHTML = renderImage(flowContent.heroImage);
