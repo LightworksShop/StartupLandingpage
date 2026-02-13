@@ -550,33 +550,55 @@ p {
 }
 
 .pilot-form {
-  background: #1f242b;
+  background: transparent;
   border-radius: var(--radius-md);
-  padding: 20px;
-  border: 1px solid #2e353f;
+  padding: 0;
+  border: 0;
   display: grid;
-  gap: 8px;
+  gap: 9px;
   box-shadow: none;
 }
 
 .pilot-form label {
   font-size: 0.95rem;
-  color: #e4e9ef;
-  font-weight: 600;
+  color: #f0f3f7;
+  font-weight: 500;
 }
 
 .pilot-form input,
 .pilot-form textarea {
-  border: 1px solid #47515e;
+  border: 1px solid #c9d1db;
   border-radius: var(--radius-sm);
   padding: 10px 12px;
   font: inherit;
-  color: #eaf0f5;
-  background: #2b323b;
+  color: #1f242b;
+  background: #f3f4f6;
+}
+
+.pilot-form input::placeholder,
+.pilot-form textarea::placeholder {
+  color: #6c757f;
+}
+
+.pilot-form input:focus,
+.pilot-form textarea:focus {
+  outline: none;
+  border-color: #57898b;
+  box-shadow: 0 0 0 2px rgba(87, 137, 139, 0.25);
 }
 
 .pilot-form .btn {
   margin-top: 6px;
+  background: #c3b69a;
+  border-color: #c3b69a;
+  color: #1f242b;
+  font-weight: 600;
+}
+
+.pilot-form .btn:hover,
+.pilot-form .btn:focus-visible {
+  background: #b6a789;
+  border-color: #b6a789;
 }
 
 .team-grid {

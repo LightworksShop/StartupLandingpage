@@ -161,16 +161,93 @@ function setupHeaderShrink() {
     return;
   }
 
+  const ENTER_SCROLL_Y = 80;
+  const EXIT_SCROLL_Y = 40;
+  let ticking = false;
+
   function updateHeaderState() {
-    const isScrolled = window.scrollY > 24;
-    header.classList.toggle("is-scrolled", isScrolled);
+    const current = header.classList.contains("is-scrolled");
+    const y = window.scrollY;
+
+    // Hysteresis prevents rapid toggling around a single threshold.
+    const next = current ? y > EXIT_SCROLL_Y : y > ENTER_SCROLL_Y;
+    if (next !== current) {
+      header.classList.toggle("is-scrolled", next);
+    }
+
+    ticking = false;
+  }
+
+  function onScroll() {
+    if (ticking) {
+      return;
+    }
+    ticking = true;
+    requestAnimationFrame(updateHeaderState);
   }
 
   updateHeaderState();
-  window.addEventListener("scroll", updateHeaderState, { passive: true });
+  window.addEventListener("scroll", onScroll, { passive: true });
+}
+
+function setupAnchorOffset() {
+  const header = document.querySelector(".site-header");
+  if (!header) {
+    return;
+  }
+
+  const anchorLinks = document.querySelectorAll('a[href^="#"]');
+
+  function getOffset() {
+    // Keep a small visual gap below the sticky header.
+    return header.offsetHeight + 8;
+  }
+
+  function scrollToId(id, updateHash = true) {
+    const target = document.getElementById(id);
+    if (!target) {
+      return;
+    }
+
+    const top = target.getBoundingClientRect().top + window.scrollY - getOffset();
+    window.scrollTo({ top, behavior: "smooth" });
+
+    if (updateHash) {
+      history.replaceState(null, "", `#${id}`);
+    }
+  }
+
+  anchorLinks.forEach((link) => {
+    const href = link.getAttribute("href");
+    if (!href || href === "#") {
+      return;
+    }
+
+    const id = href.slice(1);
+    if (!id) {
+      return;
+    }
+
+    link.addEventListener("click", (event) => {
+      const target = document.getElementById(id);
+      if (!target) {
+        return;
+      }
+
+      event.preventDefault();
+      scrollToId(id);
+    });
+  });
+
+  // Correct initial deep-link position after reload/open with hash.
+  if (window.location.hash.length > 1) {
+    const id = window.location.hash.slice(1);
+    requestAnimationFrame(() => scrollToId(id, false));
+  }
 }
 
 renderContent();
 setupMenu();
 setupPilotForm();
 setupHeaderShrink();
+setupAnchorOffset();
