@@ -132,20 +132,23 @@
           <p>Pilot bedeutet Partnerschaft – nicht kostenlos.</p>
           <a class="btn btn-primary" href="mailto:kontakt@flow-software.de?subject=Pilotbetrieb%20anfragen">Pilotbetrieb anfragen</a>
         </div>
-        <form class="pilot-form" aria-label="Pilotanfrage">
+        <form class="pilot-form" aria-label="Pilotanfrage" novalidate>
           <label for="name">Name</label>
-          <input id="name" name="name" type="text" autocomplete="name" placeholder="Max Mustermann">
+          <input id="name" name="name" type="text" autocomplete="name" placeholder="Max Mustermann" required>
 
           <label for="company">Firma</label>
           <input id="company" name="company" type="text" autocomplete="organization" placeholder="Musterbetrieb GmbH">
 
           <label for="email">E-Mail</label>
-          <input id="email" name="email" type="email" autocomplete="email" placeholder="max@musterbetrieb.de">
+          <input id="email" name="email" type="email" autocomplete="email" placeholder="max@musterbetrieb.de" required>
 
           <label for="message">Worum geht's?</label>
-          <textarea id="message" name="message" rows="4" placeholder="Kurz die aktuelle Situation und euer Ziel beschreiben."></textarea>
+          <textarea id="message" name="message" rows="4" placeholder="Kurz die aktuelle Situation und euer Ziel beschreiben." required></textarea>
 
-          <button class="btn btn-secondary" type="submit">Anfrage vorbereiten</button>
+          <input class="hp-field" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+          <p class="form-status" data-form-status aria-live="polite"></p>
+          <button class="btn btn-secondary" type="submit" data-submit-button>Anfrage senden</button>
         </form>
       </div>
     </section>

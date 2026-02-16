@@ -1,4 +1,11 @@
 const flowContent = {
+  form: {
+    smtpRelayUrl: "http://localhost:3000/api/contact",
+    method: "POST",
+    recipientEmail: "kontakt@flow-software.de",
+    subject: "Pilotbetrieb anfragen",
+    useMailtoFallback: true
+  },
   trustBullets: [
     "KMU-fokussiert",
     "Individuell",
@@ -139,14 +146,14 @@ const flowContent = {
     {
       name: "Benjamin Nöst",
       role: "Beratung & Konzeption",
-      image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=400&q=80",
+      image: "assets/images/team-benjamin.jpg",
       fallback: "assets/images/team-benjamin.svg",
       alt: "Portraitbild als Platzhalter für Benjamin Nöst"
     },
     {
       name: "Yannis Vogel",
       role: "Softwareentwicklung & Implementierung",
-      image: "assets/images/team-yannis-224.png",
+      image: "assets/images/team-yannis.jpg",
       fallback: "assets/images/team-yannis.svg",
       alt: "Portraitbild als Platzhalter für Yannis Vogel"
     }

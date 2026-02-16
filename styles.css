@@ -122,12 +122,12 @@ p {
 }
 
 .tone-accent .btn-primary {
-  background: linear-gradient(135deg, #111418 0%, var(--color-primary-strong) 100%);
+  background: linear-gradient(135deg, var(--color-accent) 0%, #4f7f81 100%);
 }
 
 .tone-accent .btn-primary:hover,
 .tone-accent .btn-primary:focus-visible {
-  background: linear-gradient(135deg, #090b0d 0%, #151a20 100%);
+  background: linear-gradient(135deg, #111418 0%, var(--color-primary-strong) 100%);
 }
 
 .section-label {
@@ -291,12 +291,12 @@ p {
 }
 
 .site-header .btn-primary {
-  background: linear-gradient(135deg, #111418 0%, var(--color-primary-strong) 100%);
+  background: linear-gradient(135deg, var(--color-accent) 0%, #4f7f81 100%);
 }
 
 .site-header .btn-primary:hover,
 .site-header .btn-primary:focus-visible {
-  background: linear-gradient(135deg, #090b0d 0%, #151a20 100%);
+  background: linear-gradient(135deg, #111418 0%, var(--color-primary-strong) 100%);
 }
 
 .btn {
@@ -316,13 +316,13 @@ p {
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, #111418 0%, var(--color-primary) 100%);
+  background: linear-gradient(135deg, var(--color-accent) 0%, #4f7f81 100%);
   color: #ffffff;
 }
 
 .btn-primary:hover,
 .btn-primary:focus-visible {
-  background: linear-gradient(135deg, #090b0d 0%, var(--color-primary-strong) 100%);
+  background: linear-gradient(135deg, #111418 0%, var(--color-primary-strong) 100%);
 }
 
 .btn-secondary {
@@ -333,7 +333,9 @@ p {
 
 .btn-secondary:hover,
 .btn-secondary:focus-visible {
-  background: rgba(42, 48, 56, 0.1);
+  background: linear-gradient(135deg, #111418 0%, var(--color-primary-strong) 100%);
+  border-color: var(--color-primary-strong);
+  color: #ffffff;
 }
 
 .hero {
@@ -704,6 +706,38 @@ p {
   border-color: #b6a789;
 }
 
+.pilot-form .btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.form-status {
+  min-height: 1.4em;
+  margin: 2px 0 0;
+  font-size: 0.92rem;
+}
+
+.form-status.is-success {
+  color: #d7ead8;
+}
+
+.form-status.is-error {
+  color: #ffd2d2;
+}
+
+.form-status.is-info {
+  color: #d7dde4;
+}
+
+.hp-field {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
 .team-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -721,16 +755,31 @@ p {
   box-shadow: none;
 }
 
-.team-card img {
+.team-avatar {
   width: 112px;
   aspect-ratio: 1 / 1;
   border-radius: 50%;
   margin: 0 auto 12px;
+  overflow: hidden;
+}
+
+.team-card img {
+  width: 100%;
+  height: 100%;
+  display: block;
   object-fit: cover;
 }
 
 .team-card img[src*="team-yannis"] {
   object-position: center 38%;
+  transform: scale(1.30);
+  transform-origin: center 42%;
+}
+
+.team-card img[src*="team-benjamin"] {
+  object-position: center 38%;
+  transform: scale(1.30);
+  transform-origin: center 20%;
 }
 
 .about-grid {

@@ -1,0 +1,16 @@
+{
+  "name": "flow-landingpage-mail-relay",
+  "version": "1.0.0",
+  "private": true,
+  "description": "SMTP relay for Flow landingpage form",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.6.1",
+    "express": "^4.21.2",
+    "nodemailer": "^6.10.1"
+  }
+}

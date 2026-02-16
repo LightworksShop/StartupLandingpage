@@ -9,9 +9,11 @@ Diese Datei dokumentiert, wie Inhalte und Assets der Flow-Landingpage gepflegt w
 - `index.html`: Struktur und Sektionen des Onepagers
 - `styles.css`: komplettes Layout/Design (responsive)
 - `content.js`: alle Inhalte (Texte für Listen/Cards/Team)
-- `app.js`: Rendering aus `content.js`, Mobile-Menü, Formular-Mailto
+- `app.js`: Rendering aus `content.js`, Mobile-Menü, Formularlogik
 - `assets/images/*`: austauschbare Bildplatzhalter (lokal)
 - `impressum.html` und `datenschutz.html`: verlinkte Rechtsseiten (Platzhalter)
+- `server.js`: SMTP-Relay (versendet Formulareinträge per SMTP)
+- `.env` (aus `.env.example`): SMTP-Zugangsdaten und Zieladresse
 
 ## Inhaltspflege
 
@@ -19,9 +21,24 @@ Diese Datei dokumentiert, wie Inhalte und Assets der Flow-Landingpage gepflegt w
 2. Bilder nur über die Pfade in `content.js` austauschen.
 3. In `index.html` keine Bild-URL hart codieren.
 
+## Formular (SMTP-Relay ohne Datenbank)
+
+- Frontend-Konfiguration liegt in `content.js` unter `flowContent.form`.
+- `smtpRelayUrl` zeigt auf den Mail-Handler (lokal: `http://localhost:3000/api/contact`).
+- SMTP-Zugangsdaten stehen nur serverseitig in `.env`, niemals im Frontend.
+- Solange Relay nicht erreichbar ist, nutzt das Formular `mailto` als Fallback.
+
+## Lokaler Start (Formular inklusive)
+
+1. `cp .env.example .env`
+2. `.env` mit echten SMTP-Werten füllen
+3. `npm install`
+4. `npm run start` (SMTP-Relay auf Port 3000)
+5. Landingpage separat starten, z. B. `python3 -m http.server 4173`
+
 ## Hinweise vor Livegang
 
 - Impressum und Datenschutz rechtlich finalisieren.
 - E-Mail-Adresse und Firmendaten prüfen.
 - Platzhalterbilder durch finale Bilder ersetzen.
-- Optional echte Formularverarbeitung statt `mailto` integrieren.
+- `smtpRelayUrl` auf die produktive Mail-Endpoint-URL umstellen.

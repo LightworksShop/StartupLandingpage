@@ -90,7 +90,9 @@ function renderContent() {
     .map(
       (person) => `
         <article class="team-card">
-          ${renderImage({ src: person.image, alt: person.alt, fallback: person.fallback })}
+          <div class="team-avatar">
+            ${renderImage({ src: person.image, alt: person.alt, fallback: person.fallback })}
+          </div>
           <h3>${person.name}</h3>
           <p>${person.role}</p>
         </article>
@@ -139,21 +141,120 @@ function setupMenu() {
 
 function setupPilotForm() {
   const form = document.querySelector(".pilot-form");
-  form.addEventListener("submit", (event) => {
+  if (!form) {
+    return;
+  }
+
+  const submitButton = form.querySelector("[data-submit-button]");
+  const statusEl = form.querySelector("[data-form-status]");
+  const formConfig = flowContent.form || {};
+
+  function setStatus(message, state = "") {
+    if (!statusEl) {
+      return;
+    }
+    statusEl.textContent = message;
+    statusEl.className = `form-status${state ? ` is-${state}` : ""}`;
+  }
+
+  function setSubmitting(isSubmitting) {
+    if (!submitButton) {
+      return;
+    }
+    submitButton.disabled = isSubmitting;
+    submitButton.textContent = isSubmitting ? "Wird gesendet..." : "Anfrage senden";
+  }
+
+  function sanitize(value) {
+    return String(value || "").trim();
+  }
+
+  async function submitToSmtpRelay(payload) {
+    const smtpRelayUrl = sanitize(formConfig.smtpRelayUrl);
+    if (!smtpRelayUrl) {
+      return false;
+    }
+
+    const method = sanitize(formConfig.method || "POST").toUpperCase();
+    const response = await fetch(smtpRelayUrl, {
+      method,
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(payload)
+    });
+
+    if (!response.ok) {
+      throw new Error(`SMTP relay returned status ${response.status}`);
+    }
+
+    return true;
+  }
+
+  function openMailClient(payload) {
+    const recipient = sanitize(formConfig.recipientEmail || "kontakt@flow-software.de");
+    const subject = encodeURIComponent(sanitize(formConfig.subject || "Pilotbetrieb anfragen"));
+    const body = encodeURIComponent(
+      `Name: ${payload.name}\nFirma: ${payload.company}\nE-Mail: ${payload.email}\n\nWorum geht's?\n${payload.message}`
+    );
+    window.location.href = `mailto:${recipient}?subject=${subject}&body=${body}`;
+  }
+
+  form.addEventListener("submit", async (event) => {
     event.preventDefault();
+    setStatus("");
+
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      setStatus("Bitte prüfe die markierten Felder.", "error");
+      return;
+    }
 
     const formData = new FormData(form);
-    const name = formData.get("name") || "";
-    const company = formData.get("company") || "";
-    const email = formData.get("email") || "";
-    const message = formData.get("message") || "";
 
-    const subject = encodeURIComponent("Pilotbetrieb anfragen");
-    const body = encodeURIComponent(
-      `Name: ${name}\nFirma: ${company}\nE-Mail: ${email}\n\nWorum geht's?\n${message}`
-    );
+    // Simple honeypot trap for bots.
+    if (sanitize(formData.get("website"))) {
+      form.reset();
+      setStatus("Danke, deine Anfrage wurde übermittelt.", "success");
+      return;
+    }
 
-    window.location.href = `mailto:kontakt@flow-software.de?subject=${subject}&body=${body}`;
+    const payload = {
+      name: sanitize(formData.get("name")),
+      company: sanitize(formData.get("company")),
+      email: sanitize(formData.get("email")),
+      message: sanitize(formData.get("message")),
+      source: "landingpage",
+      createdAt: new Date().toISOString()
+    };
+
+    setSubmitting(true);
+
+    try {
+      const sentViaSmtpRelay = await submitToSmtpRelay(payload);
+      if (sentViaSmtpRelay) {
+        form.reset();
+        setStatus("Danke, deine Anfrage wurde gesendet.", "success");
+        return;
+      }
+
+      if (formConfig.useMailtoFallback !== false) {
+        openMailClient(payload);
+        setStatus("Dein E-Mail-Programm wurde geöffnet. Bitte sende die vorbereitete Anfrage ab.", "info");
+        return;
+      }
+
+      setStatus("Kein SMTP-Relay konfiguriert. Bitte smtpRelayUrl in content.js hinterlegen.", "error");
+    } catch (error) {
+      if (formConfig.useMailtoFallback !== false) {
+        openMailClient(payload);
+        setStatus("Die direkte Übertragung war nicht möglich. Dein E-Mail-Programm wurde als Fallback geöffnet.", "info");
+      } else {
+        setStatus("Senden fehlgeschlagen. Bitte später erneut versuchen.", "error");
+      }
+    } finally {
+      setSubmitting(false);
+    }
   });
 }
 
