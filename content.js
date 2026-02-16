@@ -85,11 +85,10 @@ const flowContent = {
     }
   ],
   timeline: [
-    "Analysegespräch – Prozesse verstehen",
-    "Struktur- und Modulkonzept entwickeln",
-    "Mockup erstellen und abstimmen",
-    "Umsetzung und Iteration",
-    "Wartung und Weiterentwicklung"
+    "Erstgespräch",
+    "Konzeption",
+    "Entwicklung und Implementierung",
+    "Wartung und Pflege"
   ],
   pricing: [
     {
@@ -147,7 +146,7 @@ const flowContent = {
     {
       name: "Yannis Vogel",
       role: "Softwareentwicklung & Implementierung",
-      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80",
+      image: "assets/images/team-yannis-224.png",
       fallback: "assets/images/team-yannis.svg",
       alt: "Portraitbild als Platzhalter für Yannis Vogel"
     }

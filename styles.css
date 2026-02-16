@@ -539,35 +539,65 @@ p {
   margin: 0;
   padding: 0;
   display: grid;
-  gap: 12px;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 26px;
+  position: relative;
+  margin-top: 10px;
 }
 
 .timeline li {
-  display: grid;
-  grid-template-columns: 34px 1fr;
-  gap: 14px;
-  padding: 10px 0;
-  border-radius: 0;
-  background: transparent;
-  border: 0;
-  border-bottom: 1px solid var(--color-border);
-  box-shadow: none;
+  position: relative;
+  padding-top: 56px;
+  padding-right: 22px;
+  min-height: 152px;
 }
 
 .timeline li::before {
   content: attr(data-step);
-  width: 34px;
-  height: 34px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 30px;
+  height: 30px;
   border-radius: var(--radius-sm);
   background: var(--color-primary);
   color: #ffffff;
   display: grid;
   place-items: center;
   font-weight: 700;
+  z-index: 2;
+}
+
+.timeline li:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  top: 14px;
+  left: 34px;
+  right: -18px;
+  height: 2px;
+  background: #b8c1cd;
+  z-index: 1;
+}
+
+.timeline li span {
+  display: block;
+  color: var(--color-muted);
+  line-height: 1.35;
+  font-weight: 600;
 }
 
 .timeline-note {
-  margin-top: 20px;
+  margin-top: 34px;
+}
+
+.speed-highlight {
+  margin: 10px 0 18px;
+  display: inline-block;
+  font-size: clamp(1.05rem, 1.4vw, 1.25rem);
+  font-weight: 700;
+  color: #1f242b;
+  background: rgba(195, 182, 154, 0.35);
+  padding: 8px 12px;
 }
 
 .pricing-grid {
@@ -699,6 +729,10 @@ p {
   object-fit: cover;
 }
 
+.team-card img[src*="team-yannis"] {
+  object-position: center 38%;
+}
+
 .about-grid {
   display: grid;
   grid-template-columns: 1.1fr 1fr 1fr;
@@ -807,6 +841,29 @@ p {
     inset: auto;
     height: 320px;
     min-height: 320px;
+  }
+
+  .timeline {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .timeline li {
+    padding: 0 0 0 46px;
+    min-height: 0;
+  }
+
+  .timeline li::before {
+    top: 0;
+    left: 0;
+  }
+
+  .timeline li:not(:last-child)::after {
+    top: 34px;
+    left: 14px;
+    right: auto;
+    width: 2px;
+    height: calc(100% - 18px);
   }
 
   .card-grid,
