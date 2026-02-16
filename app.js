@@ -85,6 +85,64 @@ function renderContent() {
   const pilotPoints = document.getElementById("pilot-points");
   pilotPoints.innerHTML = createListItems(flowContent.pilot);
 
+  const faqList = document.getElementById("faq-list");
+  if (faqList && Array.isArray(flowContent.faq)) {
+    faqList.innerHTML = flowContent.faq
+      .map(
+        (item, index) => `
+          <article class="faq-item">
+            <button
+              class="faq-question"
+              type="button"
+              aria-expanded="false"
+              aria-controls="faq-answer-${index}"
+              id="faq-question-${index}"
+            >
+              ${item.question}
+            </button>
+            <div
+              class="faq-answer"
+              id="faq-answer-${index}"
+              role="region"
+              aria-labelledby="faq-question-${index}"
+              hidden
+            >
+              ${item.answer.map((paragraph) => `<p>${paragraph}</p>`).join("")}
+            </div>
+          </article>
+        `
+      )
+      .join("");
+  }
+
+  const faqStructuredData =
+    Array.isArray(flowContent.faq) && flowContent.faq.length > 0
+      ? {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: flowContent.faq.map((item) => ({
+            "@type": "Question",
+            name: item.question,
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: item.answer.join(" ")
+            }
+          }))
+        }
+      : null;
+
+  const existingFaqJsonLd = document.getElementById("faq-jsonld");
+  if (existingFaqJsonLd) {
+    existingFaqJsonLd.remove();
+  }
+  if (faqStructuredData) {
+    const script = document.createElement("script");
+    script.type = "application/ld+json";
+    script.id = "faq-jsonld";
+    script.textContent = JSON.stringify(faqStructuredData);
+    document.head.appendChild(script);
+  }
+
   const teamCards = document.getElementById("team-cards");
   teamCards.innerHTML = flowContent.team
     .map(
@@ -104,6 +162,88 @@ function renderContent() {
   if (year) {
     year.textContent = new Date().getFullYear();
   }
+}
+
+function setupFaqAccordion() {
+  const items = document.querySelectorAll(".faq-item");
+  if (!items.length) {
+    return;
+  }
+
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  function openItem(item, trigger, panel) {
+    trigger.setAttribute("aria-expanded", "true");
+    item.classList.add("is-open");
+
+    if (prefersReducedMotion) {
+      panel.hidden = false;
+      panel.style.height = "auto";
+      panel.style.opacity = "1";
+      return;
+    }
+
+    panel.hidden = false;
+    panel.style.height = "0px";
+    panel.style.opacity = "0";
+
+    requestAnimationFrame(() => {
+      panel.style.height = `${panel.scrollHeight}px`;
+      panel.style.opacity = "1";
+    });
+
+    const onEnd = () => {
+      panel.style.height = "auto";
+      panel.removeEventListener("transitionend", onEnd);
+    };
+    panel.addEventListener("transitionend", onEnd);
+  }
+
+  function closeItem(item, trigger, panel) {
+    trigger.setAttribute("aria-expanded", "false");
+    item.classList.remove("is-open");
+
+    if (prefersReducedMotion) {
+      panel.hidden = true;
+      panel.style.height = "0px";
+      panel.style.opacity = "0";
+      return;
+    }
+
+    panel.style.height = `${panel.scrollHeight}px`;
+    panel.style.opacity = "1";
+
+    requestAnimationFrame(() => {
+      panel.style.height = "0px";
+      panel.style.opacity = "0";
+    });
+
+    const onEnd = () => {
+      panel.hidden = true;
+      panel.removeEventListener("transitionend", onEnd);
+    };
+    panel.addEventListener("transitionend", onEnd);
+  }
+
+  items.forEach((item) => {
+    const trigger = item.querySelector(".faq-question");
+    const panel = item.querySelector(".faq-answer");
+    if (!trigger || !panel) {
+      return;
+    }
+
+    panel.style.height = "0px";
+    panel.style.opacity = "0";
+
+    trigger.addEventListener("click", () => {
+      const isOpen = item.classList.contains("is-open");
+      if (isOpen) {
+        closeItem(item, trigger, panel);
+      } else {
+        openItem(item, trigger, panel);
+      }
+    });
+  });
 }
 
 function setupMenu() {
@@ -345,6 +485,7 @@ function setupAnchorOffset() {
 }
 
 renderContent();
+setupFaqAccordion();
 setupMenu();
 setupPilotForm();
 setupHeaderShrink();

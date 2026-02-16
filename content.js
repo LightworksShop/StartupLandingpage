@@ -12,24 +12,24 @@ const flowContent = {
     "KI-gestützt & geprüft"
   ],
   heroImage: {
-    src: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1600&q=80",
+    src: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1440&q=78",
     fallback: "assets/images/hero-mockup.svg",
     alt: "Laptop mit moderner Softwareoberfläche auf einem Schreibtisch"
   },
   sectionImages: {
     problem: {
-      src: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1200&q=80",
+      src: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=960&q=78",
       fallback: "assets/images/hero-mockup.svg",
       alt: "Kleines Team bei der Abstimmung von Arbeitsprozessen"
     },
     solution: [
       {
-        src: "https://images.unsplash.com/photo-1551281044-8b26d3b4f4d0?auto=format&fit=crop&w=1000&q=80",
+        src: "https://images.unsplash.com/photo-1551281044-8b26d3b4f4d0?auto=format&fit=crop&w=920&q=78",
         fallback: "assets/images/hero-mockup.svg",
         alt: "Visualisierung strukturierter Daten auf einem Monitor"
       },
       {
-        src: "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1000&q=80",
+        src: "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=920&q=78",
         fallback: "assets/images/hero-mockup.svg",
         alt: "Team bei strukturierter Prozessplanung"
       }
@@ -142,18 +142,70 @@ const flowContent = {
     "Verbindliches Feedback",
     "Perspektive auf reguläre Preisstruktur"
   ],
+  faq: [
+    {
+      question: "Ist Flow eine Standardsoftware oder individuell für mein Unternehmen?",
+      answer: [
+        "Flow wird für jedes Unternehmen gezielt auf den tatsächlichen Bedarf abgestimmt.",
+        "Ausgangspunkt sind eure konkreten Abläufe, Ziele und Strukturen. Daraus entsteht ein System, das eure Prozesse klar, logisch und effizient abbildet.",
+        "Ihr bekommt keine starre Standardlösung, sondern eine passgenaue, strukturierte Softwarebasis für euer Wachstum."
+      ]
+    },
+    {
+      question: "Wie lange dauert die Umsetzung?",
+      answer: [
+        "Das hängt vom Umfang ab.",
+        "Ein klar abgegrenzter Kernprozess kann oft innerhalb weniger Tage umgesetzt werden. Komplexere Strukturen oder Schnittstellen benötigen entsprechend mehr Abstimmung.",
+        "Wichtig: Wir starten pragmatisch und bauen Schritt für Schritt auf."
+      ]
+    },
+    {
+      question: "Was passiert, wenn wir später weitere Funktionen benötigen?",
+      answer: [
+        "Flow ist bewusst modular aufgebaut.",
+        "Neue Prozesse, zusätzliche Funktionen oder Schnittstellen können jederzeit ergänzt werden, ohne das bestehende System zu destabilisieren.",
+        "Ihr startet schlank und erweitert bei Bedarf."
+      ]
+    },
+    {
+      question: "Wo werden unsere Daten gespeichert?",
+      answer: [
+        "Die Daten werden DSGVO-konform gespeichert.",
+        "Hosting und technische Infrastruktur werden transparent abgestimmt. Auf Wunsch ist auch eine getrennte oder individuelle Hosting-Lösung möglich.",
+        "Datensicherheit und Zugriffskontrolle sind fester Bestandteil des Systems."
+      ]
+    },
+    {
+      question: "Was bedeutet \"KI-gestützt\" konkret?",
+      answer: [
+        "Wir nutzen KI als professionelles Entwicklungswerkzeug, um schneller und effizienter zu arbeiten.",
+        "Das bedeutet für euch: kürzere Entwicklungszeiten, geringere Kosten und saubere Dokumentation.",
+        "Alle Ergebnisse werden sorgfältig geprüft, bevor sie eingesetzt werden.",
+        "Es gibt keine automatischen Änderungen ohne menschliche Kontrolle. Jede Anpassung wird bewusst entschieden und verantwortet.",
+        "Verlässlichkeit und Sicherheit stehen für uns immer vor Geschwindigkeit."
+      ]
+    },
+    {
+      question: "Wodurch unterscheidet sich Flow von klassischen ERP-Systemen oder einer Agentur?",
+      answer: [
+        "Klassische ERP-Systeme bringen viele vorgefertigte Prozesse mit, oft mehr, als kleinere Betriebe benötigen.",
+        "Agenturprojekte sind häufig individuell, aber teuer und schwer skalierbar.",
+        "Flow verbindet beides: ein stabiles Grundsystem mit klarer Struktur, kombiniert mit gezielter, wirtschaftlicher Individualisierung."
+      ]
+    }
+  ],
   team: [
     {
       name: "Benjamin Nöst",
       role: "Beratung & Konzeption",
-      image: "assets/images/team-benjamin.jpg",
+      image: "assets/images/team-benjamin-512.jpg",
       fallback: "assets/images/team-benjamin.svg",
       alt: "Portraitbild als Platzhalter für Benjamin Nöst"
     },
     {
       name: "Yannis Vogel",
       role: "Softwareentwicklung & Implementierung",
-      image: "assets/images/team-yannis.jpg",
+      image: "assets/images/team-yannis-512.jpg",
       fallback: "assets/images/team-yannis.svg",
       alt: "Portraitbild als Platzhalter für Yannis Vogel"
     }
