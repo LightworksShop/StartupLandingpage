@@ -2,12 +2,15 @@ function createListItems(items) {
   return items.map((item) => `<li>${item}</li>`).join("");
 }
 
-function renderImage({ src, alt, fallback }, className = "") {
+function renderImage({ src, alt, fallback }, className = "", options = {}) {
   const safeClass = className ? ` class="${className}"` : "";
   const fallbackAttr = fallback
     ? ` onerror="if(!this.dataset.fallback){this.dataset.fallback='1';this.src='${fallback}';}"`
     : "";
-  return `<img${safeClass} src="${src}" alt="${alt}" loading="lazy"${fallbackAttr}>`;
+  const loading = options.loading || "lazy";
+  const fetchPriority = options.fetchPriority ? ` fetchpriority="${options.fetchPriority}"` : "";
+  const decoding = options.decoding || "async";
+  return `<img${safeClass} src="${src}" alt="${alt}" loading="${loading}" decoding="${decoding}"${fetchPriority}${fallbackAttr}>`;
 }
 
 function renderContent() {
@@ -17,7 +20,11 @@ function renderContent() {
   }
 
   const heroVisual = document.getElementById("hero-visual");
-  heroVisual.innerHTML = renderImage(flowContent.heroImage);
+  heroVisual.innerHTML = renderImage(flowContent.heroImage, "", {
+    loading: "eager",
+    fetchPriority: "high",
+    decoding: "async"
+  });
 
   const problemVisual = document.getElementById("problem-visual");
   problemVisual.innerHTML = renderImage(flowContent.sectionImages.problem);
