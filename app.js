@@ -260,10 +260,32 @@ function setupMenu() {
     return;
   }
   const links = menu.querySelectorAll("a");
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let closeTimer;
 
   function setMenuState(open) {
+    if (closeTimer) {
+      clearTimeout(closeTimer);
+      closeTimer = null;
+    }
+
     toggle.setAttribute("aria-expanded", String(open));
-    menu.hidden = !open;
+
+    if (open) {
+      menu.hidden = false;
+      requestAnimationFrame(() => menu.classList.add("is-open"));
+    } else {
+      menu.classList.remove("is-open");
+
+      if (prefersReducedMotion) {
+        menu.hidden = true;
+      } else {
+        closeTimer = window.setTimeout(() => {
+          menu.hidden = true;
+        }, 220);
+      }
+    }
+
     document.body.style.overflow = open ? "hidden" : "";
   }
 
