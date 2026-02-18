@@ -260,7 +260,7 @@ p {
 .mobile-menu {
   position: fixed;
   inset: var(--header-total-height) 0 0;
-  background: rgba(20, 27, 35, 0.62);
+  background: rgba(20, 27, 35, 0.80);
   display: grid;
   align-content: start;
   justify-items: end;
@@ -1055,7 +1055,7 @@ p {
 
   .mobile-menu nav {
     gap: 8px;
-    font-size: 1.05rem;
+    font-size: 1.24rem;
   }
 
   .mobile-menu nav a {
