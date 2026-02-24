@@ -4,13 +4,29 @@ function createListItems(items) {
 
 function renderImage({ src, alt, fallback }, className = "", options = {}) {
   const safeClass = className ? ` class="${className}"` : "";
-  const fallbackAttr = fallback
-    ? ` onerror="if(!this.dataset.fallback){this.dataset.fallback='1';this.src='${fallback}';}"`
-    : "";
+  const fallbackAttr = fallback ? ` data-fallback-src="${fallback}"` : "";
   const loading = options.loading || "lazy";
   const fetchPriority = options.fetchPriority ? ` fetchpriority="${options.fetchPriority}"` : "";
   const decoding = options.decoding || "async";
   return `<img${safeClass} src="${src}" alt="${alt}" loading="${loading}" decoding="${decoding}"${fetchPriority}${fallbackAttr}>`;
+}
+
+function setupImageFallbacks() {
+  const images = document.querySelectorAll("img[data-fallback-src]");
+  if (!images.length) {
+    return;
+  }
+
+  images.forEach((image) => {
+    image.addEventListener("error", () => {
+      const fallbackSrc = image.getAttribute("data-fallback-src");
+      if (!fallbackSrc || image.dataset.fallbackApplied === "1") {
+        return;
+      }
+      image.dataset.fallbackApplied = "1";
+      image.src = fallbackSrc;
+    });
+  });
 }
 
 function renderContent() {
@@ -514,6 +530,7 @@ function setupAnchorOffset() {
 }
 
 renderContent();
+setupImageFallbacks();
 setupFaqAccordion();
 setupMenu();
 setupPilotForm();

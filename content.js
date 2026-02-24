@@ -1,6 +1,6 @@
 const flowContent = {
   form: {
-    smtpRelayUrl: "http://localhost:3000/api/contact",
+    smtpRelayUrl: "/api/contact",
     method: "POST",
     recipientEmail: "kontakt@flow-software.de",
     subject: "Pilotbetrieb anfragen",
