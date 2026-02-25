@@ -45,13 +45,24 @@ function renderContent() {
   const painGrid = document.getElementById("pain-points");
   painGrid.innerHTML = flowContent.painPoints
     .map(
-      (point) => `
+      (point) => {
+        const normalized =
+          typeof point === "string"
+            ? { icon: "sheet", title: point, text: "" }
+            : {
+                icon: point?.icon || "sheet",
+                title: point?.title || "",
+                text: point?.text || ""
+              };
+
+        return `
         <article class="pain-card">
-          <div class="pain-icon" aria-hidden="true">${getProblemIcon(point.icon)}</div>
-          <h3>${point.title}</h3>
-          <p>${point.text}</p>
+          <div class="pain-icon" aria-hidden="true">${getProblemIcon(normalized.icon)}</div>
+          <h3>${normalized.title}</h3>
+          ${normalized.text ? `<p>${normalized.text}</p>` : ""}
         </article>
-      `
+      `;
+      }
     )
     .join("");
 
