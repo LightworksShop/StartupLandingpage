@@ -36,40 +36,43 @@ const flowContent = {
     ]
   },
   painPoints: [
-    "Excel-Listen wachsen unkontrolliert",
-    "Mehrere Tools ohne saubere Verbindung",
-    "Individuelle Abläufe passen in kein Standardsystem",
-    "ERP-Systeme sind zu komplex oder zu teuer",
-    "Sonderprozesse werden provisorisch gelöst"
+    {
+      icon: "sheet",
+      title: "Du arbeitest in fünf Tools - aber nichts ist wirklich verbunden.",
+      text: "Informationen springen zwischen E-Mail, Excel und Messenger. Verantwortung bleibt dabei oft unklar."
+    },
+    {
+      icon: "integration",
+      title: "Jeder Auftrag ist ein Sonderfall.",
+      text: "Entscheidungen werden ständig neu getroffen. Fällt jemand aus, steht der Prozess still."
+    },
+    {
+      icon: "process",
+      title: "Wachstum bringt zusätzliche Reibung.",
+      text: "Mehr Aufträge bedeuten mehr Abstimmung, mehr Rückfragen und mehr operative Hektik."
+    },
+    {
+      icon: "erp",
+      title: "Das Standard-ERP zwingt dich in fremde Prozesse.",
+      text: "Du passt deinen Betrieb der Software an - statt umgekehrt. Und verlierst dabei Effizienz."
+    }
   ],
   solutionCards: [
     {
-      title: "Die stabile Basis (Core)",
-      points: [
-        "Benutzer- und Rechteverwaltung",
-        "Modulares System",
-        "Strukturierte Datenhaltung",
-        "Update- und Erweiterungsfähigkeit",
-        "Klare, nachvollziehbare Struktur im Hintergrund"
-      ]
+      title: "Ein System. Ein Überblick.",
+      text: "Wir bündeln Aufträge, Kommunikation und Daten an einem Ort. Du siehst jederzeit, wo ihr steht - ohne Tool-Hopping, ohne Sucherei."
     },
     {
-      title: "Individuelle Module",
-      points: [
-        "Abbildung konkreter Betriebsabläufe",
-        "Status-Logiken und Abhängigkeiten",
-        "Schnittstellen zu bestehenden Systemen",
-        "Erweiterbar ohne Systembruch"
-      ]
+      title: "Verlässliche Prozesse statt Dauer-Improvisation.",
+      text: "Wir definieren klare Abläufe, Zuständigkeiten und Übergaben. Entscheidungen werden nachvollziehbar - nicht täglich neu erfunden."
     },
     {
-      title: "Schnittstellen-Offenheit",
-      points: [
-        "Integration mit bestehenden Systemen vorgesehen",
-        "Keine Abschottung",
-        "Prozessübergreifende Datenflüsse möglich",
-        "Technisch sauber dokumentierbar"
-      ]
+      title: "Wachstum mit Kontrolle - nicht mit Hektik.",
+      text: "Mehr Aufträge führen nicht zu mehr Chaos. Deine Strukturen skalieren mit. Du behältst Übersicht, Tempo und Qualität."
+    },
+    {
+      title: "Software, die deinen Betrieb stärkt - nicht verbiegt.",
+      text: "Wir entwickeln Lösungen, die eure Realität abbilden. Keine fremden Prozesse, keine unnötige Komplexität - sondern echte Entlastung im Alltag."
     }
   ],
   targetGroups: [

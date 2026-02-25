@@ -42,48 +42,45 @@ function renderContent() {
     decoding: "async"
   });
 
-  const problemVisual = document.getElementById("problem-visual");
-  problemVisual.innerHTML = renderImage(flowContent.sectionImages.problem);
-
-  const solutionVisuals = document.getElementById("solution-visuals");
-  solutionVisuals.innerHTML = flowContent.sectionImages.solution
-    .map(
-      (image) => `
-        <figure class="section-image">
-          ${renderImage(image)}
-        </figure>
-      `
-    )
-    .join("");
-
   const painGrid = document.getElementById("pain-points");
   painGrid.innerHTML = flowContent.painPoints
-    .map((point) => `<article class="pain-card"><p>${point}</p></article>`)
+    .map(
+      (point) => `
+        <article class="pain-card">
+          <div class="pain-icon" aria-hidden="true">${getProblemIcon(point.icon)}</div>
+          <h3>${point.title}</h3>
+          <p>${point.text}</p>
+        </article>
+      `
+    )
     .join("");
 
   const solutionCards = document.getElementById("solution-cards");
   solutionCards.innerHTML = flowContent.solutionCards
     .map(
-      (card) => `
-        <article class="card">
+      (card, index) => `
+        <article class="solution-card-large">
+          <p class="solution-card-index">${String(index + 1).padStart(2, "0")}</p>
           <h3>${card.title}</h3>
-          <ul>${createListItems(card.points)}</ul>
+          <p>${card.text}</p>
         </article>
       `
     )
     .join("");
 
   const targetGroups = document.getElementById("target-groups");
-  targetGroups.innerHTML = flowContent.targetGroups
-    .map(
-      (group) => `
-        <article class="card">
-          <h3>${group.title}</h3>
-          <ul>${createListItems(group.points)}</ul>
-        </article>
-      `
-    )
-    .join("");
+  if (targetGroups && Array.isArray(flowContent.targetGroups)) {
+    targetGroups.innerHTML = flowContent.targetGroups
+      .map(
+        (group) => `
+          <article class="card">
+            <h3>${group.title}</h3>
+            <ul>${createListItems(group.points)}</ul>
+          </article>
+        `
+      )
+      .join("");
+  }
 
   const timeline = document.getElementById("timeline");
   timeline.innerHTML = flowContent.timeline
@@ -187,6 +184,42 @@ function renderContent() {
   }
 }
 
+function getProblemIcon(type) {
+  const icons = {
+    sheet: `
+      <svg viewBox="0 0 24 24" focusable="false">
+        <rect x="4" y="3.5" width="16" height="17" rx="2"></rect>
+        <path d="M8 8.5h8M8 12h8M8 15.5h5"></path>
+      </svg>
+    `,
+    integration: `
+      <svg viewBox="0 0 24 24" focusable="false">
+        <circle cx="6.5" cy="7" r="2.5"></circle>
+        <circle cx="17.5" cy="7" r="2.5"></circle>
+        <circle cx="12" cy="17" r="2.5"></circle>
+        <path d="M8.8 8.4L10.7 10M15.2 8.4L13.3 10M10.7 14l-1.9 1.6M13.3 14l1.9 1.6"></path>
+      </svg>
+    `,
+    process: `
+      <svg viewBox="0 0 24 24" focusable="false">
+        <rect x="3.5" y="5" width="7" height="5" rx="1"></rect>
+        <rect x="13.5" y="5" width="7" height="5" rx="1"></rect>
+        <rect x="8.5" y="14" width="7" height="5" rx="1"></rect>
+        <path d="M10.5 7.5h3M12 10v4"></path>
+      </svg>
+    `,
+    erp: `
+      <svg viewBox="0 0 24 24" focusable="false">
+        <rect x="3.5" y="4" width="17" height="4.5" rx="1"></rect>
+        <rect x="3.5" y="10" width="17" height="4.5" rx="1"></rect>
+        <rect x="3.5" y="16" width="11" height="4.5" rx="1"></rect>
+      </svg>
+    `
+  };
+
+  return icons[type] || icons.sheet;
+}
+
 function setupFaqAccordion() {
   const items = document.querySelectorAll(".faq-item");
   if (!items.length) {
@@ -267,6 +300,62 @@ function setupFaqAccordion() {
       }
     });
   });
+}
+
+function setupSolutionCardScrollEffect() {
+  const cards = Array.from(document.querySelectorAll(".solution-card-large"));
+  if (!cards.length) {
+    return;
+  }
+
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (prefersReducedMotion || !("IntersectionObserver" in window)) {
+    cards.forEach((card) => card.classList.add("is-visible"));
+    return;
+  }
+
+  const revealObserver = new IntersectionObserver(
+    (entries, observer) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    {
+      threshold: 0.2,
+      rootMargin: "0px 0px -8% 0px"
+    }
+  );
+
+  cards.forEach((card) => revealObserver.observe(card));
+
+  const ratios = new Map();
+  const activeObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        ratios.set(entry.target, entry.isIntersecting ? entry.intersectionRatio : 0);
+      });
+
+      let activeCard = null;
+      let maxRatio = 0;
+      ratios.forEach((ratio, card) => {
+        if (ratio > maxRatio) {
+          maxRatio = ratio;
+          activeCard = card;
+        }
+      });
+
+      cards.forEach((card) => card.classList.toggle("is-active", card === activeCard && maxRatio > 0.35));
+    },
+    {
+      threshold: [0.2, 0.35, 0.5, 0.65, 0.8],
+      rootMargin: "-10% 0px -28% 0px"
+    }
+  );
+
+  cards.forEach((card) => activeObserver.observe(card));
 }
 
 function setupMenu() {
@@ -531,6 +620,7 @@ function setupAnchorOffset() {
 
 renderContent();
 setupImageFallbacks();
+setupSolutionCardScrollEffect();
 setupFaqAccordion();
 setupMenu();
 setupPilotForm();
