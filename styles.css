@@ -1,8 +1,8 @@
 :root {
   --color-bg: #f3f4f6;
   --color-surface: #ffffff;
-  --color-surface-alt: #eef0f3;
-  --color-surface-soft: #e7eaee;
+  --color-surface-alt: #f2f2f2;
+  --color-surface-soft: #ffffff;
   --color-surface-accent: #1f2937;
   --color-text: #1f2937;
   --color-muted: #6b7280;
@@ -153,7 +153,7 @@ p {
   left: 0;
   right: 0;
   z-index: 100;
-  background: #f3f4f6;
+  background: #ffffff;
   backdrop-filter: none;
   border-bottom: 0;
   overflow: hidden;
@@ -508,8 +508,6 @@ p {
 
 .pain-card {
   min-height: 200px;
-  background: #2b3746;
-  border: 1px solid #3a4859;
   border-radius: var(--radius-md);
   padding: 18px 18px 20px;
   box-shadow: 0 8px 20px rgba(8, 15, 22, 0.16);
@@ -524,14 +522,14 @@ p {
 
 .pain-card h3 {
   margin: 0 0 10px;
-  color: #f1f4f8;
+  color: var(--color-text);
   font-size: clamp(1.06rem, 1.2vw, 1.16rem);
   line-height: 1.28;
 }
 
 .pain-card p {
   margin: 0;
-  color: #d4dde7;
+  color: var(--color-text);
   font-size: 1rem;
   line-height: 1.45;
   max-width: none;
@@ -594,7 +592,7 @@ p {
 
 .solution-card-large {
   min-height: 320px;
-  background: #f4f6f8;
+  background: #ffffff;
   border: 1px solid #d5dce4;
   border-radius: var(--radius-md);
   padding: 34px 34px 36px;
@@ -617,7 +615,7 @@ p {
   left: 0;
   height: 3px;
   width: 100%;
-  background: linear-gradient(90deg, var(--color-accent) 0%, #7aa6a8 100%);
+  background: var(--color-accent);
   transform: scaleX(0.18);
   transform-origin: left center;
   opacity: 0.45;
