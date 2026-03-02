@@ -13,7 +13,7 @@
 - Link: `Unverbindliches Analysegespräch` (Anker `#pilot`)
 
 ### Header – Hauptnavigation
-- Logo: `assets/images/ERP-Logo.svg`
+- Logo: `assets/images/logo.svg`
 - Menüpunkte:
   - `Ausgangslage` (`#problem`)
   - `Lösung` (`#loesung`)

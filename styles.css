@@ -6,9 +6,9 @@
   --color-surface-accent: #1f2937;
   --color-text: #1f2937;
   --color-muted: #6b7280;
-  --color-primary: #1f2937;
+  --color-primary: #4d4d53;
   --color-primary-strong: #111827;
-  --color-accent: #f97316;
+  --color-accent: #f48235;
   --color-warm: #fb923c;
   --color-border: #d1d5db;
   --radius-sm: 2px;
@@ -19,8 +19,8 @@
   --contact-bar-height: 34px;
   --nav-height: 118px;
   --nav-height-scrolled: 84px;
-  --logo-height: 66px;
-  --logo-height-scrolled: 48px;
+  --logo-height: 58px;
+  --logo-height-scrolled: 42px;
   --header-total-height: calc(var(--contact-bar-height) + var(--nav-height));
 }
 
@@ -131,7 +131,7 @@ p {
 
 .tone-accent .btn-primary:hover,
 .tone-accent .btn-primary:focus-visible {
-  background: #ea580c;
+  background: #d86a21;
 }
 
 .section-label {
