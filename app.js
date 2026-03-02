@@ -199,39 +199,36 @@ function getProblemIcon(type) {
   const icons = {
     sheet: `
       <svg viewBox="0 0 24 24" focusable="false">
-        <rect x="3.5" y="5" width="6.5" height="6.5" rx="1.2"></rect>
-        <rect x="14" y="3.5" width="6.5" height="6.5" rx="1.2"></rect>
-        <rect x="7.5" y="14" width="6.5" height="6.5" rx="1.2"></rect>
-        <path d="M10 8.2h4M17.2 10v4M9.2 14.8l2.2-2.1"></path>
+        <rect x="3.5" y="4.5" width="7" height="7" rx="1.5"></rect>
+        <rect x="13.5" y="4.5" width="7" height="7" rx="1.5"></rect>
+        <rect x="8.5" y="13.5" width="7" height="7" rx="1.5"></rect>
+        <path d="M10.5 8h3M17 11.5v2M9.5 14.5l2.5-2.5"></path>
       </svg>
     `,
     integration: `
       <svg viewBox="0 0 24 24" focusable="false">
-        <circle cx="7" cy="7" r="2.5"></circle>
-        <path d="M9.5 7h7"></path>
-        <path d="M14 4.5l2.5 2.5-2.5 2.5"></path>
-        <circle cx="17" cy="17" r="2.5"></circle>
-        <path d="M14.5 17h-7"></path>
-        <path d="M10 14.5L7.5 17l2.5 2.5"></path>
+        <circle cx="6.5" cy="6.5" r="2.5"></circle>
+        <circle cx="17.5" cy="6.5" r="2.5"></circle>
+        <circle cx="6.5" cy="17.5" r="2.5"></circle>
+        <circle cx="17.5" cy="17.5" r="2.5"></circle>
+        <path d="M9 6.5h6M6.5 9v6M15 17.5H9M17.5 15v-2.5"></path>
       </svg>
     `,
     process: `
       <svg viewBox="0 0 24 24" focusable="false">
-        <path d="M6 6h8"></path>
-        <path d="M11 3l3 3-3 3"></path>
-        <path d="M18 18H10"></path>
-        <path d="M13 15l-3 3 3 3"></path>
-        <circle cx="7" cy="18" r="2.2"></circle>
+        <path d="M5 7h7"></path>
+        <path d="M9.5 3.5L13 7l-3.5 3.5"></path>
+        <path d="M19 17h-7"></path>
+        <path d="M14.5 13.5L11 17l3.5 3.5"></path>
+        <circle cx="7" cy="17" r="2.25"></circle>
       </svg>
     `,
     erp: `
       <svg viewBox="0 0 24 24" focusable="false">
-        <rect x="4" y="4" width="10" height="6" rx="1.2"></rect>
-        <rect x="4" y="14" width="10" height="6" rx="1.2"></rect>
-        <path d="M17 7h3"></path>
-        <path d="M17 17h3"></path>
-        <path d="M18.5 5.5l2 1.5-2 1.5"></path>
-        <path d="M18.5 15.5l2 1.5-2 1.5"></path>
+        <rect x="3.5" y="4" width="9" height="6" rx="1.5"></rect>
+        <rect x="3.5" y="14" width="9" height="6" rx="1.5"></rect>
+        <rect x="15.5" y="4" width="5" height="16" rx="1.5"></rect>
+        <path d="M7 7h2M7 17h2M15.5 9h5M15.5 15h5"></path>
       </svg>
     `
   };
