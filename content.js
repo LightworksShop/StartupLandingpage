@@ -38,7 +38,7 @@ const flowContent = {
   painPoints: [
     {
       icon: "sheet",
-      title: "Du arbeitest in fünf Tools - aber nichts ist wirklich verbunden.",
+      title: "Ihr arbeitet in fünf Tools - aber nichts ist wirklich verbunden.",
       text: "Informationen springen zwischen E-Mail, Excel und Messenger. Verantwortung bleibt dabei oft unklar."
     },
     {
