@@ -93,10 +93,27 @@ function renderContent() {
       .join("");
   }
 
-  const timeline = document.getElementById("timeline");
-  timeline.innerHTML = flowContent.timeline
-    .map((step, index) => `<li data-step="${index + 1}"><span>${step}</span></li>`)
-    .join("");
+  const processSteps = document.getElementById("process-steps");
+  if (processSteps && Array.isArray(flowContent.processSteps)) {
+    processSteps.innerHTML = flowContent.processSteps
+      .map(
+        (step, index) => `
+          <article class="process-card">
+            <p class="process-card-index">${String(index + 1).padStart(2, "0")}</p>
+            <h3>${step.title}</h3>
+            <p>${step.text}</p>
+          </article>
+        `
+      )
+      .join("");
+  }
+
+  const processFlow = document.querySelector(".process-flow");
+  if (processFlow && Array.isArray(flowContent.processSteps)) {
+    processFlow.innerHTML = flowContent.processSteps
+      .map((_, index) => `<span class="process-flow-segment" data-step="${index + 1}"></span>`)
+      .join("");
+  }
 
   const pricing = document.getElementById("pricing-cards");
   pricing.innerHTML = flowContent.pricing
@@ -410,6 +427,59 @@ function setupPracticeTileReveal() {
   tiles.forEach((tile) => observer.observe(tile));
 }
 
+function setupProcessFlowProgress() {
+  const section = document.getElementById("vorgehen");
+  const flow = document.querySelector(".process-flow");
+  const cards = Array.from(document.querySelectorAll(".process-card"));
+  const segments = Array.from(document.querySelectorAll(".process-flow-segment"));
+  if (!section || !flow || !cards.length || !segments.length) {
+    return;
+  }
+
+  function applyActiveIndex(activeIndex) {
+    cards.forEach((card, index) => {
+      const active = index <= activeIndex;
+      card.classList.toggle("is-active", active);
+      segments[index]?.classList.toggle("is-active", active);
+    });
+  }
+
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (prefersReducedMotion) {
+    applyActiveIndex(0);
+    return;
+  }
+
+  let ticking = false;
+
+  function updateProgress() {
+    ticking = false;
+
+    const rect = section.getBoundingClientRect();
+    const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+    const start = viewportHeight * 0.78;
+    const end = -Math.max(rect.height * 0.35, viewportHeight * 0.18);
+    const total = start - end;
+    const rawProgress = total <= 0 ? 0 : (start - rect.top) / total;
+    const clampedProgress = Math.max(0, Math.min(0.999, rawProgress));
+    const activeIndex = Math.min(cards.length - 1, Math.floor(clampedProgress * cards.length));
+
+    applyActiveIndex(activeIndex);
+  }
+
+  function requestUpdate() {
+    if (ticking) {
+      return;
+    }
+    ticking = true;
+    window.requestAnimationFrame(updateProgress);
+  }
+
+  window.addEventListener("scroll", requestUpdate, { passive: true });
+  window.addEventListener("resize", requestUpdate);
+  requestUpdate();
+}
+
 function setupMenu() {
   const toggle = document.querySelector(".menu-toggle");
   const menu = document.getElementById("mobile-menu");
@@ -674,6 +744,7 @@ renderContent();
 setupImageFallbacks();
 setupSolutionCardScrollEffect();
 setupPracticeTileReveal();
+setupProcessFlowProgress();
 setupFaqAccordion();
 setupMenu();
 setupPilotForm();

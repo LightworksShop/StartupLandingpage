@@ -94,11 +94,23 @@ const flowContent = {
       ]
     }
   ],
-  timeline: [
-    "Erstgespräch",
-    "Konzeption",
-    "Entwicklung und Implementierung",
-    "Wartung und Pflege"
+  processSteps: [
+    {
+      title: "Verstehen",
+      text: "Wir schauen uns euren Betrieb und eure Abläufe an – mit Fokus auf die Punkte, die euch im Alltag bremsen. Gemeinsam klären wir, welche Funktionen die Software konkret abdecken muss, damit Angebote, Aufträge oder Projekte sauber laufen."
+    },
+    {
+      title: "Strukturieren",
+      text: "Aus diesen Anforderungen entsteht eine klare Systemstruktur. Wir übertragen eure Abläufe in eine logische, digitale Lösung, die verständlich aufgebaut ist und eure täglichen Aufgaben zuverlässig abbildet."
+    },
+    {
+      title: "Umsetzen",
+      text: "Wir richten die Lösung ein und führen sie Schritt für Schritt in euren Arbeitsalltag ein, sodass ihr schnell produktiv damit arbeiten könnt."
+    },
+    {
+      title: "Weiterentwickeln",
+      text: "Wenn sich euer Betrieb verändert, wächst die Software mit. Wir übernehmen Anpassungen, Updates und laufende Wartung – damit alles stabil weiterläuft."
+    }
   ],
   pricing: [
     {
