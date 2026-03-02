@@ -1,7 +1,7 @@
 :root {
   --color-bg: #f3f4f6;
   --color-surface: #ffffff;
-  --color-surface-alt: #f2f2f2;
+  --color-surface-alt: #f9f9f9;
   --color-surface-soft: #ffffff;
   --color-surface-accent: #1f2937;
   --color-text: #1f2937;
@@ -798,12 +798,6 @@ p {
   margin-top: 8px;
 }
 
-.leitbild-point.is-active {
-  background: transparent;
-  border-left-color: transparent;
-  box-shadow: none;
-}
-
 .leitbild-point h3 {
   margin: 0 0 12px;
   font-size: clamp(1.18rem, 1.5vw, 1.4rem);
@@ -829,6 +823,64 @@ p {
 
 .leitbild-list-practice {
   margin-bottom: 18px;
+}
+
+.practice-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin-bottom: 24px;
+}
+
+.practice-tile {
+  min-height: 56px;
+  padding: 18px 18px 16px;
+  background: rgba(255, 255, 255, 0.76);
+  border: 0;
+  display: grid;
+  grid-template-columns: 16px 1fr;
+  align-items: start;
+  gap: 12px;
+  opacity: 0;
+  transform: translateY(12px);
+  transition: transform 320ms ease, opacity 320ms ease, border-color 320ms ease, background-color 320ms ease;
+}
+
+.practice-tile.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.practice-tile:hover,
+.practice-tile:focus-within {
+  background: rgba(255, 255, 255, 0.92);
+}
+
+.practice-tile-icon {
+  width: 22px;
+  height: 22px;
+  margin-top: 0.14rem;
+  background: url("assets/images/favicon.svg") center / contain no-repeat;
+  display: block;
+}
+
+.practice-title {
+  margin: 0;
+  color: var(--color-text);
+  font-weight: 600;
+  line-height: 1.28;
+}
+
+.practice-subline {
+  margin: 3px 0 0;
+  color: var(--color-muted);
+  font-size: 0.95rem;
+  font-weight: 500;
+  line-height: 1.3;
+}
+
+.practice-statement {
+  max-width: 34ch;
 }
 
 .leitbild-image-side {
@@ -1475,6 +1527,14 @@ p {
     width: min(var(--container), calc(100% - 24px));
     margin-inline: auto;
     padding: 34px 0;
+  }
+
+  .practice-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .practice-tile:nth-child(5) {
+    grid-column: auto;
   }
 
   .solution-sticky {

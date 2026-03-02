@@ -374,6 +374,42 @@ function setupSolutionCardScrollEffect() {
   cards.forEach((card) => activeObserver.observe(card));
 }
 
+function setupPracticeTileReveal() {
+  const tiles = Array.from(document.querySelectorAll(".practice-tile"));
+  if (!tiles.length) {
+    return;
+  }
+
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (prefersReducedMotion || !("IntersectionObserver" in window)) {
+    tiles.forEach((tile) => tile.classList.add("is-visible"));
+    return;
+  }
+
+  const observer = new IntersectionObserver(
+    (entries, instance) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) {
+          return;
+        }
+
+        const tile = entry.target;
+        const index = tiles.indexOf(tile);
+        window.setTimeout(() => {
+          tile.classList.add("is-visible");
+        }, Math.max(0, index) * 55);
+        instance.unobserve(tile);
+      });
+    },
+    {
+      threshold: 0.18,
+      rootMargin: "0px 0px -10% 0px"
+    }
+  );
+
+  tiles.forEach((tile) => observer.observe(tile));
+}
+
 function setupMenu() {
   const toggle = document.querySelector(".menu-toggle");
   const menu = document.getElementById("mobile-menu");
@@ -637,6 +673,7 @@ function setupAnchorOffset() {
 renderContent();
 setupImageFallbacks();
 setupSolutionCardScrollEffect();
+setupPracticeTileReveal();
 setupFaqAccordion();
 setupMenu();
 setupPilotForm();
