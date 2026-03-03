@@ -147,6 +147,7 @@ function renderContent() {
           <p class="price">${plan.price}</p>
           <p>${plan.summary}</p>
           <ul>${createListItems(plan.points)}</ul>
+          ${plan.note ? `<p class="pricing-card-note"><strong>${plan.noteLabel || ""}</strong> ${plan.note}</p>` : ""}
         </article>
       `
     )

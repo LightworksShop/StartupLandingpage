@@ -217,7 +217,9 @@ const flowContent = {
         "Anbindung externer Systeme, zum Beispiel Buchhaltung, Shop oder Zeiterfassung",
         "Prozessautomatisierungen zwischen Modulen und Systemen",
         "Abbildung komplexer, betriebsindividueller Abläufe"
-      ]
+      ],
+      noteLabel: "Hinweis zu allen Paketen:",
+      note: "Der konkrete Umfang richtet sich immer nach euren individuellen Anforderungen und der tatsächlichen Komplexität. Der finale Preis wird transparent im Gespräch auf Basis eurer Prozesse definiert."
     }
   ],
   pilot: [

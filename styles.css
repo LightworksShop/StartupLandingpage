@@ -1242,10 +1242,19 @@ p {
   color: var(--color-muted);
 }
 
-.pricing-note {
-  margin-top: 16px;
-  color: var(--color-primary);
-  font-weight: 600;
+.pricing-card-note {
+  margin-top: 18px;
+  color: var(--color-muted);
+  font-size: 0.92rem;
+}
+
+.pricing-card-note strong {
+  font-weight: 700;
+}
+
+.pricing-followup {
+  margin-top: 22px;
+  color: var(--color-text);
 }
 
 .pilot-grid {
