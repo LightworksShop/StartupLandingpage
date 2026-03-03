@@ -93,6 +93,28 @@ function renderContent() {
       .join("");
   }
 
+  const moduleGrid = document.getElementById("module-grid");
+  if (moduleGrid && Array.isArray(flowContent.modules)) {
+    moduleGrid.innerHTML = flowContent.modules
+      .map(
+        (module, index) => `
+          <button
+            class="module-card${index === 0 ? " is-active" : ""}"
+            type="button"
+            role="tab"
+            id="module-tab-${index}"
+            aria-selected="${index === 0 ? "true" : "false"}"
+            aria-controls="module-detail"
+            data-module-index="${index}"
+          >
+            <span class="module-card-icon" aria-hidden="true">${getModuleIcon(index)}</span>
+            <h3>${module.name}</h3>
+          </button>
+        `
+      )
+      .join("");
+  }
+
   const processSteps = document.getElementById("process-steps");
   if (processSteps && Array.isArray(flowContent.processSteps)) {
     processSteps.innerHTML = flowContent.processSteps
@@ -212,6 +234,75 @@ function renderContent() {
   }
 }
 
+function renderModuleDetail(module, index = 0) {
+  const label = document.getElementById("module-detail-label");
+  const title = document.getElementById("module-detail-title");
+  const text = document.getElementById("module-detail-text");
+  const badges = document.getElementById("module-badges");
+  const visual = document.getElementById("module-detail-visual");
+  const detail = document.getElementById("module-detail");
+  if (!label || !title || !text || !badges || !visual || !detail || !module) {
+    return;
+  }
+
+  label.textContent = `Detailbereich – ${module.name}`;
+  title.textContent = module.name;
+  text.innerHTML = module.description.map((paragraph) => `<p>${paragraph}</p>`).join("");
+  badges.innerHTML = module.integrations.map((item) => `<span class="module-badge">${item}</span>`).join("");
+  visual.innerHTML = renderModuleMockup(module);
+
+  detail.classList.remove("is-transitioning");
+  detail.setAttribute("aria-labelledby", `module-tab-${index}`);
+  void detail.offsetWidth;
+  detail.classList.add("is-transitioning");
+}
+
+function renderModuleMockup(module) {
+  const mockup = module.mockup;
+  if (!mockup) {
+    return "";
+  }
+
+  return `
+    <article class="module-mockup-shell">
+      <header class="module-mockup-topbar">
+        <div>
+          <p class="module-mockup-eyebrow">${mockup.eyebrow}</p>
+          <h4>${mockup.title}</h4>
+        </div>
+        <span class="module-mockup-status">Live</span>
+      </header>
+      <div class="module-mockup-stats">
+        ${mockup.stats
+          .map(
+            (stat) => `
+              <article class="module-mockup-stat">
+                <span>${stat.label}</span>
+                <strong>${stat.value}</strong>
+              </article>
+            `
+          )
+          .join("")}
+      </div>
+      <div class="module-mockup-list">
+        ${mockup.rows
+          .map(
+            (row) => `
+              <article class="module-mockup-row">
+                <div>
+                  <h5>${row.title}</h5>
+                  <p>${row.meta}</p>
+                </div>
+                <span>${row.status}</span>
+              </article>
+            `
+          )
+          .join("")}
+      </div>
+    </article>
+  `;
+}
+
 function getProblemIcon(type) {
   const icons = {
     sheet: `
@@ -251,6 +342,21 @@ function getProblemIcon(type) {
   };
 
   return icons[type] || icons.sheet;
+}
+
+function getModuleIcon(index) {
+  const icons = [
+    `<svg viewBox="0 0 24 24" focusable="false"><path d="M4 6.5h16M4 12h10M4 17.5h7"></path><rect x="14.5" y="10" width="5.5" height="7.5" rx="1.2"></rect></svg>`,
+    `<svg viewBox="0 0 24 24" focusable="false"><path d="M7 4.5v15M17 7.5v12M12 10.5v9"></path><path d="M4 19.5h16"></path></svg>`,
+    `<svg viewBox="0 0 24 24" focusable="false"><path d="M5 17.5l4-5 3 2.5 5-7"></path><path d="M5 5.5h14v13H5z"></path></svg>`,
+    `<svg viewBox="0 0 24 24" focusable="false"><path d="M4.5 7.5h15M7.5 4.5v15"></path><rect x="4.5" y="4.5" width="15" height="15" rx="1.5"></rect></svg>`,
+    `<svg viewBox="0 0 24 24" focusable="false"><path d="M6 6.5h12M6 11h12M6 15.5h8"></path><rect x="4.5" y="4.5" width="15" height="15" rx="1.5"></rect></svg>`,
+    `<svg viewBox="0 0 24 24" focusable="false"><circle cx="9" cy="9" r="3"></circle><path d="M4.5 18c1.2-2.6 3.1-4 4.5-4s3.3 1.4 4.5 4"></path><path d="M16 8h3.5M16 12h3.5M16 16h2.5"></path></svg>`,
+    `<svg viewBox="0 0 24 24" focusable="false"><path d="M5 8h14M5 12h10M5 16h6"></path><path d="M18 15l1.8 1.8L22 14.6"></path></svg>`,
+    `<svg viewBox="0 0 24 24" focusable="false"><path d="M5 18V9M10 18V5M15 18v-7M20 18v-4"></path><path d="M3.5 18.5h17"></path></svg>`
+  ];
+
+  return icons[index] || icons[0];
 }
 
 function setupFaqAccordion() {
@@ -478,6 +584,36 @@ function setupProcessFlowProgress() {
   window.addEventListener("scroll", requestUpdate, { passive: true });
   window.addEventListener("resize", requestUpdate);
   requestUpdate();
+}
+
+function setupModuleShowcase() {
+  const buttons = Array.from(document.querySelectorAll(".module-card"));
+  if (!buttons.length || !Array.isArray(flowContent.modules)) {
+    return;
+  }
+
+  function activate(index) {
+    const module = flowContent.modules[index];
+    if (!module) {
+      return;
+    }
+
+    buttons.forEach((button, buttonIndex) => {
+      const isActive = buttonIndex === index;
+      button.classList.toggle("is-active", isActive);
+      button.setAttribute("aria-selected", String(isActive));
+    });
+
+    renderModuleDetail(module, index);
+  }
+
+  buttons.forEach((button) => {
+    button.addEventListener("click", () => {
+      activate(Number(button.dataset.moduleIndex || 0));
+    });
+  });
+
+  activate(0);
 }
 
 function setupMenu() {
@@ -745,6 +881,7 @@ setupImageFallbacks();
 setupSolutionCardScrollEffect();
 setupPracticeTileReveal();
 setupProcessFlowProgress();
+setupModuleShowcase();
 setupFaqAccordion();
 setupMenu();
 setupPilotForm();

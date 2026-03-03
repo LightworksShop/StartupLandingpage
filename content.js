@@ -112,6 +112,185 @@ const flowContent = {
       text: "Wenn sich euer Betrieb verändert, wächst die Software mit. Wir übernehmen Anpassungen, Updates und laufende Wartung – damit alles stabil weiterläuft."
     }
   ],
+  modules: [
+    {
+      name: "Projektübersicht",
+      description: [
+        "Wir gestalten eine zentrale Übersicht, in der alle Projekte zusammenlaufen.",
+        "Jeder weiß, was gerade läuft und was als Nächstes ansteht.",
+        "Das schafft Ruhe im Alltag."
+      ],
+      integrations: ["DATEV", "Shopify", "Outlook", "Google Kalender"],
+      mockup: {
+        eyebrow: "Projektstatus",
+        title: "Alle Projekte auf einen Blick",
+        stats: [
+          { label: "Aktiv", value: "18" },
+          { label: "Heute fällig", value: "4" },
+          { label: "Offene Aufgaben", value: "27" }
+        ],
+        rows: [
+          { title: "Innenausbau Weber", meta: "Angebot bestätigt", status: "In Arbeit" },
+          { title: "Montage Schmitt", meta: "Team Nord · 14:00", status: "Nächster Schritt" },
+          { title: "Umbau Keller", meta: "Material bestellt", status: "Im Plan" }
+        ]
+      }
+    },
+    {
+      name: "Zeiterfassung",
+      description: [
+        "Zeiten können einfach und direkt Projekten zugeordnet werden – im Büro oder unterwegs.",
+        "So entsteht Transparenz, ohne zusätzlichen Verwaltungsaufwand."
+      ],
+      integrations: ["DATEV Lohn", "Personio"],
+      mockup: {
+        eyebrow: "Zeit & Team",
+        title: "Zeiten direkt im Projekt",
+        stats: [
+          { label: "Heute gebucht", value: "63 h" },
+          { label: "Teams aktiv", value: "6" },
+          { label: "Offene Einträge", value: "2" }
+        ],
+        rows: [
+          { title: "Projekt Adler", meta: "Y. Vogel · 07:30–11:45", status: "Gebucht" },
+          { title: "Serviceeinsatz Süd", meta: "M. Becker · mobil", status: "Unterwegs" },
+          { title: "Werkstatt intern", meta: "Team 2 · Nachtrag", status: "Prüfen" }
+        ]
+      }
+    },
+    {
+      name: "Projektkalkulation",
+      description: [
+        "Wir schaffen eine klare Sicht auf Kosten und Erlöse.",
+        "Sie erkennen frühzeitig, ob ein Projekt im Plan liegt – und können rechtzeitig reagieren."
+      ],
+      integrations: ["DATEV", "Lexoffice", "Warenwirtschaftssysteme"],
+      mockup: {
+        eyebrow: "Deckungsbeitrag",
+        title: "Kosten und Erlöse im Blick",
+        stats: [
+          { label: "Soll-Marge", value: "24 %" },
+          { label: "Ist-Marge", value: "21 %" },
+          { label: "Warnungen", value: "3" }
+        ],
+        rows: [
+          { title: "Projekt Adler", meta: "Material +8 %", status: "Achtung" },
+          { title: "Innenausbau Weber", meta: "Im Korridor", status: "Stabil" },
+          { title: "Montage Schmitt", meta: "Zusatzleistung offen", status: "Prüfen" }
+        ]
+      }
+    },
+    {
+      name: "Material & Lager",
+      description: [
+        "Materialbewegungen lassen sich nachvollziehbar abbilden.",
+        "Bestände bleiben übersichtlich, Engpässe werden rechtzeitig sichtbar."
+      ],
+      integrations: ["Großhändler-Schnittstellen", "Shopify", "Barcode-Systeme"],
+      mockup: {
+        eyebrow: "Bestände",
+        title: "Materialflüsse transparent halten",
+        stats: [
+          { label: "Artikel aktiv", value: "412" },
+          { label: "Unter Mindestbestand", value: "11" },
+          { label: "Bestellungen offen", value: "7" }
+        ],
+        rows: [
+          { title: "Montageschienen", meta: "Lager A · 18 Stk", status: "Nachbestellen" },
+          { title: "Kabelsatz 4m", meta: "Lager B · 62 Stk", status: "Verfügbar" },
+          { title: "Ventileinheit X2", meta: "Lieferung morgen", status: "Unterwegs" }
+        ]
+      }
+    },
+    {
+      name: "Angebote & Rechnungen",
+      description: [
+        "Angebote, Projekte und Rechnungen greifen ineinander.",
+        "Doppelarbeit wird vermieden, Abläufe werden klarer und einfacher."
+      ],
+      integrations: ["DATEV", "SevDesk", "Stripe", "PayPal"],
+      mockup: {
+        eyebrow: "Dokumente",
+        title: "Von Angebot bis Rechnung",
+        stats: [
+          { label: "Angebote offen", value: "9" },
+          { label: "Rechnungen heute", value: "5" },
+          { label: "Zahlstatus prüfen", value: "3" }
+        ],
+        rows: [
+          { title: "Angebot #2481", meta: "Projekt Adler", status: "Freigabe" },
+          { title: "Rechnung #1042", meta: "Innenausbau Weber", status: "Versendet" },
+          { title: "Abschlag #771", meta: "Montage Schmitt", status: "Offen" }
+        ]
+      }
+    },
+    {
+      name: "Kundenmanagement",
+      description: [
+        "Alle wichtigen Informationen zu Ihren Kunden bleiben an einem Ort.",
+        "So gehen keine Absprachen oder Dokumente verloren."
+      ],
+      integrations: ["IMAP", "Outlook", "Google Workspace", "Telefonanlagen"],
+      mockup: {
+        eyebrow: "Kundenakte",
+        title: "Kontakte, Notizen, Historie",
+        stats: [
+          { label: "Kontakte", value: "286" },
+          { label: "Offene Rückrufe", value: "6" },
+          { label: "Neue Mails", value: "14" }
+        ],
+        rows: [
+          { title: "Schmitt GmbH", meta: "Letzte Mail heute 09:12", status: "Aktiv" },
+          { title: "Weber Bau", meta: "Telefonnotiz offen", status: "Rückruf" },
+          { title: "Keller Technik", meta: "Dokumente vollständig", status: "Dokumentiert" }
+        ]
+      }
+    },
+    {
+      name: "Produktionssteuerung",
+      description: [
+        "Wir strukturieren Abläufe so, dass jeder weiß, was zu tun ist.",
+        "Fortschritte werden sichtbar, Abstimmungen werden einfacher."
+      ],
+      integrations: ["Maschinen-Schnittstellen", "IoT-Sensoren", "QR-Code-Systeme"],
+      mockup: {
+        eyebrow: "Fertigung",
+        title: "Abläufe sauber takten",
+        stats: [
+          { label: "Stationen aktiv", value: "8" },
+          { label: "Heute geplant", value: "34" },
+          { label: "Blocker", value: "1" }
+        ],
+        rows: [
+          { title: "Linie 2", meta: "Auftrag 581 · 67 %", status: "Läuft" },
+          { title: "Vorbereitung", meta: "Material fehlt", status: "Blockiert" },
+          { title: "Endkontrolle", meta: "6 Positionen offen", status: "Nächster Schritt" }
+        ]
+      }
+    },
+    {
+      name: "Auswertungen & Dashboard",
+      description: [
+        "Wichtige Kennzahlen werden übersichtlich dargestellt.",
+        "Sie erhalten eine klare Grundlage für unternehmerische Entscheidungen – ohne Zahlenchaos."
+      ],
+      integrations: ["Buchhaltung", "Lohn", "Shop-Systeme"],
+      mockup: {
+        eyebrow: "Kennzahlen",
+        title: "Entscheidungen auf Basis klarer Daten",
+        stats: [
+          { label: "Umsatz Monat", value: "128 T€" },
+          { label: "Auslastung", value: "83 %" },
+          { label: "Marge", value: "19 %" }
+        ],
+        rows: [
+          { title: "Leistung nach Team", meta: "Nord +12 %", status: "Trend +" },
+          { title: "Offene Posten", meta: "7 Positionen", status: "Beobachten" },
+          { title: "Auftragslage", meta: "5 Wochen gesichert", status: "Stabil" }
+        ]
+      }
+    }
+  ],
   pricing: [
     {
       title: "Basis",
