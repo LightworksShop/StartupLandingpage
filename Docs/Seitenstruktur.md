@@ -138,7 +138,7 @@
 
 ### Sektion: Über uns (`#ueber-uns`)
 - Label: `Über uns`
-- Überschrift: `Das Entwickler-Team`
+- Überschrift: `Langfristiger Software-Partner – kein Projektanbieter`
 - Team:
   - `Benjamin Nöst` – `Beratung & Konzeption`
     - Bild: `assets/images/team-benjamin-512.jpg`
