@@ -707,7 +707,7 @@ function setupPilotForm() {
     // Simple honeypot trap for bots.
     if (sanitize(formData.get("website"))) {
       form.reset();
-      setStatus("Danke, deine Anfrage wurde übermittelt.", "success");
+      setStatus("Danke, eure Anfrage wurde übermittelt.", "success");
       return;
     }
 
@@ -726,13 +726,13 @@ function setupPilotForm() {
       const sentViaSmtpRelay = await submitToSmtpRelay(payload);
       if (sentViaSmtpRelay) {
         form.reset();
-        setStatus("Danke, deine Anfrage wurde gesendet.", "success");
+        setStatus("Danke, eure Anfrage wurde gesendet.", "success");
         return;
       }
 
       if (formConfig.useMailtoFallback !== false) {
         openMailClient(payload);
-        setStatus("Dein E-Mail-Programm wurde geöffnet. Bitte sende die vorbereitete Anfrage ab.", "info");
+        setStatus("Euer E-Mail-Programm wurde geöffnet. Bitte sendet die vorbereitete Anfrage ab.", "info");
         return;
       }
 

@@ -53,14 +53,14 @@ const flowContent = {
     },
     {
       icon: "erp",
-      title: "Das Standard-ERP zwingt dich in fremde Prozesse.",
-      text: "Du passt deinen Betrieb der Software an - statt umgekehrt. Und verlierst dabei Effizienz."
+      title: "Das Standard-ERP zwingt euch in fremde Prozesse.",
+      text: "Ihr passt euren Betrieb der Software an - statt umgekehrt. Und verliert dabei Effizienz."
     }
   ],
   solutionCards: [
     {
       title: "Ein System. Ein Überblick.",
-      text: "Wir bündeln Aufträge, Kommunikation und Daten an einem Ort. Du siehst jederzeit, wo ihr steht - ohne Tool-Hopping, ohne Sucherei."
+      text: "Wir bündeln Aufträge, Kommunikation und Daten an einem Ort. Ihr seht jederzeit, wo ihr steht - ohne Tool-Hopping, ohne Sucherei."
     },
     {
       title: "Verlässliche Prozesse statt Dauer-Improvisation.",
@@ -68,10 +68,10 @@ const flowContent = {
     },
     {
       title: "Wachstum mit Kontrolle - nicht mit Hektik.",
-      text: "Mehr Aufträge führen nicht zu mehr Chaos. Deine Strukturen skalieren mit. Du behältst Übersicht, Tempo und Qualität."
+      text: "Mehr Aufträge führen nicht zu mehr Chaos. Eure Strukturen skalieren mit. Ihr behaltet Übersicht, Tempo und Qualität."
     },
     {
-      title: "Software, die deinen Betrieb stärkt - nicht verbiegt.",
+      title: "Software, die euren Betrieb stärkt - nicht verbiegt.",
       text: "Wir entwickeln Lösungen, die eure Realität abbilden. Keine fremden Prozesse, keine unnötige Komplexität - sondern echte Entlastung im Alltag."
     }
   ],
@@ -134,7 +134,7 @@ const flowContent = {
       name: "Projektkalkulation",
       description: [
         "Wir schaffen eine klare Sicht auf Kosten und Erlöse.",
-        "Sie erkennen frühzeitig, ob ein Projekt im Plan liegt – und können rechtzeitig reagieren."
+        "Ihr erkennt frühzeitig, ob ein Projekt im Plan liegt – und könnt rechtzeitig reagieren."
       ],
       integrations: ["Buchhaltung", "Warenwirtschaft", "Einkaufssysteme"]
     },
@@ -157,7 +157,7 @@ const flowContent = {
     {
       name: "Kundenmanagement",
       description: [
-        "Alle wichtigen Informationen zu Ihren Kunden bleiben an einem Ort.",
+        "Alle wichtigen Informationen zu euren Kunden bleiben an einem Ort.",
         "So gehen keine Absprachen oder Dokumente verloren."
       ],
       integrations: ["E-Mail", "Kalender", "Telefonanlagen", "CRM-Systeme"]
@@ -174,7 +174,7 @@ const flowContent = {
       name: "Auswertungen & Dashboard",
       description: [
         "Wichtige Kennzahlen werden übersichtlich dargestellt.",
-        "Sie erhalten eine klare Grundlage für unternehmerische Entscheidungen – ohne Zahlenchaos."
+        "Ihr erhaltet eine klare Grundlage für unternehmerische Entscheidungen – ohne Zahlenchaos."
       ],
       integrations: ["Buchhaltung", "Lohn", "Online-Shops", "Controlling-Tools"]
     }
@@ -226,7 +226,7 @@ const flowContent = {
   ],
   faq: [
     {
-      question: "Ist Flow eine Standardsoftware oder individuell für mein Unternehmen?",
+      question: "Ist Flow eine Standardsoftware oder individuell für euer Unternehmen?",
       answer: [
         "Flow wird für jedes Unternehmen gezielt auf den tatsächlichen Bedarf abgestimmt.",
         "Ausgangspunkt sind eure konkreten Abläufe, Ziele und Strukturen. Daraus entsteht ein System, das eure Prozesse klar, logisch und effizient abbildet.",
