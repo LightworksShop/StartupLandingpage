@@ -1131,6 +1131,13 @@ p {
   line-height: 1.58;
 }
 
+.module-badges-title {
+  margin: 24px 0 10px;
+  color: #eef2f6;
+  font-size: 0.92rem;
+  font-weight: 600;
+}
+
 .module-badges {
   display: flex;
   flex-wrap: wrap;
