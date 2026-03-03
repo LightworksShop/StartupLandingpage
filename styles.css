@@ -1237,6 +1237,11 @@ p {
   margin-bottom: 8px;
 }
 
+.pricing-card ul,
+.pricing-card li {
+  color: var(--color-muted);
+}
+
 .pricing-note {
   margin-top: 16px;
   color: var(--color-primary);

@@ -182,39 +182,41 @@ const flowContent = {
   pricing: [
     {
       title: "Basis",
-      price: "995 € (einmalig)",
-      summary: "Für einen klar abgegrenzten Kernprozess ohne Schnittstellen.",
+      price: "ab 995 € (einmalig)",
+      summary: "Für einen strukturierten digitalen Start mit klar definiertem Umfang.",
       points: [
-        "Einrichtung des Core-Systems",
-        "Benutzer- und Rechteverwaltung",
-        "Modul-Grundstruktur",
-        "Technische Grundkonfiguration",
-        "Abbildung genau eines klar definierten Kernprozesses",
-        "Keine Schnittstellen-Integration",
-        "Keine komplexen Sonderlogiken"
+        "Technisches Grundsystem mit Nutzerverwaltung",
+        "Rollen und Rechte",
+        "Individuelle und zentrale Dashboard-Ansichten, abhängig von den gewählten Modulen",
+        "Modulbezogene Auswertungen und Übersichten",
+        "Implementierung und technische Einrichtung",
+        "Einrichtung der Hosting-Umgebung, auf Wunsch auch in eurer bestehenden Infrastruktur",
+        "Umsetzung von 2–3 Modulen aus eurem Kernbereich"
       ]
     },
     {
       title: "Individual",
-      price: "1.995 € (einmalig)",
-      summary: "Für kleinere Betriebe mit klar abgegrenztem Bedarf.",
+      price: "ab 1.995 € (einmalig)",
+      summary: "Für Betriebe, die mehrere Bereiche digital abbilden möchten.",
       featured: true,
       points: [
-        "Einrichtung auf Basis des Core-Systems",
-        "Konfiguration definierter Standardmodule",
-        "Abbildung eines klar umrissenen Kernprozesses",
-        "1 Feedback-Iteration"
+        "Enthält alles aus Basis",
+        "Umsetzung zusätzlicher Module, insgesamt typischerweise 4–6 Module",
+        "Erweiterte Prozessabbildung über mehrere Arbeitsbereiche hinweg",
+        "Individuell angepasste Masken, Felder und Abläufe",
+        "Erweiterte, modulabhängige Auswertungen und Dashboards"
       ]
     },
     {
       title: "Individual Plus",
-      price: "2.995 € (einmalig)",
-      summary: "Für wachsende Betriebe mit mehreren Sonderprozessen.",
+      price: "ab 2.995 € (einmalig)",
+      summary: "Für Betriebe mit individuellen Anforderungen oder mehreren angebundenen Systemen.",
       points: [
-        "Erweiterte Prozessabbildung",
-        "Zusätzliche Module oder komplexere Logiken",
-        "1–2 Schnittstellen zu bestehenden Systemen",
-        "2 Feedback-Iterationen"
+        "Enthält alles aus Basis und Individual",
+        "Umsetzung weiterer individueller Module über den Standardumfang hinaus",
+        "Anbindung externer Systeme, zum Beispiel Buchhaltung, Shop oder Zeiterfassung",
+        "Prozessautomatisierungen zwischen Modulen und Systemen",
+        "Abbildung komplexer, betriebsindividueller Abläufe"
       ]
     }
   ],
