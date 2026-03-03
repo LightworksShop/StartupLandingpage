@@ -235,72 +235,32 @@ function renderContent() {
 }
 
 function renderModuleDetail(module, index = 0) {
-  const label = document.getElementById("module-detail-label");
   const title = document.getElementById("module-detail-title");
   const text = document.getElementById("module-detail-text");
   const badges = document.getElementById("module-badges");
   const visual = document.getElementById("module-detail-visual");
   const detail = document.getElementById("module-detail");
-  if (!label || !title || !text || !badges || !visual || !detail || !module) {
+  if (!title || !text || !badges || !visual || !detail || !module) {
     return;
   }
 
-  label.textContent = `Detailbereich – ${module.name}`;
   title.textContent = module.name;
   text.innerHTML = module.description.map((paragraph) => `<p>${paragraph}</p>`).join("");
   badges.innerHTML = module.integrations.map((item) => `<span class="module-badge">${item}</span>`).join("");
-  visual.innerHTML = renderModuleMockup(module);
+  visual.innerHTML = renderImage(
+    module.image || {
+      src: "assets/images/business-values-2-1800.jpg",
+      fallback: "assets/images/hero-mockup.svg",
+      alt: `${module.name} Platzhalterbild`
+    },
+    "module-detail-image"
+  );
+  setupImageFallbacks();
 
   detail.classList.remove("is-transitioning");
   detail.setAttribute("aria-labelledby", `module-tab-${index}`);
   void detail.offsetWidth;
   detail.classList.add("is-transitioning");
-}
-
-function renderModuleMockup(module) {
-  const mockup = module.mockup;
-  if (!mockup) {
-    return "";
-  }
-
-  return `
-    <article class="module-mockup-shell">
-      <header class="module-mockup-topbar">
-        <div>
-          <p class="module-mockup-eyebrow">${mockup.eyebrow}</p>
-          <h4>${mockup.title}</h4>
-        </div>
-        <span class="module-mockup-status">Live</span>
-      </header>
-      <div class="module-mockup-stats">
-        ${mockup.stats
-          .map(
-            (stat) => `
-              <article class="module-mockup-stat">
-                <span>${stat.label}</span>
-                <strong>${stat.value}</strong>
-              </article>
-            `
-          )
-          .join("")}
-      </div>
-      <div class="module-mockup-list">
-        ${mockup.rows
-          .map(
-            (row) => `
-              <article class="module-mockup-row">
-                <div>
-                  <h5>${row.title}</h5>
-                  <p>${row.meta}</p>
-                </div>
-                <span>${row.status}</span>
-              </article>
-            `
-          )
-          .join("")}
-      </div>
-    </article>
-  `;
 }
 
 function getProblemIcon(type) {
