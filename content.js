@@ -120,7 +120,7 @@ const flowContent = {
         "Jeder weiß, was gerade läuft und was als Nächstes ansteht.",
         "Das schafft Ruhe im Alltag."
       ],
-      integrations: ["DATEV", "Shopify", "Outlook", "Google Kalender"]
+      integrations: ["Buchhaltungssysteme", "E-Mail & Kalender", "Online-Shops"]
     },
     {
       name: "Zeiterfassung",
@@ -128,7 +128,7 @@ const flowContent = {
         "Zeiten können einfach und direkt Projekten zugeordnet werden – im Büro oder unterwegs.",
         "So entsteht Transparenz, ohne zusätzlichen Verwaltungsaufwand."
       ],
-      integrations: ["DATEV Lohn", "Personio"]
+      integrations: ["Lohnabrechnung", "Personalverwaltung", "Stempelsysteme"]
     },
     {
       name: "Projektkalkulation",
@@ -136,7 +136,7 @@ const flowContent = {
         "Wir schaffen eine klare Sicht auf Kosten und Erlöse.",
         "Sie erkennen frühzeitig, ob ein Projekt im Plan liegt – und können rechtzeitig reagieren."
       ],
-      integrations: ["DATEV", "Lexoffice", "Warenwirtschaftssysteme"]
+      integrations: ["Buchhaltung", "Warenwirtschaft", "Einkaufssysteme"]
     },
     {
       name: "Material & Lager",
@@ -144,7 +144,7 @@ const flowContent = {
         "Materialbewegungen lassen sich nachvollziehbar abbilden.",
         "Bestände bleiben übersichtlich, Engpässe werden rechtzeitig sichtbar."
       ],
-      integrations: ["Großhändler-Schnittstellen", "Shopify", "Barcode-Systeme"]
+      integrations: ["Großhändler", "Warenwirtschaft", "Scanner- & Barcodesysteme"]
     },
     {
       name: "Angebote & Rechnungen",
@@ -152,7 +152,7 @@ const flowContent = {
         "Angebote, Projekte und Rechnungen greifen ineinander.",
         "Doppelarbeit wird vermieden, Abläufe werden klarer und einfacher."
       ],
-      integrations: ["DATEV", "SevDesk", "Stripe", "PayPal"]
+      integrations: ["Buchhaltung", "Zahlungsanbieter", "Online-Banking"]
     },
     {
       name: "Kundenmanagement",
@@ -160,7 +160,7 @@ const flowContent = {
         "Alle wichtigen Informationen zu Ihren Kunden bleiben an einem Ort.",
         "So gehen keine Absprachen oder Dokumente verloren."
       ],
-      integrations: ["IMAP", "Outlook", "Google Workspace", "Telefonanlagen"]
+      integrations: ["E-Mail", "Kalender", "Telefonanlagen", "CRM-Systeme"]
     },
     {
       name: "Produktionssteuerung",
@@ -168,7 +168,7 @@ const flowContent = {
         "Wir strukturieren Abläufe so, dass jeder weiß, was zu tun ist.",
         "Fortschritte werden sichtbar, Abstimmungen werden einfacher."
       ],
-      integrations: ["Maschinen-Schnittstellen", "IoT-Sensoren", "QR-Code-Systeme"]
+      integrations: ["Maschinensteuerungen", "Sensorik", "QR- & Trackingsysteme"]
     },
     {
       name: "Auswertungen & Dashboard",
@@ -176,7 +176,7 @@ const flowContent = {
         "Wichtige Kennzahlen werden übersichtlich dargestellt.",
         "Sie erhalten eine klare Grundlage für unternehmerische Entscheidungen – ohne Zahlenchaos."
       ],
-      integrations: ["Buchhaltung", "Lohn", "Shop-Systeme"]
+      integrations: ["Buchhaltung", "Lohn", "Online-Shops", "Controlling-Tools"]
     }
   ],
   pricing: [
