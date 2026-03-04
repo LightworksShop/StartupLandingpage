@@ -59,5 +59,13 @@ function setupLegalHeaderShrink() {
   window.addEventListener("scroll", onScroll, { passive: true });
 }
 
+function setLegalYear() {
+  const year = document.getElementById("year");
+  if (year) {
+    year.textContent = new Date().getFullYear();
+  }
+}
+
 setupLegalMenu();
 setupLegalHeaderShrink();
+setLegalYear();
