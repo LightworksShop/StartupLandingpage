@@ -219,11 +219,14 @@ function renderContent() {
     .map(
       (person) => `
         <article class="team-card">
+          <div class="team-copy">
+            <h3>${person.name}</h3>
+            <p class="team-title">${person.title ?? ""}</p>
+            <p class="team-role">${person.role}</p>
+          </div>
           <div class="team-avatar">
             ${renderImage({ src: person.image, alt: person.alt, fallback: person.fallback })}
           </div>
-          <h3>${person.name}</h3>
-          <p>${person.role}</p>
         </article>
       `
     )

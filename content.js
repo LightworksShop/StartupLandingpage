@@ -191,7 +191,7 @@ const flowContent = {
         "Modulbezogene Auswertungen und Übersichten",
         "Implementierung und technische Einrichtung",
         "Einrichtung der Hosting-Umgebung, auf Wunsch auch in eurer bestehenden Infrastruktur",
-        "Umsetzung von 2–3 Modulen aus eurem Kernbereich"
+        "Umsetzung von 1-2 Modulen aus eurem Kernbereich"
       ]
     },
     {
@@ -201,7 +201,7 @@ const flowContent = {
       featured: true,
       points: [
         "Enthält alles aus Basis",
-        "Umsetzung zusätzlicher Module, insgesamt typischerweise 4–6 Module",
+        "Umsetzung zusätzlicher Module, insgesamt typischerweise 3-6 Module",
         "Erweiterte Prozessabbildung über mehrere Arbeitsbereiche hinweg",
         "Individuell angepasste Masken, Felder und Abläufe",
         "Erweiterte, modulabhängige Auswertungen und Dashboards"
@@ -283,14 +283,16 @@ const flowContent = {
   team: [
     {
       name: "Benjamin Nöst",
-      role: "Beratung & Konzeption",
+      title: "",
+      role: "Strategie & Konzeption",
       image: "assets/images/team-benjamin-512.jpg",
       fallback: "assets/images/team-benjamin.svg",
       alt: "Portraitbild als Platzhalter für Benjamin Nöst"
     },
     {
       name: "Yannis Vogel",
-      role: "Softwareentwicklung & Implementierung",
+      title: "",
+      role: "Architektur & Systemsicherheit",
       image: "assets/images/team-yannis-512.jpg",
       fallback: "assets/images/team-yannis.svg",
       alt: "Portraitbild als Platzhalter für Yannis Vogel"
