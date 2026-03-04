@@ -12,24 +12,24 @@ const flowContent = {
     "KI-gestützt & geprüft"
   ],
   heroImage: {
-    src: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1440&q=78",
+    src: "assets/images/hero-unsplash-1440.jpg",
     fallback: "assets/images/hero-mockup.svg",
     alt: "Laptop mit moderner Softwareoberfläche auf einem Schreibtisch"
   },
   sectionImages: {
     problem: {
-      src: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=960&q=78",
+      src: "assets/images/problem-unsplash-960.jpg",
       fallback: "assets/images/hero-mockup.svg",
       alt: "Kleines Team bei der Abstimmung von Arbeitsprozessen"
     },
     solution: [
       {
-        src: "https://images.unsplash.com/photo-1551281044-8b26d3b4f4d0?auto=format&fit=crop&w=920&q=78",
+        src: "assets/images/Render4.jpg",
         fallback: "assets/images/hero-mockup.svg",
         alt: "Visualisierung strukturierter Daten auf einem Monitor"
       },
       {
-        src: "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=920&q=78",
+        src: "assets/images/solution-unsplash-2-920.jpg",
         fallback: "assets/images/hero-mockup.svg",
         alt: "Team bei strukturierter Prozessplanung"
       }

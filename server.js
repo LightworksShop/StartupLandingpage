@@ -32,7 +32,7 @@ app.use(
         formAction: ["'self'", "mailto:"],
         frameAncestors: ["'none'"],
         objectSrc: ["'none'"],
-        imgSrc: ["'self'", "data:", "https://images.unsplash.com"],
+        imgSrc: ["'self'", "data:"],
         styleSrc: ["'self'"],
         scriptSrc: ["'self'"],
         connectSrc: cspConnectSrc
