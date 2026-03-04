@@ -229,57 +229,55 @@ const flowContent = {
     "Perspektive auf reguläre Preisstruktur"
   ],
   faq: [
-    {
-      question: "Ist Flow eine Standardsoftware oder individuell für euer Unternehmen?",
-      answer: [
-        "Flow wird für jedes Unternehmen gezielt auf den tatsächlichen Bedarf abgestimmt.",
-        "Ausgangspunkt sind eure konkreten Abläufe, Ziele und Strukturen. Daraus entsteht ein System, das eure Prozesse klar, logisch und effizient abbildet.",
-        "Ihr bekommt keine starre Standardlösung, sondern eine passgenaue, strukturierte Softwarebasis für euer Wachstum."
-      ]
-    },
-    {
-      question: "Wie lange dauert die Umsetzung?",
-      answer: [
-        "Das hängt vom Umfang ab.",
-        "Ein klar abgegrenzter Kernprozess kann oft innerhalb weniger Tage umgesetzt werden. Komplexere Strukturen oder Schnittstellen benötigen entsprechend mehr Abstimmung.",
-        "Wichtig: Wir starten pragmatisch und bauen Schritt für Schritt auf."
-      ]
-    },
-    {
-      question: "Was passiert, wenn wir später weitere Funktionen benötigen?",
-      answer: [
-        "Flow ist bewusst modular aufgebaut.",
-        "Neue Prozesse, zusätzliche Funktionen oder Schnittstellen können jederzeit ergänzt werden, ohne das bestehende System zu destabilisieren.",
-        "Ihr startet schlank und erweitert bei Bedarf."
-      ]
-    },
-    {
-      question: "Wo werden unsere Daten gespeichert?",
-      answer: [
-        "Die Daten werden DSGVO-konform gespeichert.",
-        "Hosting und technische Infrastruktur werden transparent abgestimmt. Auf Wunsch ist auch eine getrennte oder individuelle Hosting-Lösung möglich.",
-        "Datensicherheit und Zugriffskontrolle sind fester Bestandteil des Systems."
-      ]
-    },
-    {
-      question: "Was bedeutet \"KI-gestützt\" konkret?",
-      answer: [
-        "Wir nutzen KI als professionelles Entwicklungswerkzeug, um schneller und effizienter zu arbeiten.",
-        "Das bedeutet für euch: kürzere Entwicklungszeiten, geringere Kosten und saubere Dokumentation.",
-        "Alle Ergebnisse werden sorgfältig geprüft, bevor sie eingesetzt werden.",
-        "Es gibt keine automatischen Änderungen ohne menschliche Kontrolle. Jede Anpassung wird bewusst entschieden und verantwortet.",
-        "Verlässlichkeit und Sicherheit stehen für uns immer vor Geschwindigkeit."
-      ]
-    },
-    {
-      question: "Wodurch unterscheidet sich Flow von klassischen ERP-Systemen oder einer Agentur?",
-      answer: [
-        "Klassische ERP-Systeme bringen viele vorgefertigte Prozesse mit, oft mehr, als kleinere Betriebe benötigen.",
-        "Agenturprojekte sind häufig individuell, aber teuer und schwer skalierbar.",
-        "Flow verbindet beides: ein stabiles Grundsystem mit klarer Struktur, kombiniert mit gezielter, wirtschaftlicher Individualisierung."
-      ]
-    }
-  ],
+{
+question: "Ist das eine fertige Standardsoftware?",
+answer: "Nein. Es gibt kein starres Produkt, das eingeführt wird. Wir entwickeln eine strukturierte, modulare Lösung auf Basis eurer tatsächlichen Abläufe. Ausgangspunkt sind Prozesse, Verantwortlichkeiten und Ziele – daraus entsteht ein System, das zu eurem Betrieb passt."
+},
+{
+question: "Für welche Unternehmen ist das sinnvoll?",
+answer: "Für wachsende Handwerks- und Dienstleistungsbetriebe, bei denen Abläufe unübersichtlich werden oder Einzellösungen nicht mehr ausreichen. Besonders dann, wenn Transparenz, klare Zuständigkeiten und saubere Prozesse wichtig werden."
+},
+{
+question: "Wie läuft ein Projekt konkret ab?",
+answer: "Wir starten mit einem klar abgegrenzten Kernbereich, zum Beispiel Projektübersicht oder Aufgabenmanagement. Dieser wird strukturiert umgesetzt und gemeinsam getestet. Danach wird Schritt für Schritt erweitert – technisch sauber und ohne unnötige Komplexität."
+},
+{
+question: "Wie lange dauert die Umsetzung?",
+answer: "Ein erster funktionsfähiger Kern kann oft innerhalb weniger Wochen stehen – abhängig vom Umfang. Erweiterungen erfolgen modular. Ziel ist immer, früh nutzbar zu sein und nicht erst nach Monaten live zu gehen."
+},
+{
+question: "Können später weitere Funktionen ergänzt werden?",
+answer: "Ja. Die Struktur ist modular aufgebaut. Zusätzliche Module, individuelle Anforderungen oder Schnittstellen können ergänzt werden, ohne das bestehende System neu aufzusetzen."
+},
+{
+question: "Wo liegen die Daten?",
+answer: "Die Daten werden DSGVO-konform gespeichert. Hosting, Zugriffsrechte und Sicherheitsstruktur werden transparent abgestimmt. Je nach Anforderung sind verschiedene Hosting-Modelle möglich."
+},
+{
+question: "Was bedeutet KI-unterstützt in eurem Kontext?",
+answer: "Wir nutzen moderne Entwicklungswerkzeuge, um schneller zu strukturieren, sauber zu dokumentieren und effizient umzusetzen. Entscheidungen, Architektur und Qualitätskontrolle liegen immer beim Menschen. Es gibt keine unkontrollierten Automatismen."
+},
+{
+question: "Sind wir danach von euch abhängig?",
+answer: "Das System ist nachvollziehbar aufgebaut und dokumentiert. Ziel ist Transparenz, nicht Abhängigkeit. Weiterentwicklung kann gemeinsam erfolgen oder strukturiert übergeben werden."
+},
+{
+question: "Was unterscheidet euch von klassischen ERP-Systemen?",
+answer: "Klassische ERP-Lösungen sind oft überdimensioniert oder unflexibel für kleinere Betriebe. Wir entwickeln keine Software mit unnötiger Funktionsfülle, sondern eine klare Struktur, die genau die Prozesse abbildet, die wirklich gebraucht werden. Im Mittelpunkt steht nicht ein Produkt, sondern eine tragfähige Struktur für euren Betrieb."
+},
+{
+question: "Mit welchem Investitionsrahmen müssen wir rechnen?",
+answer: "Der Umfang hängt stark von den Anforderungen ab. Wir starten mit einem klar definierten Kernbereich, sodass Investition und Nutzen in einem gesunden Verhältnis stehen. Erweiterungen erfolgen modular und transparent kalkuliert."
+},
+{
+question: "Können bestehende Systeme angebunden werden?",
+answer: "Ja. Schnittstellen zu bestehenden Lösungen wie Buchhaltung, Zeiterfassung oder branchenspezifischen Tools können berücksichtigt werden. Ziel ist nicht, alles zu ersetzen, sondern sinnvoll zu integrieren."
+},
+{
+question: "Was passiert mit unseren bestehenden Daten?",
+answer: "Bestehende Daten können – je nach Struktur und Qualität – übernommen oder strukturiert migriert werden. Wir prüfen gemeinsam, was sinnvoll ist. Ziel ist ein sauberer Übergang ohne unnötige Doppelstrukturen."
+}
+],
   team: [
     {
       name: "Benjamin Nöst",

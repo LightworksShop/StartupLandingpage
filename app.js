@@ -158,9 +158,8 @@ function renderContent() {
 
   const faqList = document.getElementById("faq-list");
   if (faqList && Array.isArray(flowContent.faq)) {
-    faqList.innerHTML = flowContent.faq
-      .map(
-        (item, index) => `
+    const faqItems = flowContent.faq.map(
+      (item, index) => `
           <article class="faq-item">
             <button
               class="faq-question"
@@ -178,12 +177,23 @@ function renderContent() {
               aria-labelledby="faq-question-${index}"
               hidden
             >
-              ${item.answer.map((paragraph) => `<p>${paragraph}</p>`).join("")}
+              ${
+                Array.isArray(item.answer)
+                  ? item.answer.map((paragraph) => `<p>${paragraph}</p>`).join("")
+                  : `<p>${item.answer}</p>`
+              }
             </div>
           </article>
         `
-      )
-      .join("");
+    );
+
+    const leftColumn = faqItems.filter((_, index) => index % 2 === 0).join("");
+    const rightColumn = faqItems.filter((_, index) => index % 2 === 1).join("");
+
+    faqList.innerHTML = `
+      <div class="faq-column">${leftColumn}</div>
+      <div class="faq-column">${rightColumn}</div>
+    `;
   }
 
   const faqStructuredData =
@@ -196,7 +206,7 @@ function renderContent() {
             name: item.question,
             acceptedAnswer: {
               "@type": "Answer",
-              text: item.answer.join(" ")
+              text: Array.isArray(item.answer) ? item.answer.join(" ") : String(item.answer || "")
             }
           }))
         }
@@ -399,6 +409,19 @@ function setupFaqAccordion() {
       if (isOpen) {
         closeItem(item, trigger, panel);
       } else {
+        items.forEach((otherItem) => {
+          if (otherItem === item || !otherItem.classList.contains("is-open")) {
+            return;
+          }
+
+          const otherTrigger = otherItem.querySelector(".faq-question");
+          const otherPanel = otherItem.querySelector(".faq-answer");
+          if (!otherTrigger || !otherPanel) {
+            return;
+          }
+
+          closeItem(otherItem, otherTrigger, otherPanel);
+        });
         openItem(item, trigger, panel);
       }
     });
