@@ -3,47 +3,90 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Impressum | Flow</title>
-  <meta name="description" content="Impressum der Landingpage von Flow.">
+  <title>Impressum | SmartWerk</title>
+  <meta name="description" content="Impressum von SmartWerk.">
   <meta name="robots" content="noindex,follow">
   <link rel="canonical" href="https://flow-software.de/impressum.html">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml">
   <link rel="shortcut icon" href="assets/images/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body class="legal-page">
-  <header class="site-header">
+  <header class="site-header" id="top">
     <div class="contact-bar">
       <div class="container contact-inner">
         <a href="tel:+491234567890">+49 123 4567890</a>
         <span aria-hidden="true">|</span>
         <a href="mailto:kontakt@flow-software.de">kontakt@flow-software.de</a>
+        <span aria-hidden="true">|</span>
+        <a href="index.html#pilot">Unverbindliches Analysegespräch</a>
       </div>
     </div>
     <div class="container header-inner">
-      <a class="logo" href="index.html" aria-label="Flow Startseite">
+      <a class="logo" href="index.html#top" aria-label="Flow Startseite">
         <img src="assets/images/logo.svg" alt="Flow Logo" loading="eager">
       </a>
-      <a class="btn btn-secondary" href="index.html">Zur Landingpage</a>
+      <nav class="desktop-nav" aria-label="Hauptnavigation">
+        <a href="index.html#problem">Ausgangslage</a>
+        <a href="index.html#loesung">Lösung</a>
+        <a href="index.html#pakete">Pakete</a>
+        <a href="index.html#ueber-uns">Über uns</a>
+        <a href="index.html#pilot">Pilot</a>
+        <a href="index.html#faq">FAQ</a>
+      </nav>
+      <a class="btn btn-primary header-cta" href="index.html#pilot">Pilot anfragen</a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Menü öffnen">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div class="mobile-menu" id="mobile-menu" hidden>
+      <nav aria-label="Mobile Navigation">
+        <a href="index.html#problem">Ausgangslage</a>
+        <a href="index.html#loesung">Lösung</a>
+        <a href="index.html#pakete">Pakete</a>
+        <a href="index.html#ueber-uns">Über uns</a>
+        <a href="index.html#pilot">Pilot</a>
+        <a href="index.html#faq">FAQ</a>
+        <a class="mobile-menu-accent" href="index.html#pilot">Pilot anfragen</a>
+      </nav>
     </div>
   </header>
+  <div id="header-shrink-sentinel" aria-hidden="true"></div>
 
   <main class="legal-main">
-    <div class="container">
-      <article class="legal-article">
+    <section class="section tone-plain legal-section">
+      <div class="container">
+        <p class="section-label"></p>
         <h1>Impressum</h1>
-        <p>Diese Seite ist als Platzhalter angelegt und muss vor Livegang mit rechtskonformen Angaben ergänzt werden.</p>
-        <h2>Angaben gemäß § 5 TMG</h2>
-        <p>Flow<br>Inhaber: Benjamin Nöst<br>Straße und Hausnummer<br>PLZ Ort<br>Deutschland</p>
-        <h2>Kontakt</h2>
-        <p>E-Mail: kontakt@flow-software.de</p>
-        <h2>Verantwortlich für den Inhalt</h2>
-        <p>Benjamin Nöst, Anschrift wie oben.</p>
-      </article>
-    </div>
+        <article class="legal-copy">
+          <h2>Angaben gemäß § 5 TMG</h2>
+          <p class="text-strong-color">
+            SmartWerk - Nöst und Vogel GbR<br>
+            Rorichmoorer Str. 76<br>
+            26802 Moormerland
+          </p>
+
+          <h2>Vertreten durch die Gesellschafter:</h2>
+          <p class="text-strong-color">
+            Benjamin Nöst<br>
+            Yannis Vogel
+          </p>
+
+          <h2>Kontakt</h2>
+          <p class="text-strong-color">
+            Telefon: <a href="tel:04954000">04954 000</a><br>
+            E-Mail: <a href="mailto:info@smartwerk.com">info@smartwerk.com</a><br>
+            <a href="index.html#pilot">Kontaktformular</a>
+          </p>
+
+          <h2>Umsatzsteuer-ID</h2>
+          <p class="text-strong-color">Umsatzsteuer-Identifikationsnummer gemäß § 27 a Umsatzsteuergesetz:<br>DEXXX</p>
+        </article>
+      </div>
+    </section>
   </main>
+  <script src="legal.js"></script>
 </body>
 </html>

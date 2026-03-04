@@ -24,6 +24,38 @@
   --header-total-height: calc(var(--contact-bar-height) + var(--nav-height));
 }
 
+@font-face {
+  font-family: "Barlow";
+  src: url("assets/fonts/Barlow-Regular.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Barlow";
+  src: url("assets/fonts/Barlow-Medium.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Barlow";
+  src: url("assets/fonts/Barlow-SemiBold.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Barlow";
+  src: url("assets/fonts/Barlow-Bold.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -1643,34 +1675,46 @@ p {
 }
 
 .legal-main {
-  padding: 72px 0 88px;
+  padding: 0 0 88px;
 }
 
-.legal-article {
+.legal-section {
+  padding-top: 72px;
+}
+
+.legal-section h1 {
+  margin-bottom: 24px;
+}
+
+.legal-copy {
   max-width: 860px;
-  background: linear-gradient(180deg, #fafbfc 0%, #f2f4f7 100%);
-  border-radius: var(--radius-lg);
-  border: 1px solid var(--color-border);
-  padding: 34px 36px;
-  box-shadow: 0 12px 28px rgba(21, 29, 38, 0.08);
 }
 
-.legal-article h1 {
-  margin-bottom: 10px;
-  font-size: clamp(2rem, 3.2vw, 2.7rem);
+.legal-copy h2 {
+  margin-top: 30px;
+  margin-bottom: 12px;
+  font-size: clamp(1.15rem, 1.8vw, 1.45rem);
+  color: var(--color-primary-strong);
 }
 
-.legal-article h2 {
-  margin-top: 28px;
-  margin-bottom: 10px;
-  font-size: clamp(1.25rem, 2vw, 1.55rem);
-  color: #202833;
+.legal-copy h2:first-child {
+  margin-top: 0;
 }
 
-.legal-article p {
-  margin-bottom: 14px;
-  max-width: 72ch;
+.legal-copy p {
+  margin-bottom: 12px;
+  max-width: 76ch;
   line-height: 1.6;
+}
+
+.legal-copy p:last-child {
+  margin-bottom: 0;
+}
+
+.legal-copy a {
+  color: var(--color-primary-strong);
+  text-decoration: underline;
+  text-underline-offset: 0.12em;
 }
 
 @media (max-width: 1080px) {
@@ -2048,11 +2092,11 @@ p {
   }
 
   .legal-main {
-    padding: 56px 0 72px;
+    padding: 0 0 72px;
   }
 
-  .legal-article {
-    padding: 26px 22px;
+  .legal-section {
+    padding-top: 56px;
   }
 }
 
