@@ -36,11 +36,16 @@ function renderContent() {
   }
 
   const heroVisual = document.getElementById("hero-visual");
-  heroVisual.innerHTML = renderImage(flowContent.heroImage, "", {
-    loading: "eager",
-    fetchPriority: "high",
-    decoding: "async"
-  });
+  heroVisual.innerHTML = `
+    ${renderImage(flowContent.heroImage, "", {
+      loading: "eager",
+      fetchPriority: "high",
+      decoding: "async"
+    })}
+    <a class="hero-scroll-hint" href="#problem" aria-label="Weiter nach unten">
+      <span class="hero-scroll-hint-arrow" aria-hidden="true"></span>
+    </a>
+  `;
 
   const painGrid = document.getElementById("pain-points");
   painGrid.innerHTML = flowContent.painPoints
