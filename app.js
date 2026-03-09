@@ -249,7 +249,9 @@ function renderContent() {
     .join("");
 
   const pilotPoints = document.getElementById("pilot-points");
-  pilotPoints.innerHTML = createListItems(flowContent.pilot);
+  if (pilotPoints && Array.isArray(flowContent.pilot)) {
+    pilotPoints.innerHTML = createListItems(flowContent.pilot);
+  }
 
   const faqList = document.getElementById("faq-list");
   if (faqList && Array.isArray(flowContent.faq)) {

@@ -303,29 +303,14 @@
 
     <section class="section tone-accent" id="pilot">
       <div class="container pilot-grid">
-        <div>
+        <div class="pilot-intro">
           <p class="section-label">Pilotbetrieb</p>
-          <h2>Pilotpartner gesucht</h2>
-          <ul class="standard-list" id="pilot-points"></ul>
+          <h2>Erstgespräch buchen</h2>
+          <p class="pilot-intro-text">Wir suchen Pilotbetriebe, mit denen wir gemeinsam starten und Lösungen praxisnah entwickeln:</p>
         </div>
-        <form class="pilot-form" aria-label="Pilotanfrage" novalidate>
-          <label for="name">Name</label>
-          <input id="name" name="name" type="text" autocomplete="name" placeholder="Max Mustermann" required>
-
-          <label for="company">Firma</label>
-          <input id="company" name="company" type="text" autocomplete="organization" placeholder="Musterbetrieb GmbH">
-
-          <label for="email">E-Mail</label>
-          <input id="email" name="email" type="email" autocomplete="email" placeholder="max@musterbetrieb.de" required>
-
-          <label for="message">Worum geht's?</label>
-          <textarea id="message" name="message" rows="4" placeholder="Kurz die aktuelle Situation und euer Ziel beschreiben." required></textarea>
-
-          <input class="hp-field" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
-
-          <p class="form-status" data-form-status aria-live="polite"></p>
-          <button class="btn btn-secondary" type="submit" data-submit-button>Anfrage senden</button>
-        </form>
+        <div class="booking-embed-wrap" aria-label="Terminbuchung">
+          <div id="inline-container"></div>
+        </div>
       </div>
     </section>
 
@@ -379,5 +364,19 @@
 
   <script src="content.js"></script>
   <script src="app.js"></script>
+  <script src="https://bookings.nimbuspop.com/assets/embed.js"></script>
+  <script>
+    window.addEventListener("load", function () {
+      if (!window.Bookings || typeof Bookings.inlineEmbed !== "function") {
+        return;
+      }
+
+      Bookings.inlineEmbed({
+        url: "https://smartwerk.zohobookings.eu/portal-embed#/254439000000047054",
+        parent: "#inline-container",
+        height: "600px"
+      });
+    });
+  </script>
 </body>
 </html>

@@ -1555,9 +1555,18 @@ p {
 
 .pilot-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
   gap: 24px;
   align-items: start;
+}
+
+.pilot-intro {
+  width: 100%;
+}
+
+.pilot-intro-text {
+  margin: 0 0 10px;
+  max-width: none;
 }
 
 .pilot-form {
@@ -1615,6 +1624,16 @@ p {
 .pilot-form .btn:disabled {
   opacity: 0.7;
   cursor: not-allowed;
+}
+
+.booking-embed-wrap {
+  width: 100%;
+  grid-column: 1 / -1;
+}
+
+#inline-container {
+  width: 100%;
+  min-height: 600px;
 }
 
 .form-status {
