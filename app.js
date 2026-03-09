@@ -1091,7 +1091,8 @@ function setupAnchorOffset() {
       return;
     }
 
-    const top = target.getBoundingClientRect().top + window.scrollY - getOffset();
+    const top =
+      id === "top" ? 0 : target.getBoundingClientRect().top + window.scrollY - getOffset();
     window.scrollTo({ top, behavior: "smooth" });
 
     if (updateHash) {

@@ -2240,18 +2240,31 @@ p {
 
   .team-card {
     width: 100%;
-    max-width: 332px;
+    max-width: 344px;
     grid-template-columns: minmax(0, 1fr) 122px;
-    gap: 10px;
+    gap: 12px;
+  }
+
+  .team-grid {
+    justify-items: center;
+  }
+
+  .team-card:first-child {
+    margin-left: -52px;
   }
 
   .team-card:nth-child(2) {
     margin-top: -1px;
-    margin-left: -52px;
+    margin-left: 52px;
     grid-template-columns: 122px minmax(0, 1fr);
   }
 
+  .team-card:nth-child(2) .team-avatar {
+    order: 1;
+  }
+
   .team-card:nth-child(2) .team-copy {
+    order: 2;
     text-align: left;
   }
 
