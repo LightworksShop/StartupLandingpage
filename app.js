@@ -192,10 +192,12 @@ function renderContent() {
       </article>
     `;
 
-    moduleCards.push(additionalCard);
+    const leftCards = moduleCards.filter((_, index) => index % 2 === 0);
+    const rightCards = moduleCards.filter((_, index) => index % 2 === 1);
+    rightCards.push(additionalCard);
 
-    const leftColumn = moduleCards.filter((_, index) => index % 2 === 0).join("");
-    const rightColumn = moduleCards.filter((_, index) => index % 2 === 1).join("");
+    const leftColumn = leftCards.join("");
+    const rightColumn = rightCards.join("");
 
     moduleListGrid.innerHTML = `
       <div class="module-list-column">${leftColumn}</div>
@@ -623,6 +625,36 @@ function setupProcessFlowProgress() {
       card.classList.toggle("is-active", active);
       segments[index]?.classList.toggle("is-active", active);
     });
+  }
+
+  if (window.matchMedia("(max-width: 720px)").matches) {
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (prefersReducedMotion || !("IntersectionObserver" in window)) {
+      cards.forEach((card) => card.classList.add("is-active"));
+      return;
+    }
+
+    cards.forEach((card) => card.classList.remove("is-active"));
+
+    const mobileObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) {
+            return;
+          }
+
+          cards.forEach((card) => card.classList.remove("is-active"));
+          entry.target.classList.add("is-active");
+        });
+      },
+      {
+        threshold: [0.38, 0.58],
+        rootMargin: "-14% 0px -24% 0px"
+      }
+    );
+
+    cards.forEach((card) => mobileObserver.observe(card));
+    return;
   }
 
   const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;

@@ -316,6 +316,10 @@ p {
   pointer-events: none;
 }
 
+.site-header.is-scrolled .mobile-menu {
+  inset: calc(var(--contact-bar-height) + var(--nav-height-scrolled)) 0 0;
+}
+
 .mobile-menu[hidden] {
   display: none !important;
 }
@@ -1905,10 +1909,10 @@ p {
 @media (max-width: 1080px) {
   :root {
     --contact-bar-height: 32px;
-    --nav-height: 92px;
-    --nav-height-scrolled: 76px;
-    --logo-height: 52px;
-    --logo-height-scrolled: 44px;
+    --nav-height: 88px;
+    --nav-height-scrolled: 70px;
+    --logo-height: 46px;
+    --logo-height-scrolled: 36px;
     --header-total-height: calc(var(--contact-bar-height) + var(--nav-height));
   }
 
@@ -1983,7 +1987,7 @@ p {
   .team-card:nth-child(2) {
     margin-top: -1px;
     margin-right: 0;
-    margin-left: 184px;
+    margin-left: 136px;
   }
 
   .footer-inner {
@@ -2007,6 +2011,14 @@ p {
     margin: 0;
     padding: 58px 20px 28px;
     justify-content: flex-end;
+  }
+
+  .hero-content h1 {
+    font-size: clamp(1.9rem, 7.6vw, 2.45rem);
+  }
+
+  .hero-content .lead {
+    font-size: 1.02rem;
   }
 
   .hero-content > * {
@@ -2113,6 +2125,10 @@ p {
     padding: 34px 0;
   }
 
+  .leitbild-band-top .leitbild-text-inner {
+    padding-left: 0;
+  }
+
   .practice-grid {
     grid-template-columns: 1fr;
   }
@@ -2164,6 +2180,14 @@ p {
     padding: 52px 16px 22px;
   }
 
+  .hero-content h1 {
+    font-size: clamp(1.65rem, 8.2vw, 2.1rem);
+  }
+
+  .hero-content .lead {
+    font-size: 0.96rem;
+  }
+
   .hero-content p {
     margin-bottom: 12px;
   }
@@ -2206,19 +2230,33 @@ p {
     grid-template-columns: 1fr;
   }
 
+  .faq-list {
+    gap: 8px;
+  }
+
+  .faq-column {
+    display: contents;
+  }
+
   .team-card {
     width: 100%;
-    grid-template-columns: minmax(0, 1fr) 152px;
-    gap: 14px;
+    max-width: 332px;
+    grid-template-columns: minmax(0, 1fr) 122px;
+    gap: 10px;
   }
 
   .team-card:nth-child(2) {
     margin-top: -1px;
-    margin-left: 152px;
+    margin-left: -52px;
+    grid-template-columns: 122px minmax(0, 1fr);
+  }
+
+  .team-card:nth-child(2) .team-copy {
+    text-align: left;
   }
 
   .team-avatar {
-    width: 152px;
+    width: 122px;
   }
 
   .process-grid {
@@ -2226,9 +2264,7 @@ p {
   }
 
   .process-flow {
-    grid-template-columns: 1fr;
-    margin-left: 0;
-    margin-right: 0;
+    display: none;
   }
 
   .module-card {
@@ -2297,10 +2333,10 @@ p {
 @media (max-width: 420px) {
   :root {
     --contact-bar-height: 30px;
-    --nav-height: 84px;
-    --nav-height-scrolled: 70px;
-    --logo-height: 48px;
-    --logo-height-scrolled: 40px;
+    --nav-height: 80px;
+    --nav-height-scrolled: 64px;
+    --logo-height: 42px;
+    --logo-height-scrolled: 34px;
     --header-total-height: calc(var(--contact-bar-height) + var(--nav-height));
   }
 
