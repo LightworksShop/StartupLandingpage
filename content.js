@@ -2,7 +2,7 @@ const flowContent = {
   form: {
     smtpRelayUrl: "/api/contact",
     method: "POST",
-    recipientEmail: "kontakt@flow-software.de",
+    recipientEmail: "kontakt@smartwerk-software.de",
     subject: "Pilotbetrieb anfragen",
     useMailtoFallback: true
   },

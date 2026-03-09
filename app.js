@@ -917,7 +917,7 @@ function setupPilotForm() {
   }
 
   function openMailClient(payload) {
-    const recipient = sanitize(formConfig.recipientEmail || "kontakt@flow-software.de");
+    const recipient = sanitize(formConfig.recipientEmail || "kontakt@smartwerk-software.de");
     const subject = encodeURIComponent(sanitize(formConfig.subject || "Pilotbetrieb anfragen"));
     const body = encodeURIComponent(
       `Name: ${payload.name}\nFirma: ${payload.company}\nE-Mail: ${payload.email}\n\nWorum geht's?\n${payload.message}`
