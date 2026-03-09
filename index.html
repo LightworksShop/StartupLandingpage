@@ -309,7 +309,20 @@
           <p class="pilot-intro-text">Wir suchen Pilotbetriebe, mit denen wir gemeinsam starten und Lösungen praxisnah entwickeln:</p>
         </div>
         <div class="booking-embed-wrap" aria-label="Terminbuchung">
-          <div id="inline-container"></div>
+          <div class="booking-consent" id="booking-consent">
+            <p class="booking-consent-text">
+              Mit Klick auf <strong>„Terminbuchung laden“</strong> willigen Sie ein, dass der externe Buchungsdienst geladen wird.
+              Details zur Datenverarbeitung finden Sie in unserer
+              <a href="datenschutz.html">Datenschutzerklärung</a>.
+              Die Einwilligung können Sie jederzeit zurücksetzen.
+            </p>
+            <div class="booking-consent-actions">
+              <button class="btn btn-primary" type="button" id="booking-consent-button">Terminbuchung laden</button>
+            </div>
+            <p class="booking-consent-status" id="booking-consent-status" aria-live="polite"></p>
+          </div>
+          <div id="inline-container" hidden></div>
+          <button class="booking-manage-button" type="button" id="booking-manage-button" hidden></button>
         </div>
       </div>
     </section>
@@ -364,19 +377,5 @@
 
   <script src="content.js"></script>
   <script src="app.js"></script>
-  <script src="https://bookings.nimbuspop.com/assets/embed.js"></script>
-  <script>
-    window.addEventListener("load", function () {
-      if (!window.Bookings || typeof Bookings.inlineEmbed !== "function") {
-        return;
-      }
-
-      Bookings.inlineEmbed({
-        url: "https://smartwerk.zohobookings.eu/portal-embed#/254439000000047054",
-        parent: "#inline-container",
-        height: "600px"
-      });
-    });
-  </script>
 </body>
 </html>

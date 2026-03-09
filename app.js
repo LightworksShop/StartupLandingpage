@@ -930,6 +930,175 @@ function setupMenu() {
   });
 }
 
+function setupBookingsEmbed() {
+  const consentBox = document.getElementById("booking-consent");
+  const consentButton = document.getElementById("booking-consent-button");
+  const manageButton = document.getElementById("booking-manage-button");
+  const consentStatus = document.getElementById("booking-consent-status");
+  const inlineContainer = document.getElementById("inline-container");
+  if (!consentButton || !inlineContainer) {
+    return;
+  }
+
+  const storageKey = "smartwerk_booking_embed_consent_v1";
+  const consentGranted = "granted";
+  const embedScriptUrl = "https://bookings.nimbuspop.com/assets/embed.js";
+  const embedUrl = "https://smartwerk.zohobookings.eu/portal-embed#/254439000000047054";
+  let loading = false;
+  let storedDecision = "";
+
+  try {
+    storedDecision = String(localStorage.getItem(storageKey) || "");
+  } catch (error) {
+    storedDecision = "";
+  }
+
+  function setStatus(message = "") {
+    if (!consentStatus) {
+      return;
+    }
+    consentStatus.textContent = message;
+  }
+
+  function writeDecision(value) {
+    try {
+      localStorage.setItem(storageKey, value);
+    } catch (error) {
+      // Ignore storage errors (e.g. strict privacy mode).
+    }
+  }
+
+  function clearDecision() {
+    try {
+      localStorage.removeItem(storageKey);
+    } catch (error) {
+      // Ignore storage errors.
+    }
+  }
+
+  function setManageButtonState(decision) {
+    if (!manageButton) {
+      return;
+    }
+
+    if (decision === consentGranted) {
+      manageButton.hidden = false;
+      manageButton.textContent = "Einwilligung zurücksetzen";
+      return;
+    }
+
+    manageButton.hidden = true;
+    manageButton.textContent = "";
+  }
+
+  function loadEmbedScript() {
+    return new Promise((resolve, reject) => {
+      if (window.Bookings && typeof window.Bookings.inlineEmbed === "function") {
+        resolve();
+        return;
+      }
+
+      const existingScript = document.querySelector('script[data-bookings-embed="true"]');
+      if (existingScript) {
+        existingScript.addEventListener("load", () => resolve(), { once: true });
+        existingScript.addEventListener("error", () => reject(new Error("bookings_embed_load_failed")), {
+          once: true
+        });
+        return;
+      }
+
+      const script = document.createElement("script");
+      script.src = embedScriptUrl;
+      script.async = true;
+      script.dataset.bookingsEmbed = "true";
+      script.onload = () => {
+        if (window.Bookings && typeof window.Bookings.inlineEmbed === "function") {
+          resolve();
+        } else {
+          reject(new Error("bookings_embed_unavailable"));
+        }
+      };
+      script.onerror = () => reject(new Error("bookings_embed_load_failed"));
+      document.head.appendChild(script);
+    });
+  }
+
+  async function activateEmbed({ persistConsent }) {
+    if (inlineContainer.dataset.loaded === "1" || loading) {
+      return;
+    }
+
+    loading = true;
+    consentButton.disabled = true;
+    consentButton.textContent = "Wird geladen...";
+    setStatus("");
+
+    try {
+      await loadEmbedScript();
+      inlineContainer.hidden = false;
+      if (consentBox) {
+        consentBox.hidden = true;
+      }
+
+      window.Bookings.inlineEmbed({
+        url: embedUrl,
+        parent: "#inline-container",
+        height: "600px"
+      });
+
+      inlineContainer.dataset.loaded = "1";
+      if (persistConsent) {
+        storedDecision = consentGranted;
+        writeDecision(consentGranted);
+      }
+
+      setManageButtonState(consentGranted);
+    } catch (error) {
+      consentButton.disabled = false;
+      consentButton.textContent = "Terminbuchung laden";
+      setStatus("Das Buchungsformular konnte nicht geladen werden. Bitte erneut versuchen.");
+    } finally {
+      loading = false;
+    }
+  }
+
+  function deactivateEmbed(message = "") {
+    inlineContainer.innerHTML = "";
+    inlineContainer.hidden = true;
+    delete inlineContainer.dataset.loaded;
+
+    if (consentBox) {
+      consentBox.hidden = false;
+    }
+
+    consentButton.disabled = false;
+    consentButton.textContent = "Terminbuchung laden";
+    setStatus(message);
+  }
+
+  consentButton.addEventListener("click", () => {
+    activateEmbed({ persistConsent: true });
+  });
+
+  if (manageButton) {
+    manageButton.addEventListener("click", () => {
+      if (storedDecision === consentGranted) {
+        storedDecision = "";
+        clearDecision();
+        deactivateEmbed("");
+        setManageButtonState("");
+      }
+    });
+  }
+
+  if (storedDecision === consentGranted) {
+    activateEmbed({ persistConsent: false });
+    return;
+  }
+
+  setManageButtonState("");
+}
+
 function setupPilotForm() {
   const form = document.querySelector(".pilot-form");
   if (!form) {
@@ -1145,6 +1314,7 @@ setupModuleShowcase();
 setupModuleListCards();
 setupFaqAccordion();
 setupMenu();
+setupBookingsEmbed();
 setupPilotForm();
 setupHeaderShrink();
 setupAnchorOffset();

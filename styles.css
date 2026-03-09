@@ -88,6 +88,10 @@ img {
   display: block;
 }
 
+[hidden] {
+  display: none !important;
+}
+
 h1,
 h2,
 h3 {
@@ -396,7 +400,12 @@ p {
   padding: 12px 20px;
   font-weight: 600;
   border: 1px solid transparent;
+  cursor: pointer;
   transition: transform 120ms ease, background-color 120ms ease, border-color 120ms ease;
+}
+
+.btn:disabled {
+  cursor: not-allowed;
 }
 
 .btn:hover,
@@ -1629,6 +1638,68 @@ p {
 .booking-embed-wrap {
   width: 100%;
   grid-column: 1 / -1;
+}
+
+.booking-consent {
+  display: grid;
+  justify-items: center;
+  gap: 14px;
+  max-width: 76ch;
+  margin: 0 auto 14px;
+  padding: 18px 18px 16px;
+  border: 1px solid rgba(243, 246, 250, 0.3);
+  border-radius: var(--radius-md);
+  background: transparent;
+  text-align: left;
+}
+
+.booking-consent-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+.booking-consent-text {
+  margin: 0;
+  color: #f3f6fa;
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
+.booking-consent-text a {
+  color: #ffffff;
+  text-decoration: underline;
+  text-underline-offset: 0.12em;
+}
+
+.booking-consent-text code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+  font-size: 0.92em;
+  background: rgba(255, 255, 255, 0.12);
+  padding: 0.08em 0.32em;
+  border-radius: 4px;
+}
+
+.booking-consent-status {
+  margin: 0;
+  min-height: 1.4em;
+  font-size: 0.92rem;
+  color: #fde68a;
+}
+
+.booking-manage-button {
+  display: block;
+  margin: 12px auto 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #dbe4ec;
+  font-size: 0.9rem;
+  font-family: inherit;
+  font-weight: 500;
+  line-height: 1.2;
+  cursor: pointer;
 }
 
 #inline-container {
