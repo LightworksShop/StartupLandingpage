@@ -115,6 +115,94 @@ function renderContent() {
       .join("");
   }
 
+  const moduleListGrid = document.getElementById("module-list-grid");
+  if (moduleListGrid && Array.isArray(flowContent.modules)) {
+    const moduleCards = flowContent.modules
+      .map(
+        (module, index) => `
+          <article class="module-list-card">
+            <button
+              class="module-list-trigger"
+              type="button"
+              aria-expanded="false"
+              aria-controls="module-list-panel-${index}"
+              id="module-list-trigger-${index}"
+            >
+              <h3>${module.name}</h3>
+              <span class="module-list-trigger-icon" aria-hidden="true">+</span>
+            </button>
+            <div
+              class="module-list-panel"
+              id="module-list-panel-${index}"
+              role="region"
+              aria-labelledby="module-list-trigger-${index}"
+              hidden
+            >
+              <div class="module-list-text">
+                <p>${module.description.join(" ")}</p>
+              </div>
+              <p class="module-list-badges-title">Mögliche Anbindungen:</p>
+              <div class="module-list-badges">
+                ${module.integrations.map((item) => `<span class="module-list-badge">${item}</span>`).join("")}
+              </div>
+            </div>
+          </article>
+        `
+      )
+      ;
+
+    const additionalCard = `
+      <article class="module-list-card module-list-card--special">
+        <button
+          class="module-list-trigger module-list-trigger--special"
+          type="button"
+          aria-expanded="false"
+          aria-controls="module-list-panel-extra"
+          id="module-list-trigger-extra"
+        >
+          <h3>Weitere individuelle Anforderungen</h3>
+          <span class="module-list-trigger-icon" aria-hidden="true">+</span>
+        </button>
+        <div
+          class="module-list-panel"
+          id="module-list-panel-extra"
+          role="region"
+          aria-labelledby="module-list-trigger-extra"
+          hidden
+        >
+          <div class="module-list-text">
+            <p>Neben den dargestellten Bereichen können zum Beispiel auch folgende Funktionen - sowie passende Schnittstellen zu bestehenden Systemen - individuell umgesetzt werden:</p>
+          </div>
+          <ul class="module-list-compact-list">
+            <li>Automatisierte Workflows und Prozessautomatisierung</li>
+            <li>Dokumenten- und Dateiverwaltung</li>
+            <li>Qualitätsmanagement und Prüfprotokolle</li>
+            <li>Wartungs- und Serviceplanung</li>
+            <li>Ressourcen- und Kapazitätsplanung</li>
+            <li>Lieferanten- und Einkaufsmanagement</li>
+            <li>Termin- und Einsatzplanung</li>
+            <li>Mobile Apps für Außendienst oder Werkstatt</li>
+            <li>Individuelle Dashboards und Auswertungen</li>
+            <li>Schnittstellen zu bestehenden Systemen oder Maschinen</li>
+          </ul>
+          <div class="module-list-text">
+            <p>Welche Funktionen tatsächlich sinnvoll sind, ergibt sich immer aus den konkreten Abläufen im Unternehmen. Ziel ist nicht eine möglichst große Software - sondern eine Lösung, die genau zu Ihrem Betrieb passt.</p>
+          </div>
+        </div>
+      </article>
+    `;
+
+    moduleCards.push(additionalCard);
+
+    const leftColumn = moduleCards.filter((_, index) => index % 2 === 0).join("");
+    const rightColumn = moduleCards.filter((_, index) => index % 2 === 1).join("");
+
+    moduleListGrid.innerHTML = `
+      <div class="module-list-column">${leftColumn}</div>
+      <div class="module-list-column">${rightColumn}</div>
+    `;
+  }
+
   const processSteps = document.getElementById("process-steps");
   if (processSteps && Array.isArray(flowContent.processSteps)) {
     processSteps.innerHTML = flowContent.processSteps
@@ -603,6 +691,124 @@ function setupModuleShowcase() {
   activate(0);
 }
 
+function setupModuleListCards() {
+  const cards = Array.from(document.querySelectorAll(".module-list-card"));
+  if (!cards.length) {
+    return;
+  }
+
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  function applyStackState(activeCard) {
+    cards.forEach((card) => {
+      const collapsed = Boolean(activeCard) && card !== activeCard;
+      card.classList.toggle("is-collapsed", collapsed);
+    });
+  }
+
+  function openCard(card, trigger, panel) {
+    trigger.setAttribute("aria-expanded", "true");
+    card.classList.add("is-open");
+    applyStackState(card);
+
+    const icon = trigger.querySelector(".module-list-trigger-icon");
+    if (icon) {
+      icon.textContent = "−";
+    }
+
+    if (prefersReducedMotion) {
+      panel.hidden = false;
+      panel.style.height = "auto";
+      panel.style.opacity = "1";
+      return;
+    }
+
+    panel.hidden = false;
+    panel.style.height = "0px";
+    panel.style.opacity = "0";
+
+    requestAnimationFrame(() => {
+      panel.style.height = `${panel.scrollHeight}px`;
+      panel.style.opacity = "1";
+    });
+
+    const onEnd = () => {
+      panel.style.height = "auto";
+      panel.removeEventListener("transitionend", onEnd);
+    };
+    panel.addEventListener("transitionend", onEnd);
+  }
+
+  function closeCard(card, trigger, panel) {
+    trigger.setAttribute("aria-expanded", "false");
+    card.classList.remove("is-open");
+    applyStackState(null);
+
+    const icon = trigger.querySelector(".module-list-trigger-icon");
+    if (icon) {
+      icon.textContent = "+";
+    }
+
+    if (prefersReducedMotion) {
+      panel.hidden = true;
+      panel.style.height = "0px";
+      panel.style.opacity = "0";
+      return;
+    }
+
+    panel.style.height = `${panel.scrollHeight}px`;
+    panel.style.opacity = "1";
+
+    requestAnimationFrame(() => {
+      panel.style.height = "0px";
+      panel.style.opacity = "0";
+    });
+
+    const onEnd = () => {
+      panel.hidden = true;
+      panel.removeEventListener("transitionend", onEnd);
+    };
+    panel.addEventListener("transitionend", onEnd);
+  }
+
+  cards.forEach((card, index) => {
+    const trigger = card.querySelector(".module-list-trigger");
+    const panel = card.querySelector(".module-list-panel");
+    if (!trigger || !panel) {
+      return;
+    }
+
+    panel.style.height = "0px";
+    panel.style.opacity = "0";
+
+    trigger.addEventListener("click", () => {
+      const isOpen = card.classList.contains("is-open");
+      if (isOpen) {
+        closeCard(card, trigger, panel);
+        return;
+      }
+
+      cards.forEach((otherCard) => {
+        if (otherCard === card || !otherCard.classList.contains("is-open")) {
+          return;
+        }
+        const otherTrigger = otherCard.querySelector(".module-list-trigger");
+        const otherPanel = otherCard.querySelector(".module-list-panel");
+        if (!otherTrigger || !otherPanel) {
+          return;
+        }
+        closeCard(otherCard, otherTrigger, otherPanel);
+      });
+
+      openCard(card, trigger, panel);
+    });
+
+    if (index === 0) {
+      openCard(card, trigger, panel);
+    }
+  });
+}
+
 function setupMenu() {
   const toggle = document.querySelector(".menu-toggle");
   const menu = document.getElementById("mobile-menu");
@@ -869,6 +1075,7 @@ setupSolutionCardScrollEffect();
 setupPracticeTileReveal();
 setupProcessFlowProgress();
 setupModuleShowcase();
+setupModuleListCards();
 setupFaqAccordion();
 setupMenu();
 setupPilotForm();
