@@ -1911,8 +1911,8 @@ p {
     --contact-bar-height: 32px;
     --nav-height: 88px;
     --nav-height-scrolled: 70px;
-    --logo-height: 46px;
-    --logo-height-scrolled: 36px;
+    --logo-height: 42px;
+    --logo-height-scrolled: 32px;
     --header-total-height: calc(var(--contact-bar-height) + var(--nav-height));
   }
 
@@ -2335,8 +2335,8 @@ p {
     --contact-bar-height: 30px;
     --nav-height: 80px;
     --nav-height-scrolled: 64px;
-    --logo-height: 42px;
-    --logo-height-scrolled: 34px;
+    --logo-height: 38px;
+    --logo-height-scrolled: 30px;
     --header-total-height: calc(var(--contact-bar-height) + var(--nav-height));
   }
 

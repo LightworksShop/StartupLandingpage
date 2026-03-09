@@ -627,33 +627,60 @@ function setupProcessFlowProgress() {
     });
   }
 
-  if (window.matchMedia("(max-width: 720px)").matches) {
+  if (window.matchMedia("(max-width: 1080px)").matches) {
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (prefersReducedMotion || !("IntersectionObserver" in window)) {
-      cards.forEach((card) => card.classList.add("is-active"));
+    if (prefersReducedMotion) {
+      cards.forEach((card, index) => card.classList.toggle("is-active", index === 0));
       return;
     }
 
-    cards.forEach((card) => card.classList.remove("is-active"));
+    let ticking = false;
 
-    const mobileObserver = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (!entry.isIntersecting) {
-            return;
-          }
+    function applySingleActive(activeCard) {
+      cards.forEach((card) => card.classList.toggle("is-active", card === activeCard));
+    }
 
-          cards.forEach((card) => card.classList.remove("is-active"));
-          entry.target.classList.add("is-active");
-        });
-      },
-      {
-        threshold: [0.38, 0.58],
-        rootMargin: "-14% 0px -24% 0px"
+    function updateMobileActiveCard() {
+      ticking = false;
+      const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+      const focusY = viewportHeight * 0.42;
+
+      let visibleBest = null;
+      let visibleBestDistance = Number.POSITIVE_INFINITY;
+      let fallbackBest = null;
+      let fallbackBestDistance = Number.POSITIVE_INFINITY;
+
+      cards.forEach((card) => {
+        const rect = card.getBoundingClientRect();
+        const centerY = rect.top + rect.height / 2;
+        const distance = Math.abs(centerY - focusY);
+        const visible = rect.bottom > viewportHeight * 0.12 && rect.top < viewportHeight * 0.88;
+
+        if (visible && distance < visibleBestDistance) {
+          visibleBestDistance = distance;
+          visibleBest = card;
+        }
+
+        if (distance < fallbackBestDistance) {
+          fallbackBestDistance = distance;
+          fallbackBest = card;
+        }
+      });
+
+      applySingleActive(visibleBest || fallbackBest || cards[0]);
+    }
+
+    function requestMobileUpdate() {
+      if (ticking) {
+        return;
       }
-    );
+      ticking = true;
+      window.requestAnimationFrame(updateMobileActiveCard);
+    }
 
-    cards.forEach((card) => mobileObserver.observe(card));
+    window.addEventListener("scroll", requestMobileUpdate, { passive: true });
+    window.addEventListener("resize", requestMobileUpdate);
+    requestMobileUpdate();
     return;
   }
 
