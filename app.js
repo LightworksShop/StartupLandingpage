@@ -279,8 +279,21 @@ function renderContent() {
       </article>
     `;
 
-    const leftCards = moduleCards.filter((_, index) => index % 2 === 0);
-    const rightCards = moduleCards.filter((_, index) => index % 2 === 1);
+    const leftCards = [];
+    const rightCards = [];
+
+    moduleCards.forEach((card, index) => {
+      const moduleName = flowContent.modules[index]?.name || "";
+      const forceLeft = moduleName.toLowerCase() === "zeiterfassung";
+
+      if (forceLeft || index % 2 === 0) {
+        leftCards.push(card);
+        return;
+      }
+
+      rightCards.push(card);
+    });
+
     rightCards.push(securityCard);
     rightCards.push(additionalCard);
 
@@ -318,14 +331,34 @@ function renderContent() {
   const pricing = document.getElementById("pricing-cards");
   pricing.innerHTML = flowContent.pricing
     .map(
-      (plan) => `
+      (plan, index) => `
         <article class="pricing-card${plan.featured ? " featured" : ""}">
           ${plan.featured ? `<span class="badge">${plan.badgeLabel || "häufiger Einstieg"}</span>` : ""}
-          <h3>${plan.title}</h3>
+          <p class="pricing-card-index">${String(index + 1).padStart(2, "0")}</p>
+          <h3>„${plan.title}“</h3>
           <p class="price">${plan.price}</p>
-          <p>${plan.summary}</p>
-          <p class="pricing-examples-title">Beispiele:</p>
-          <ul>${createListItems(plan.examples || plan.points || [])}</ul>
+          ${plan.focus ? `<p class="pricing-focus"><strong>Fokus:</strong> ${plan.focus}</p>` : ""}
+          <div
+            class="pricing-panel"
+            id="pricing-panel-${index}"
+            role="region"
+            aria-labelledby="pricing-toggle-${index}"
+            hidden
+          >
+            ${Array.isArray(plan.benefits) && plan.benefits.length ? '<p class="pricing-examples-title">Was ihr bekommt:</p>' : ""}
+            ${Array.isArray(plan.benefits) && plan.benefits.length ? `<ul class="pricing-list">${createListItems(plan.benefits)}</ul>` : ""}
+            ${Array.isArray(plan.examples) && plan.examples.length ? '<p class="pricing-examples-title">Beispiele:</p>' : ""}
+            ${Array.isArray(plan.examples) && plan.examples.length ? `<ul class="pricing-list">${createListItems(plan.examples)}</ul>` : ""}
+          </div>
+          <button
+            class="pricing-toggle"
+            type="button"
+            aria-expanded="false"
+            aria-controls="pricing-panel-${index}"
+            id="pricing-toggle-${index}"
+          >
+            Details anzeigen
+          </button>
         </article>
       `
     )
@@ -442,7 +475,7 @@ function setupHeroSlider() {
   }
 
   const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const autoplayMs = 5200;
+  const autoplayMs = 3000;
   let activeIndex = 0;
   let autoplayTimer = null;
 
@@ -1037,6 +1070,90 @@ function setupModuleListCards() {
   });
 }
 
+function setupPricingCardsAccordion() {
+  const cards = Array.from(document.querySelectorAll(".pricing-card"));
+  if (!cards.length) {
+    return;
+  }
+
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  function openPanel(card, toggle, panel) {
+    card.classList.add("is-open");
+    toggle.setAttribute("aria-expanded", "true");
+    toggle.textContent = "Details ausblenden";
+
+    if (prefersReducedMotion) {
+      panel.hidden = false;
+      panel.style.height = "auto";
+      panel.style.opacity = "1";
+      return;
+    }
+
+    panel.hidden = false;
+    panel.style.height = "0px";
+    panel.style.opacity = "0";
+
+    requestAnimationFrame(() => {
+      panel.style.height = `${panel.scrollHeight}px`;
+      panel.style.opacity = "1";
+    });
+
+    const onEnd = () => {
+      panel.style.height = "auto";
+      panel.removeEventListener("transitionend", onEnd);
+    };
+    panel.addEventListener("transitionend", onEnd);
+  }
+
+  function closePanel(card, toggle, panel) {
+    card.classList.remove("is-open");
+    toggle.setAttribute("aria-expanded", "false");
+    toggle.textContent = "Details anzeigen";
+
+    if (prefersReducedMotion) {
+      panel.hidden = true;
+      panel.style.height = "0px";
+      panel.style.opacity = "0";
+      return;
+    }
+
+    panel.style.height = `${panel.scrollHeight}px`;
+    panel.style.opacity = "1";
+
+    requestAnimationFrame(() => {
+      panel.style.height = "0px";
+      panel.style.opacity = "0";
+    });
+
+    const onEnd = () => {
+      panel.hidden = true;
+      panel.removeEventListener("transitionend", onEnd);
+    };
+    panel.addEventListener("transitionend", onEnd);
+  }
+
+  cards.forEach((card) => {
+    const toggle = card.querySelector(".pricing-toggle");
+    const panel = card.querySelector(".pricing-panel");
+    if (!toggle || !panel) {
+      return;
+    }
+
+    panel.style.height = "0px";
+    panel.style.opacity = "0";
+
+    toggle.addEventListener("click", () => {
+      const isOpen = toggle.getAttribute("aria-expanded") === "true";
+      if (isOpen) {
+        closePanel(card, toggle, panel);
+      } else {
+        openPanel(card, toggle, panel);
+      }
+    });
+  });
+}
+
 function setupMenu() {
   const toggle = document.querySelector(".menu-toggle");
   const menu = document.getElementById("mobile-menu");
@@ -1474,6 +1591,7 @@ setupPracticeTileReveal();
 setupProcessFlowProgress();
 setupModuleShowcase();
 setupModuleListCards();
+setupPricingCardsAccordion();
 setupFaqAccordion();
 setupMenu();
 setupBookingsEmbed();

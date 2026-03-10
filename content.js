@@ -21,6 +21,11 @@ const flowContent = {
       src: "assets/images/hero-smartwerk-2-1600.jpg",
       fallback: "assets/images/hero-mockup.svg",
       alt: "Team arbeitet gemeinsam an digitalen Prozessen in einer modernen Produktionsumgebung"
+    },
+    {
+      src: "assets/images/hero-smartwerk-3-1600.jpg",
+      fallback: "assets/images/hero-mockup.svg",
+      alt: "Digitale Zusammenarbeit bei der Planung und Steuerung von Betriebsabläufen"
     }
   ],
   sectionImages: {
@@ -188,38 +193,54 @@ const flowContent = {
   ],
   pricing: [
     {
-      title: "Kleiner Einstieg",
-      price: "ca. 2.000 – 5.000 €",
-      summary: "Für Betriebe, die einen klar definierten Prozess digitalisieren möchten.",
+      title: "Schluss mit Zettelwirtschaft und Excel-Chaos",
+      price: "Investition: ca. 2.000 – 5.000 €",
+      focus:
+        "Digitalisierung eines einzelnen, kritischen Arbeitsschritts. Ideal für Betriebe, die einen klaren Flaschenhals beseitigen wollen.",
+      benefits: [
+        "Zentrale Datenhaltung: Alle Infos an einem Ort, für alle (berechtigten) Mitarbeiter gleichzeitig verfügbar.",
+        "Intelligente Erfassung: Schlanke Masken statt überladener Tabellen - Fehlerquellen werden minimiert.",
+        "Dashboards und Auswertungen: Grafische Aufbereitung eurer Daten für den sofortigen Überblick ab dem ersten Tag.",
+        "Schnelle Einführung: Einsetzbar innerhalb weniger Wochen."
+      ],
       examples: [
-        "zentrale Auftrags- oder Projektübersicht",
-        "Angebots- oder Kalkulationslogik",
-        "einfache Produktions- oder Terminplanung",
-        "strukturierte Datenerfassung statt Excel"
+        "Digitale Bautagebücher inklusive automatischer Wochenübersicht.",
+        "Kunden- und Anfragenverwaltung mit Erfolgs-Statistiken.",
+        "Geräteverwaltung mit grafischer Anzeige von Wartungsintervallen."
       ]
     },
     {
-      title: "Ausbau mehrerer Prozesse",
-      price: "ca. 5.000 – 10.000 €",
-      summary: "Wenn mehrere Abläufe miteinander verbunden werden sollen.",
+      title: "Abteilungen vernetzen und Doppelt-Pflege stoppen",
+      price: "Investition: ca. 5.000 – 10.000 €",
+      focus:
+        "Verbindung von 2-3 Arbeitsbereichen. Informationen fließen automatisch von Schritt A zu Schritt B, ohne dass manuell kopiert oder nachgefragt werden muss.",
       featured: true,
       badgeLabel: "häufiger Einstieg",
+      benefits: [
+        "Automatisierte Logik: Statusänderungen lösen Folgeschritte aus (z. B. automatische Info an die Buchhaltung, sobald die Montage abgeschlossen ist).",
+        "Dashboards und Auswertungen: Übergreifende Analysen, die Daten aus verschiedenen Abteilungen intelligent kombinieren.",
+        "Schnittstellen zu euren Tools: Anbindung an bestehende Programme (z. B. Kalender, E-Mail oder eure Buchhaltungssoftware).",
+      ],
       examples: [
-        "Verbindung mehrerer Arbeitsbereiche",
-        "individuelle Masken und Datenstrukturen",
-        "automatisierte Status- oder Prozesslogik",
-        "erste Schnittstellen zu bestehenden Systemen"
+        "Nahtloser Übergang vom Angebot in die Ressourcenplanung mit Kapazitäts-Übersicht.",
+        "Automatisierte Status-Updates für Kunden kombiniert mit interner Erfolgsmessung.",
+        "Zeiterfassung & Nachkalkulation: Arbeitszeiten fließen direkt in das jeweilige Projekt, um die tatsächliche Gewinnspanne zu sehen."
       ]
     },
     {
-      title: "Komplexere Lösungen",
-      price: "ab ca. 10.000 €",
-      summary: "Für umfangreichere Systeme mit mehreren Bereichen oder Integrationen.",
+      title: "Voll vernetzte Prozesse für maximale Übersicht",
+      price: "Investition: ab ca. 10.000 €",
+      focus:
+        "Eine zentrale Plattform als Herzschlag eures Betriebs. Hier werden komplexe Regeln und alle wichtigen Datenströme gebündelt.",
+      benefits: [
+        "Dashboards und Auswertungen: Hochkomplexe Echtzeit-Steuerung, die live Profitabilität und Prozess-Engpässe aufzeigt.",
+        "Tiefe System-Verknüpfung: Nahtlose Anbindung an bestehende große Systeme (ERP/CRM) oder direkt an eure Maschinen.",
+        "Zukunftssicher & Unabhängig: Wir setzen auf bewährte, offene Technologien. Das bedeutet: Keine Abhängigkeit von uns als Anbieter - die Lösung gehört euch."
+      ],
       examples: [
-        "Verbindung mit bestehenden ERP- oder CRM-Systemen",
-        "komplexere Prozess- und Rechtestrukturen",
-        "Automatisierungen zwischen verschiedenen Systemen",
-        "individuelle Auswertungen und Dashboards"
+        "Vollautomatisierte Produktionssteuerung mit Live-Kennzahlen direkt aus der Werkstatt.",
+        "Komplexe Kalkulationstools mit Live-Preisen eurer Lieferanten und Margen-Analyse.",
+        "Kundenportale mit Self-Service-Funktionen und Live-Auftragsverfolgung."
       ]
     }
   ],

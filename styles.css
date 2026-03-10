@@ -1000,6 +1000,16 @@ p {
   line-height: 1.5;
 }
 
+.leitbild-point-compact h3 {
+  font-size: clamp(1.04rem, 1.32vw, 1.22rem);
+  margin-bottom: 9px;
+}
+
+.leitbild-point-compact p {
+  font-size: 0.94rem;
+  line-height: 1.42;
+}
+
 .leitbild-list {
   margin: 0;
   padding-left: 1.1rem;
@@ -1604,6 +1614,7 @@ p {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 18px;
+  align-items: start;
 }
 
 .pricing-card {
@@ -1613,6 +1624,8 @@ p {
   border-radius: var(--radius-md);
   padding: 22px;
   box-shadow: 0 8px 22px rgba(9, 29, 44, 0.06);
+  display: flex;
+  flex-direction: column;
 }
 
 .pricing-card.featured {
@@ -1638,16 +1651,106 @@ p {
   margin-bottom: 8px;
 }
 
+.pricing-card-index {
+  margin: 0 0 10px;
+  font-size: clamp(1.9rem, 2.4vw, 2.5rem);
+  line-height: 1;
+  font-weight: 700;
+  color: rgba(31, 41, 55, 0.22);
+}
+
 .pricing-card ul,
 .pricing-card li {
   color: var(--color-muted);
   font-size: 1rem;
 }
 
+.pricing-focus {
+  margin: 0 0 10px;
+  color: var(--color-text);
+}
+
+.pricing-focus strong {
+  color: var(--color-primary-strong);
+}
+
+.pricing-toggle {
+  margin-top: auto;
+  border: 0;
+  background: transparent;
+  color: var(--color-primary);
+  font: inherit;
+  font-size: 0.92rem;
+  font-weight: 600;
+  padding: 0;
+  cursor: pointer;
+}
+
+.pricing-toggle:hover,
+.pricing-toggle:focus-visible {
+  text-decoration: underline;
+}
+
 .pricing-examples-title {
   margin: 0 0 6px;
   font-size: 1rem;
   color: var(--color-muted);
+}
+
+.pricing-panel {
+  overflow: hidden;
+  height: 0;
+  opacity: 0;
+  transition: height 280ms ease, opacity 220ms ease;
+  will-change: height, opacity;
+  margin-top: 10px;
+}
+
+@media (min-width: 1081px) {
+  .pricing-grid {
+    width: min(100%, 1300px);
+    margin-top: 44px;
+    margin-inline: auto;
+    gap: 18px;
+  }
+
+  .pricing-followup {
+    margin-top: 40px;
+  }
+
+  .pricing-card:not(.is-open) {
+    min-height: 340px;
+  }
+
+  .pricing-card {
+    padding: 20px 20px 18px;
+  }
+
+  .pricing-card h3 {
+    font-size: 1.16rem;
+    margin-bottom: 9px;
+  }
+
+  .price {
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+  }
+
+  .pricing-focus {
+    font-size: 0.98rem;
+    margin-bottom: 9px;
+  }
+
+  .pricing-examples-title,
+  .pricing-card ul,
+  .pricing-card li,
+  .pricing-toggle {
+    font-size: 0.96rem;
+  }
+}
+
+.pricing-list {
+  margin: 0 0 12px;
 }
 
 .pricing-followup {
