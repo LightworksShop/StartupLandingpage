@@ -545,6 +545,42 @@ p {
   overflow: hidden;
 }
 
+.hero-slider,
+.hero-slides {
+  width: 100%;
+  height: 100%;
+}
+
+.hero-slider {
+  position: relative;
+}
+
+.hero-slides {
+  position: relative;
+}
+
+.hero-slider-controls {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 14px;
+  z-index: 4;
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.hero-slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 320ms ease;
+}
+
+.hero-slide.is-active {
+  opacity: 1;
+}
+
 .hero-visual::after {
   content: "";
   position: absolute;
@@ -561,6 +597,27 @@ p {
   object-position: center;
 }
 
+.hero-slider-dots {
+  display: inline-flex;
+  gap: 8px;
+  pointer-events: auto;
+}
+
+.hero-slider-dot {
+  width: 9px;
+  height: 9px;
+  padding: 0;
+  border-radius: 999px;
+  border: 1px solid rgba(248, 250, 252, 0.68);
+  background: rgba(248, 250, 252, 0.28);
+  cursor: pointer;
+}
+
+.hero-slider-dot.is-active {
+  background: var(--color-accent);
+  border-color: rgba(244, 130, 53, 0.92);
+}
+
 .hero-scroll-hint {
   display: none;
   position: absolute;
@@ -574,7 +631,6 @@ p {
   border: 1px solid rgba(243, 246, 249, 0.76);
   background: rgba(17, 24, 39, 0.34);
   backdrop-filter: blur(2px);
-  display: grid;
   place-items: center;
   animation: heroScrollHintFloat 1.8s ease-in-out infinite;
 }
@@ -1585,25 +1641,35 @@ p {
 .pricing-card ul,
 .pricing-card li {
   color: var(--color-muted);
+  font-size: 1rem;
 }
 
-.pricing-card-note {
-  margin-top: 18px;
+.pricing-examples-title {
+  margin: 0 0 6px;
+  font-size: 1rem;
   color: var(--color-muted);
-  font-size: 0.92rem;
-}
-
-.pricing-card-note strong {
-  font-weight: 700;
 }
 
 .pricing-followup {
   margin-top: 22px;
   color: var(--color-text);
+  max-width: none;
+}
+
+.pricing-followup-secondary {
+  margin-top: 8px;
+  color: var(--color-muted);
 }
 
 .pricing-subline {
   color: var(--color-text);
+  max-width: none;
+  margin-bottom: 12px;
+}
+
+.pricing-subline-compact {
+  margin-bottom: 0;
+  color: var(--color-muted);
 }
 
 .pilot-grid {

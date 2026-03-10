@@ -36,16 +36,64 @@ function renderContent() {
   }
 
   const heroVisual = document.getElementById("hero-visual");
+  const heroSliderControls = document.getElementById("hero-slider-controls");
+  const heroImages =
+    Array.isArray(flowContent.heroImages) && flowContent.heroImages.length
+      ? flowContent.heroImages
+      : flowContent.heroImage
+        ? [flowContent.heroImage]
+        : [];
+
+  const heroSlides = heroImages
+    .map(
+      (image, index) => `
+        <div class="hero-slide${index === 0 ? " is-active" : ""}" data-slide-index="${index}" aria-hidden="${index === 0 ? "false" : "true"}">
+          ${renderImage(image, "", {
+            loading: index === 0 ? "eager" : "lazy",
+            fetchPriority: index === 0 ? "high" : undefined,
+            decoding: "async"
+          })}
+        </div>
+      `
+    )
+    .join("");
+
+  const heroDots =
+    heroImages.length > 1
+      ? `
+        <div class="hero-slider-dots" role="tablist" aria-label="Hero Bilder">
+          ${heroImages
+            .map(
+              (_, index) => `
+                <button
+                  class="hero-slider-dot${index === 0 ? " is-active" : ""}"
+                  type="button"
+                  role="tab"
+                  aria-label="Bild ${index + 1}"
+                  aria-selected="${index === 0 ? "true" : "false"}"
+                  data-slide-target="${index}"
+                ></button>
+              `
+            )
+            .join("")}
+        </div>
+      `
+      : "";
+
   heroVisual.innerHTML = `
-    ${renderImage(flowContent.heroImage, "", {
-      loading: "eager",
-      fetchPriority: "high",
-      decoding: "async"
-    })}
+    <div class="hero-slider">
+      <div class="hero-slides">
+        ${heroSlides}
+      </div>
+    </div>
     <a class="hero-scroll-hint" href="#problem" aria-label="Weiter nach unten">
       <span class="hero-scroll-hint-arrow" aria-hidden="true"></span>
     </a>
   `;
+
+  if (heroSliderControls) {
+    heroSliderControls.innerHTML = heroDots;
+  }
 
   const painGrid = document.getElementById("pain-points");
   painGrid.innerHTML = flowContent.painPoints
@@ -272,12 +320,12 @@ function renderContent() {
     .map(
       (plan) => `
         <article class="pricing-card${plan.featured ? " featured" : ""}">
-          ${plan.featured ? '<span class="badge">Beliebt</span>' : ""}
+          ${plan.featured ? `<span class="badge">${plan.badgeLabel || "häufiger Einstieg"}</span>` : ""}
           <h3>${plan.title}</h3>
           <p class="price">${plan.price}</p>
           <p>${plan.summary}</p>
-          <ul>${createListItems(plan.points)}</ul>
-          ${plan.note ? `<p class="pricing-card-note"><strong>${plan.noteLabel || ""}</strong> ${plan.note}</p>` : ""}
+          <p class="pricing-examples-title">Beispiele:</p>
+          <ul>${createListItems(plan.examples || plan.points || [])}</ul>
         </article>
       `
     )
@@ -378,6 +426,85 @@ function renderContent() {
   if (year) {
     year.textContent = new Date().getFullYear();
   }
+}
+
+function setupHeroSlider() {
+  const visual = document.getElementById("hero-visual");
+  const controls = document.getElementById("hero-slider-controls");
+  if (!visual || !controls) {
+    return;
+  }
+
+  const slides = Array.from(visual.querySelectorAll(".hero-slide"));
+  const dots = Array.from(controls.querySelectorAll(".hero-slider-dot"));
+  if (slides.length <= 1 || !dots.length) {
+    return;
+  }
+
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const autoplayMs = 5200;
+  let activeIndex = 0;
+  let autoplayTimer = null;
+
+  function setActiveSlide(index) {
+    activeIndex = index;
+    slides.forEach((slide, slideIndex) => {
+      const isActive = slideIndex === index;
+      slide.classList.toggle("is-active", isActive);
+      slide.setAttribute("aria-hidden", isActive ? "false" : "true");
+    });
+
+    dots.forEach((dot, dotIndex) => {
+      const isActive = dotIndex === index;
+      dot.classList.toggle("is-active", isActive);
+      dot.setAttribute("aria-selected", isActive ? "true" : "false");
+    });
+  }
+
+  function stopAutoplay() {
+    if (!autoplayTimer) {
+      return;
+    }
+    window.clearInterval(autoplayTimer);
+    autoplayTimer = null;
+  }
+
+  function startAutoplay() {
+    if (prefersReducedMotion || autoplayTimer) {
+      return;
+    }
+
+    autoplayTimer = window.setInterval(() => {
+      if (document.hidden) {
+        return;
+      }
+      const nextIndex = (activeIndex + 1) % slides.length;
+      setActiveSlide(nextIndex);
+    }, autoplayMs);
+  }
+
+  function restartAutoplay() {
+    stopAutoplay();
+    startAutoplay();
+  }
+
+  dots.forEach((dot) => {
+    dot.addEventListener("click", () => {
+      setActiveSlide(Number(dot.dataset.slideTarget || 0));
+      restartAutoplay();
+    });
+  });
+
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) {
+      stopAutoplay();
+      return;
+    }
+    startAutoplay();
+  });
+
+  setActiveSlide(0);
+  startAutoplay();
 }
 
 function renderModuleDetail(module, index = 0) {
@@ -1353,3 +1480,4 @@ setupBookingsEmbed();
 setupPilotForm();
 setupHeaderShrink();
 setupAnchorOffset();
+setupHeroSlider();

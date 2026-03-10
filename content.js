@@ -11,11 +11,18 @@ const flowContent = {
     "Individuell",
     "KI-gestützt & geprüft"
   ],
-  heroImage: {
-    src: "assets/images/hero-smartwerk-1600.jpg",
-    fallback: "assets/images/hero-mockup.svg",
-    alt: "Laptop mit moderner Softwareoberfläche auf einem Schreibtisch"
-  },
+  heroImages: [
+    {
+      src: "assets/images/hero-smartwerk-1600.jpg",
+      fallback: "assets/images/hero-mockup.svg",
+      alt: "Laptop mit moderner Softwareoberfläche auf einem Schreibtisch"
+    },
+    {
+      src: "assets/images/hero-smartwerk-2-1600.jpg",
+      fallback: "assets/images/hero-mockup.svg",
+      alt: "Team arbeitet gemeinsam an digitalen Prozessen in einer modernen Produktionsumgebung"
+    }
+  ],
   sectionImages: {
     problem: {
       src: "assets/images/problem-unsplash-960.jpg",
@@ -181,45 +188,39 @@ const flowContent = {
   ],
   pricing: [
     {
-      title: "Basis",
-      price: "ab 995 € (einmalig)",
-      summary: "Für einen strukturierten digitalen Start mit klar definiertem Umfang.",
-      points: [
-        "Technisches Grundsystem mit Nutzerverwaltung",
-        "Rollen und Rechte",
-        "Individuelle und zentrale Dashboard-Ansichten, abhängig von den gewählten Modulen",
-        "Modulbezogene Auswertungen und Übersichten",
-        "Implementierung und technische Einrichtung",
-        "Einrichtung der Hosting-Umgebung, auf Wunsch auch in eurer bestehenden Infrastruktur",
-        "Umsetzung von 1-2 Modulen aus eurem Kernbereich"
+      title: "Kleiner Einstieg",
+      price: "ca. 2.000 – 5.000 €",
+      summary: "Für Betriebe, die einen klar definierten Prozess digitalisieren möchten.",
+      examples: [
+        "zentrale Auftrags- oder Projektübersicht",
+        "Angebots- oder Kalkulationslogik",
+        "einfache Produktions- oder Terminplanung",
+        "strukturierte Datenerfassung statt Excel"
       ]
     },
     {
-      title: "Individual",
-      price: "ab 1.995 € (einmalig)",
-      summary: "Für Betriebe, die mehrere Bereiche digital abbilden möchten.",
+      title: "Ausbau mehrerer Prozesse",
+      price: "ca. 5.000 – 10.000 €",
+      summary: "Wenn mehrere Abläufe miteinander verbunden werden sollen.",
       featured: true,
-      points: [
-        "Enthält alles aus Basis",
-        "Umsetzung zusätzlicher Module, insgesamt typischerweise 3-6 Module",
-        "Erweiterte Prozessabbildung über mehrere Arbeitsbereiche hinweg",
-        "Individuell angepasste Masken, Felder und Abläufe",
-        "Erweiterte, modulabhängige Auswertungen und Dashboards"
+      badgeLabel: "häufiger Einstieg",
+      examples: [
+        "Verbindung mehrerer Arbeitsbereiche",
+        "individuelle Masken und Datenstrukturen",
+        "automatisierte Status- oder Prozesslogik",
+        "erste Schnittstellen zu bestehenden Systemen"
       ]
     },
     {
-      title: "Individual Plus",
-      price: "ab 2.995 € (einmalig)",
-      summary: "Für Betriebe mit individuellen Anforderungen oder mehreren angebundenen Systemen.",
-      points: [
-        "Enthält alles aus Basis und Individual",
-        "Umsetzung weiterer individueller Module über den Standardumfang hinaus",
-        "Anbindung externer Systeme, zum Beispiel Buchhaltung, Shop oder Zeiterfassung",
-        "Prozessautomatisierungen zwischen Modulen und Systemen",
-        "Abbildung komplexer, betriebsindividueller Abläufe"
-      ],
-      noteLabel: "Hinweis zu allen Paketen:",
-      note: "Der konkrete Umfang richtet sich immer nach euren individuellen Anforderungen und der tatsächlichen Komplexität. Der finale Preis wird transparent im Gespräch auf Basis eurer Prozesse definiert."
+      title: "Komplexere Lösungen",
+      price: "ab ca. 10.000 €",
+      summary: "Für umfangreichere Systeme mit mehreren Bereichen oder Integrationen.",
+      examples: [
+        "Verbindung mit bestehenden ERP- oder CRM-Systemen",
+        "komplexere Prozess- und Rechtestrukturen",
+        "Automatisierungen zwischen verschiedenen Systemen",
+        "individuelle Auswertungen und Dashboards"
+      ]
     }
   ],
   pilot: [
