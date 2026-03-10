@@ -12,7 +12,7 @@ const flowContent = {
     "KI-gestützt & geprüft"
   ],
   heroImage: {
-    src: "assets/images/hero-unsplash-1440.jpg",
+    src: "assets/images/hero-smartwerk-1600.jpg",
     fallback: "assets/images/hero-mockup.svg",
     alt: "Laptop mit moderner Softwareoberfläche auf einem Schreibtisch"
   },
