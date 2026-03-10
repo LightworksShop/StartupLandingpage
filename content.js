@@ -229,55 +229,114 @@ const flowContent = {
     "Perspektive auf reguläre Preisstruktur"
   ],
   faq: [
+
 {
-question: "Ist das eine fertige Standardsoftware?",
-answer: "Nein. Es gibt kein starres Produkt, das eingeführt wird. Wir entwickeln eine strukturierte, modulare Lösung auf Basis eurer tatsächlichen Abläufe. Ausgangspunkt sind Prozesse, Verantwortlichkeiten und Ziele – daraus entsteht ein System, das zu eurem Betrieb passt."
+
+question: "Ist unsere Lösung eine fertige Standardsoftware?",
+
+answer: "Nein. Es gibt kein starres Produkt, das einfach eingeführt wird. Wir entwickeln eine strukturierte, modulare Lösung auf Basis eurer tatsächlichen Abläufe. Ausgangspunkt sind Prozesse, Verantwortlichkeiten und Ziele – daraus entsteht ein System, das zu eurem Betrieb passt."
+
 },
+
 {
+
 question: "Für welche Unternehmen ist das sinnvoll?",
-answer: "Für wachsende Handwerks- und Dienstleistungsbetriebe, bei denen Abläufe unübersichtlich werden oder Einzellösungen nicht mehr ausreichen. Besonders dann, wenn Transparenz, klare Zuständigkeiten und saubere Prozesse wichtig werden."
+
+answer: "Vor allem für wachsende Handwerks- und Dienstleistungsbetriebe, bei denen Abläufe mit der Zeit unübersichtlich geworden sind oder einzelne Tools nicht mehr sauber zusammenarbeiten. Besonders dann, wenn Transparenz, klare Zuständigkeiten und strukturierte Prozesse wichtig werden."
+
 },
+
 {
+
 question: "Wie läuft ein Projekt konkret ab?",
-answer: "Wir starten mit einem klar abgegrenzten Kernbereich, zum Beispiel Projektübersicht oder Aufgabenmanagement. Dieser wird strukturiert umgesetzt und gemeinsam getestet. Danach wird Schritt für Schritt erweitert – technisch sauber und ohne unnötige Komplexität."
+
+answer: "Der Ablauf hängt vom jeweiligen Projekt ab. In vielen Fällen starten wir mit einem klar abgegrenzten Kernbereich, zum Beispiel Projektübersicht oder Aufgabenmanagement, der strukturiert umgesetzt und im Alltag getestet wird. Wenn es sinnvoll ist, können aber auch von Beginn an mehrere Module oder ein größerer Funktionsumfang gemeinsam geplant und umgesetzt werden. Ziel ist immer eine saubere, nachvollziehbare Struktur ohne unnötige Komplexität."
+
 },
+
 {
+
 question: "Wie lange dauert die Umsetzung?",
-answer: "Ein erster funktionsfähiger Kern kann oft innerhalb weniger Wochen stehen – abhängig vom Umfang. Erweiterungen erfolgen modular. Ziel ist immer, früh nutzbar zu sein und nicht erst nach Monaten live zu gehen."
+
+answer: "Ein erster funktionsfähiger Kern kann oft innerhalb weniger Wochen entstehen – abhängig vom Umfang. Erweiterungen erfolgen modular. Ziel ist immer, früh einen echten Nutzen im Alltag zu schaffen, statt erst nach Monaten ein System produktiv einsetzen zu können."
+
 },
+
 {
+
 question: "Können später weitere Funktionen ergänzt werden?",
-answer: "Ja. Die Struktur ist modular aufgebaut. Zusätzliche Module, individuelle Anforderungen oder Schnittstellen können ergänzt werden, ohne das bestehende System neu aufzusetzen."
+
+answer: "Ja. Die Struktur ist modular aufgebaut. Zusätzliche Module, individuelle Anforderungen oder Schnittstellen können jederzeit ergänzt werden, ohne das bestehende System neu aufbauen zu müssen."
+
 },
+
 {
-question: "Wo liegen die Daten?",
-answer: "Die Daten werden DSGVO-konform gespeichert. Hosting, Zugriffsrechte und Sicherheitsstruktur werden transparent abgestimmt. Je nach Anforderung sind verschiedene Hosting-Modelle möglich."
+
+question: "Wo werden unsere Daten gespeichert und wie sind sie geschützt?",
+
+answer: [
+
+"Die Daten werden DSGVO-konform in einer abgestimmten Hosting-Umgebung verarbeitet. Je nach Anforderungen sind unterschiedliche Hosting-Modelle möglich.",
+
+"Zugriffe werden über ein klares Rollen- und Rechtekonzept gesteuert, sodass nur berechtigte Personen auf relevante Bereiche zugreifen können.",
+
+"Sicherheitsmaßnahmen wie Backup-Strategie, Wiederherstellbarkeit und nachvollziehbare Änderungen werden von Beginn an berücksichtigt."
+
+]
+
 },
+
 {
-question: "Was bedeutet KI-unterstützt in eurem Kontext?",
-answer: "Wir nutzen moderne Entwicklungswerkzeuge, um schneller zu strukturieren, sauber zu dokumentieren und effizient umzusetzen. Entscheidungen, Architektur und Qualitätskontrolle liegen immer beim Menschen. Es gibt keine unkontrollierten Automatismen."
+
+question: "Wie setzen wir KI ein – und wie stellen wir Qualität und Sicherheit sicher?",
+
+answer: "KI‑gestützte Werkzeuge helfen uns dabei, Entwicklungsprozesse zu beschleunigen, Strukturen schneller aufzubauen und sauber zu dokumentieren. Architekturentscheidungen, sicherheitsrelevante Aspekte und Qualitätskontrolle liegen jedoch immer beim Menschen. Code wird strukturiert überprüft, Änderungen werden nachvollziehbar dokumentiert und sicherheitsrelevante Punkte wie Code‑Reviews, klare Systemarchitektur und kontrollierte Updates werden bewusst berücksichtigt. KI ist dabei ein Werkzeug zur Effizienzsteigerung – nicht ein unkontrollierter Automatismus."
+
 },
+
 {
+
 question: "Sind wir danach von euch abhängig?",
-answer: "Das System ist nachvollziehbar aufgebaut und dokumentiert. Ziel ist Transparenz, nicht Abhängigkeit. Weiterentwicklung kann gemeinsam erfolgen oder strukturiert übergeben werden."
+
+answer: "Das System wird nachvollziehbar aufgebaut und dokumentiert. Ziel ist Transparenz, nicht Abhängigkeit. Der entwickelte Code und die Systemstruktur sind klar dokumentiert, sodass Weiterentwicklung entweder gemeinsam mit uns oder – wenn gewünscht – auch durch andere Entwickler möglich ist. Nutzungsrechte und Übergaberegelungen werden im Projekt klar definiert, damit ihr langfristig die Kontrolle über eure Lösung behaltet."
+
 },
+
 {
-question: "Was unterscheidet euch von klassischen ERP-Systemen?",
-answer: "Klassische ERP-Lösungen sind oft überdimensioniert oder unflexibel für kleinere Betriebe. Wir entwickeln keine Software mit unnötiger Funktionsfülle, sondern eine klare Struktur, die genau die Prozesse abbildet, die wirklich gebraucht werden. Im Mittelpunkt steht nicht ein Produkt, sondern eine tragfähige Struktur für euren Betrieb."
+
+question: "Was unterscheidet uns von klassischen ERP-Systemen?",
+
+answer: "Klassische ERP-Lösungen sind oft überdimensioniert oder unflexibel für kleinere Betriebe. Wir entwickeln keine Software mit unnötiger Funktionsfülle, sondern eine klare Struktur, die genau die Prozesse abbildet, die wirklich gebraucht werden. Im Mittelpunkt steht nicht ein Produkt, sondern eine tragfähige Systemstruktur für euren Betrieb."
+
 },
+
 {
+
 question: "Mit welchem Investitionsrahmen müssen wir rechnen?",
-answer: "Der Umfang hängt stark von den Anforderungen ab. Wir starten mit einem klar definierten Kernbereich, sodass Investition und Nutzen in einem gesunden Verhältnis stehen. Erweiterungen erfolgen modular und transparent kalkuliert."
+
+answer: "Der konkrete Aufwand hängt stark von den Anforderungen ab. Durch KI‑gestützte Entwicklung können viele Schritte schneller umgesetzt werden als bei klassischen Softwareagenturen. Dadurch entstehen individuelle Lösungen oft deutlich effizienter. Wir starten bewusst mit einem klar definierten Kernbereich, sodass Investition und Nutzen in einem gesunden Verhältnis stehen. Erweiterungen erfolgen modular und transparent kalkuliert."
+
 },
+
 {
+
 question: "Können bestehende Systeme angebunden werden?",
-answer: "Ja. Schnittstellen zu bestehenden Lösungen wie Buchhaltung, Zeiterfassung oder branchenspezifischen Tools können berücksichtigt werden. Ziel ist nicht, alles zu ersetzen, sondern sinnvoll zu integrieren."
+
+answer: "Ja. Schnittstellen zu bestehenden Lösungen wie Buchhaltung, Zeiterfassung oder branchenspezifischen Tools können berücksichtigt werden. Ziel ist nicht, alles zu ersetzen, sondern bestehende Systeme sinnvoll zu integrieren."
+
 },
+
 {
+
 question: "Was passiert mit unseren bestehenden Daten?",
-answer: "Bestehende Daten können – je nach Struktur und Qualität – übernommen oder strukturiert migriert werden. Wir prüfen gemeinsam, was sinnvoll ist. Ziel ist ein sauberer Übergang ohne unnötige Doppelstrukturen."
+
+answer: "Bestehende Daten können – je nach Struktur und Qualität – übernommen oder strukturiert migriert werden. Gemeinsam prüfen wir, welcher Weg sinnvoll ist. Ziel ist ein sauberer Übergang ohne doppelte Datenstrukturen."
+
 }
-],
+
+]
+
+,
   team: [
     {
       name: "Benjamin Nöst",

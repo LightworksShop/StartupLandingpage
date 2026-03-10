@@ -191,14 +191,49 @@ function renderContent() {
             <li>Schnittstellen zu bestehenden Systemen oder Maschinen</li>
           </ul>
           <div class="module-list-text">
-            <p>Welche Funktionen tatsächlich sinnvoll sind, ergibt sich immer aus den konkreten Abläufen im Unternehmen. Ziel ist nicht eine möglichst große Software - sondern eine Lösung, die genau zu Ihrem Betrieb passt.</p>
+            <p>Welche Funktionen tatsächlich sinnvoll sind, ergibt sich immer aus den konkreten Abläufen im Unternehmen. Ziel ist nicht eine möglichst große Software - sondern eine Lösung, die genau zu eurem Betrieb passt.</p>
           </div>
+        </div>
+      </article>
+    `;
+
+    const securityCard = `
+      <article class="module-list-card module-list-card--trust">
+        <button
+          class="module-list-trigger module-list-trigger--trust"
+          type="button"
+          aria-expanded="false"
+          aria-controls="module-list-panel-trust"
+          id="module-list-trigger-trust"
+        >
+          <h3>Sicherheit &amp; Compliance</h3>
+          <span class="module-list-trigger-icon" aria-hidden="true">+</span>
+        </button>
+        <div
+          class="module-list-panel"
+          id="module-list-panel-trust"
+          role="region"
+          aria-labelledby="module-list-trigger-trust"
+          hidden
+        >
+          <div class="module-list-text">
+            <p>Sicherheitsrelevante Anforderungen werden von Beginn an strukturiert berücksichtigt – technisch, organisatorisch und dokumentationsseitig.</p>
+          </div>
+          <ul class="module-list-compact-list">
+            <li>Rollen- und Rechtekonzepte mit klaren Zuständigkeiten</li>
+            <li>Nachvollziehbare Änderungen mit Änderungs-Historie</li>
+            <li>Backup- und Wiederherstellungsstrategie</li>
+            <li>Sicherheitsorientierte Entwicklung mit Code-Reviews</li>
+            <li>Hosting- und Zugriffsmodell abgestimmt auf eure Anforderungen</li>
+            <li>Eure Daten bleiben jederzeit exportierbar</li>
+          </ul>
         </div>
       </article>
     `;
 
     const leftCards = moduleCards.filter((_, index) => index % 2 === 0);
     const rightCards = moduleCards.filter((_, index) => index % 2 === 1);
+    rightCards.push(securityCard);
     rightCards.push(additionalCard);
 
     const leftColumn = leftCards.join("");

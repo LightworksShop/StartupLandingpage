@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://flow-software.de/sitemap.xml
+Sitemap: https://smartwerk-software.de/sitemap.xml
