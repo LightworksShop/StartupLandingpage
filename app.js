@@ -974,7 +974,7 @@ function setupModuleListCards() {
 
     const icon = trigger.querySelector(".module-list-trigger-icon");
     if (icon) {
-      icon.textContent = "−";
+      icon.textContent = "-";
     }
 
     if (prefersReducedMotion) {

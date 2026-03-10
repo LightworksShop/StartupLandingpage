@@ -1505,6 +1505,9 @@ p {
   font-size: 1rem;
   line-height: 1;
   font-weight: 700;
+  font-family: "Barlow", "Segoe UI", "Trebuchet MS", sans-serif;
+  user-select: none;
+  -moz-user-select: none;
 }
 
 .module-list-card.is-open .module-list-trigger-icon {
