@@ -1791,6 +1791,34 @@ p {
   max-width: none;
 }
 
+.pilot-contact {
+  margin-top: 8px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+}
+
+.pilot-contact-item {
+  display: inline-grid;
+  justify-items: start;
+  gap: 1px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+
+.pilot-contact-label {
+  font-size: 0.76rem;
+  color: rgba(243, 246, 250, 0.78);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.pilot-contact-value {
+  color: #ffffff;
+  font-weight: 600;
+}
+
 .pilot-form {
   background: transparent;
   border-radius: var(--radius-md);
@@ -2694,6 +2722,12 @@ p {
   .team-grid,
   .faq-list {
     grid-template-columns: 1fr;
+  }
+
+  .solution-cta {
+    display: flex;
+    width: fit-content;
+    margin: 18px auto 24px;
   }
 
   .pricing-card {
