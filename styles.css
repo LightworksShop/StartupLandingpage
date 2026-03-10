@@ -2171,6 +2171,10 @@ p {
   gap: 10px;
 }
 
+.footer-social[aria-label="Social Media"] {
+  display: none;
+}
+
 .footer-social a {
   width: 34px;
   height: 34px;
@@ -2615,13 +2619,13 @@ p {
 
   .hero-content h1 {
     font-size: clamp(1.85rem, 8.8vw, 2.35rem);
-    color: var(--color-primary);
+    color: #35383c;
     margin-bottom: 18px;
   }
 
   .hero-content .lead {
     font-size: 1.06rem;
-    color: var(--color-text);
+    color: #35383c;
     margin-bottom: 4px;
   }
 
@@ -2690,6 +2694,10 @@ p {
   .team-grid,
   .faq-list {
     grid-template-columns: 1fr;
+  }
+
+  .pricing-card {
+    cursor: pointer;
   }
 
   .faq-list {

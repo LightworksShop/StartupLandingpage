@@ -1077,6 +1077,7 @@ function setupPricingCardsAccordion() {
   }
 
   const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const mobileQuery = window.matchMedia("(max-width: 720px)");
 
   function openPanel(card, toggle, panel) {
     card.classList.add("is-open");
@@ -1144,6 +1145,23 @@ function setupPricingCardsAccordion() {
     panel.style.opacity = "0";
 
     toggle.addEventListener("click", () => {
+      const isOpen = toggle.getAttribute("aria-expanded") === "true";
+      if (isOpen) {
+        closePanel(card, toggle, panel);
+      } else {
+        openPanel(card, toggle, panel);
+      }
+    });
+
+    card.addEventListener("click", (event) => {
+      if (!mobileQuery.matches) {
+        return;
+      }
+
+      if (event.target.closest(".pricing-toggle")) {
+        return;
+      }
+
       const isOpen = toggle.getAttribute("aria-expanded") === "true";
       if (isOpen) {
         closePanel(card, toggle, panel);
