@@ -2569,7 +2569,7 @@ p {
   }
 }
 
-@media (min-width: 721px) and (max-width: 1080px) and (orientation: portrait) {
+@media (min-width: 721px) and (max-width: 1180px) and (hover: none) and (pointer: coarse) {
   .hero.section {
     padding: 0;
     min-height: calc(100dvh - var(--header-total-height));
