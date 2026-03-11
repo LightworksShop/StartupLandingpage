@@ -2684,8 +2684,8 @@ p {
   }
 
   .process-card {
-    height: 270px;
-    min-height: 270px;
+    height: 330px;
+    min-height: 330px;
     display: flex;
     flex-direction: column;
   }

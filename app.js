@@ -851,57 +851,6 @@ function setupProcessFlowProgress() {
       cards.forEach((card) => card.classList.toggle("is-active", card === activeCard));
     }
 
-    function applyRowActive(activeRowCards) {
-      cards.forEach((card) => card.classList.remove("is-active"));
-      segments.forEach((segment) => segment.classList.remove("is-active"));
-
-      if (!Array.isArray(activeRowCards) || !activeRowCards.length) {
-        return;
-      }
-
-      activeRowCards.forEach((card) => {
-        card.classList.add("is-active");
-        const cardIndex = cards.indexOf(card);
-        if (cardIndex >= 0) {
-          segments[cardIndex]?.classList.add("is-active");
-        }
-      });
-    }
-
-    function getRows() {
-      const sorted = cards
-        .map((card) => ({ card, rect: card.getBoundingClientRect() }))
-        .sort((a, b) => a.rect.top - b.rect.top || a.rect.left - b.rect.left);
-
-      const rows = [];
-      const tolerance = 24;
-
-      sorted.forEach((entry) => {
-        const existingRow = rows.find((row) => Math.abs(row.top - entry.rect.top) <= tolerance);
-        if (existingRow) {
-          existingRow.items.push(entry);
-          existingRow.top = Math.min(existingRow.top, entry.rect.top);
-          existingRow.bottom = Math.max(existingRow.bottom, entry.rect.bottom);
-          return;
-        }
-
-        rows.push({
-          top: entry.rect.top,
-          bottom: entry.rect.bottom,
-          items: [entry]
-        });
-      });
-
-      rows.forEach((row) => {
-        row.cards = row.items
-          .sort((a, b) => a.rect.left - b.rect.left)
-          .map((item) => item.card);
-        row.center = (row.top + row.bottom) / 2;
-      });
-
-      return rows;
-    }
-
     function updateMobileActiveCard() {
       ticking = false;
       const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
@@ -909,29 +858,15 @@ function setupProcessFlowProgress() {
       const columnCount = getGridColumnCount();
 
       if (columnCount > 1) {
-        const rows = getRows();
-        let visibleBest = null;
-        let visibleBestDistance = Number.POSITIVE_INFINITY;
-        let fallbackBest = null;
-        let fallbackBestDistance = Number.POSITIVE_INFINITY;
+        const rect = section.getBoundingClientRect();
+        const start = viewportHeight * 0.74;
+        const end = -Math.max(rect.height * 0.25, viewportHeight * 0.2);
+        const total = start - end;
+        const rawProgress = total <= 0 ? 0 : (start - rect.top) / total;
+        const clampedProgress = Math.max(0, Math.min(0.999, rawProgress));
+        const activeIndex = Math.min(cards.length - 1, Math.floor(clampedProgress * cards.length));
 
-        rows.forEach((row) => {
-          const distance = Math.abs(row.center - focusY);
-          const visible = row.bottom > viewportHeight * 0.12 && row.top < viewportHeight * 0.88;
-
-          if (visible && distance < visibleBestDistance) {
-            visibleBestDistance = distance;
-            visibleBest = row;
-          }
-
-          if (distance < fallbackBestDistance) {
-            fallbackBestDistance = distance;
-            fallbackBest = row;
-          }
-        });
-
-        const activeRow = visibleBest || fallbackBest;
-        applyRowActive(activeRow?.cards || []);
+        applyActiveIndex(activeIndex);
         return;
       }
 
