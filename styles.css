@@ -2313,7 +2313,6 @@ p {
 
 .legal-copy a {
   color: var(--color-primary-strong);
-  text-decoration: underline;
   text-underline-offset: 0.12em;
 }
 
