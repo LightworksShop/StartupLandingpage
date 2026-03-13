@@ -207,6 +207,18 @@ app.get("/", (_req, res) => {
   res.sendFile(path.join(rootDir, "index.html"));
 });
 
+app.use("/api", (_req, res) => {
+  res.status(404).json({ ok: false, error: "not_found" });
+});
+
+app.use((req, res, next) => {
+  if (req.method !== "GET" && req.method !== "HEAD") {
+    return next();
+  }
+
+  return res.status(404).sendFile(path.join(rootDir, "404.html"));
+});
+
 app.listen(port, () => {
   process.stdout.write(`SMTP relay running on http://localhost:${port}\n`);
 });

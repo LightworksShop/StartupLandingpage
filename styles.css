@@ -2317,6 +2317,36 @@ p {
   text-underline-offset: 0.12em;
 }
 
+.not-found-copy {
+  max-width: 760px;
+}
+
+.not-found-kicker {
+  margin: 0 0 14px;
+  font-size: 0.98rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+}
+
+.not-found-copy h1 {
+  max-width: 14ch;
+  margin-bottom: 18px;
+}
+
+.not-found-copy p {
+  max-width: 58ch;
+  margin-bottom: 0;
+}
+
+.not-found-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 28px;
+}
+
 @media (max-width: 1080px) {
   html,
   body {
