@@ -32,7 +32,7 @@ function setupLegalMenu() {
 }
 
 function trackMatomoEvent(category, action, name) {
-  if (!Array.isArray(window._paq)) {
+  if (!window._paq || typeof window._paq.push !== "function") {
     return;
   }
 
