@@ -58,6 +58,15 @@ function setupMatomoButtonTracking() {
     return;
   }
 
+  function slugify(value) {
+    return String(value || "")
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .replace(/[^a-z0-9]+/g, "_")
+      .replace(/^_+|_+$/g, "") || "unknown";
+  }
+
   function getCategory(element) {
     if (element.closest(".hero-cta-group")) {
       return "Hero";
@@ -95,28 +104,63 @@ function setupMatomoButtonTracking() {
     return "CTA";
   }
 
-  function getLabel(element) {
-    const ariaLabel = element.getAttribute("aria-label");
-    if (ariaLabel) {
-      return ariaLabel.trim();
-    }
-
+  function getEventName(element) {
     const text = element.textContent.replace(/\s+/g, " ").trim();
-    if (text) {
-      return text;
+    const href = element.getAttribute("href") || "";
+
+    if (element.classList.contains("header-cta")) {
+      return "header_cta_termin_vereinbaren";
+    }
+    if (element.closest(".hero-cta-group")) {
+      if (element.classList.contains("btn-primary")) {
+        return "hero_cta_termin_vereinbaren";
+      }
+      if (element.classList.contains("btn-secondary")) {
+        return "hero_cta_mehr_erfahren";
+      }
+    }
+    if (element.closest(".solution-cta")) {
+      return "loesung_cta_termin_vereinbaren";
+    }
+    if (element.id === "booking-consent-button") {
+      return "terminbuchung_widget_laden";
+    }
+    if (element.id === "booking-manage-button") {
+      return "terminbuchung_einwilligung_zuruecksetzen";
+    }
+    if (element.closest(".pilot-contact")) {
+      if (href.startsWith("tel:")) {
+        return "kontakt_telefon";
+      }
+      if (href.startsWith("mailto:")) {
+        return "kontakt_email";
+      }
+    }
+    if (element.closest(".desktop-nav")) {
+      return `nav_desktop_${slugify(text || href)}`;
+    }
+    if (element.closest(".mobile-menu")) {
+      return `nav_mobile_${slugify(text || href)}`;
+    }
+    if (element.closest(".footer-nav")) {
+      return `footer_nav_${slugify(text || href)}`;
+    }
+    if (element.closest(".footer-legal")) {
+      return `footer_legal_${slugify(text || href)}`;
+    }
+    if (element.classList.contains("footer-logo")) {
+      return "footer_logo_startseite";
+    }
+    if (element.closest(".not-found-actions")) {
+      return `not_found_${slugify(text || href)}`;
     }
 
-    const href = element.getAttribute("href");
-    if (href) {
-      return href;
-    }
-
-    return "Unbenannt";
+    return `cta_${slugify(text || href || element.getAttribute("aria-label"))}`;
   }
 
   trackedElements.forEach((element) => {
     element.addEventListener("click", () => {
-      trackMatomoEvent(getCategory(element), "click", getLabel(element));
+      trackMatomoEvent(getCategory(element), "click", getEventName(element));
     });
   });
 }

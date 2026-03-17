@@ -55,6 +55,15 @@ function setupLegalMatomoButtonTracking() {
     return;
   }
 
+  function slugify(value) {
+    return String(value || "")
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .replace(/[^a-z0-9]+/g, "_")
+      .replace(/^_+|_+$/g, "") || "unknown";
+  }
+
   function getCategory(element) {
     if (element.closest(".desktop-nav")) {
       return "Navigation";
@@ -80,28 +89,37 @@ function setupLegalMatomoButtonTracking() {
     return "CTA";
   }
 
-  function getLabel(element) {
-    const ariaLabel = element.getAttribute("aria-label");
-    if (ariaLabel) {
-      return ariaLabel.trim();
-    }
-
+  function getEventName(element) {
     const text = element.textContent.replace(/\s+/g, " ").trim();
-    if (text) {
-      return text;
-    }
+    const href = element.getAttribute("href") || "";
 
-    const href = element.getAttribute("href");
-    if (href) {
-      return href;
+    if (element.classList.contains("header-cta")) {
+      return "header_cta_termin_vereinbaren";
     }
-
-    return "Unbenannt";
+    if (element.closest(".desktop-nav")) {
+      return `nav_desktop_${slugify(text || href)}`;
+    }
+    if (element.closest(".mobile-menu")) {
+      return `nav_mobile_${slugify(text || href)}`;
+    }
+    if (element.closest(".footer-nav")) {
+      return `footer_nav_${slugify(text || href)}`;
+    }
+    if (element.closest(".footer-legal")) {
+      return `footer_legal_${slugify(text || href)}`;
+    }
+    if (element.classList.contains("footer-logo")) {
+      return "footer_logo_startseite";
+    }
+    if (element.closest(".not-found-actions")) {
+      return `not_found_${slugify(text || href)}`;
+    }
+    return `cta_${slugify(text || href || element.getAttribute("aria-label"))}`;
   }
 
   trackedElements.forEach((element) => {
     element.addEventListener("click", () => {
-      trackMatomoEvent(getCategory(element), "click", getLabel(element));
+      trackMatomoEvent(getCategory(element), "click", getEventName(element));
     });
   });
 }
