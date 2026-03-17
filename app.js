@@ -41,6 +41,7 @@ function setupMatomoButtonTracking() {
   const trackedSelectors = [
     ".header-cta",
     ".hero-cta-group .btn",
+    ".hero-funding-badge-link",
     ".solution-cta",
     "#booking-consent-button",
     "#booking-manage-button",
@@ -69,6 +70,9 @@ function setupMatomoButtonTracking() {
 
   function getCategory(element) {
     if (element.closest(".hero-cta-group")) {
+      return "Hero";
+    }
+    if (element.classList.contains("hero-funding-badge-link")) {
       return "Hero";
     }
     if (element.closest(".solution-cta")) {
@@ -110,6 +114,9 @@ function setupMatomoButtonTracking() {
 
     if (element.classList.contains("header-cta")) {
       return "header_cta_termin_vereinbaren";
+    }
+    if (element.classList.contains("hero-funding-badge-link")) {
+      return "hero_badge_foerderung";
     }
     if (element.closest(".hero-cta-group")) {
       if (element.classList.contains("btn-primary")) {
@@ -1678,6 +1685,11 @@ function setupHeaderShrink() {
 
   function setScrolledState(isScrolled) {
     header.classList.toggle("is-scrolled", isScrolled);
+    if (window.matchMedia("(min-width: 1081px)").matches) {
+      document.body.classList.toggle("hero-badge-collapsed", isScrolled);
+    } else {
+      document.body.classList.remove("hero-badge-collapsed");
+    }
   }
 
   if ("IntersectionObserver" in window && sentinel) {
