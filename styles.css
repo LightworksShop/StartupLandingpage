@@ -2117,6 +2117,10 @@ body.hero-badge-collapsed .hero-funding-badge-mark {
   margin-bottom: 0;
 }
 
+.funding-cta {
+  margin-top: 12px;
+}
+
 .funding-card {
   display: grid;
   gap: 22px;
