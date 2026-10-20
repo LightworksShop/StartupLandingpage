@@ -1,0 +1,402 @@
+/* Compact library chrome; colors follow the native Admin theme. */
+.mk-library-tabs {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  height: var(--mk-library-tabs-height);
+  gap: 4px;
+  padding: 4px 8px;
+  flex-shrink: 0;
+  border-bottom: 1px solid var(--border-base, #ddd);
+}
+.mk .mk-library-tabs button {
+  height: 32px;
+  padding: 0 4px;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  border-radius: 0;
+  font-size: 12px;
+  background: transparent;
+}
+.mk .mk-library-tabs button[aria-selected="true"] {
+  color: var(--fg-interactive, #287cff);
+  border-bottom-color: #287cff;
+}
+.mk-add-element {
+  flex-shrink: 0;
+  margin: 12px 10px 0;
+  z-index: 4;
+}
+.mk .mk-add-element-button {
+  width: 100%;
+  height: 36px;
+  padding: 0 10px;
+  gap: 6px;
+  font-size: 11px;
+  white-space: nowrap;
+}
+.mk-add-element-button > span:not(.mk-add-chevron) {
+  flex: 1;
+}
+.mk-add-chevron {
+  align-self: stretch;
+  display: flex;
+  align-items: center;
+  border-left: 1px solid #ffffff30;
+  padding-left: 8px;
+}
+.mk-add-options {
+  position: absolute;
+  top: calc(var(--mk-library-tabs-height) + 54px);
+  left: 10px;
+  right: 10px;
+  padding: 4px;
+  border: 1px solid var(--border-base, #ddd);
+  border-radius: 8px;
+  background: var(--bg-base, #fff);
+  box-shadow: 0 8px 24px #0003;
+  max-height: min(300px, calc(100% - var(--mk-library-tabs-height) - 110px));
+  overflow: auto;
+}
+.mk-design-sidebar {
+  --mk-library-tabs-height: 76px;
+  position: relative;
+}
+.mk .mk-add-options button {
+  width: 100%;
+  justify-content: flex-start;
+  border: 0;
+  padding: 8px 6px;
+  font-size: 11px;
+  text-align: left;
+}
+.mk-library-contents {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+}
+.mk-layer-list {
+  padding: 10px;
+  scrollbar-gutter: auto;
+}
+.mk-layer-row {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  height: 46px;
+  padding: 0 5px;
+  margin-bottom: 6px;
+  border: 1px solid var(--border-base, #ddd);
+  border-radius: 6px;
+  background: var(--bg-subtle, #f7f7f8);
+}
+.mk-layer-row[data-selected="true"] {
+  color: var(--fg-base, #18181b);
+  background: var(--bg-highlight, #eff6ff);
+  border-color: var(--border-interactive, #b4d1fb);
+}
+.mk .mk-layer-row button {
+  border: 0;
+  background: transparent;
+  padding: 0;
+  height: 34px;
+  border-radius: 4px;
+}
+.mk .mk-layer-grip {
+  flex: 0 0 17px;
+  color: var(--fg-muted, #929292);
+  cursor: grab;
+}
+.mk .mk-layer-select {
+  color: inherit;
+  flex: 1;
+  min-width: 0;
+  gap: 7px;
+  justify-content: flex-start;
+  font-size: 11px;
+  text-align: left;
+}
+.mk-layer-select svg {
+  flex-shrink: 0;
+}
+.mk-layer-select span {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.mk .mk-layer-toggle {
+  position: relative;
+  display: grid;
+  place-items: center;
+  flex: 0 0 24px;
+  height: 34px;
+  margin: 0;
+  border-radius: 4px;
+}
+.mk-layer-toggle input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+.mk-layer-toggle:has(input:focus-visible) {
+  outline: 2px solid var(--border-interactive, #2563eb);
+}
+.mk-layer-toggle:has(input:disabled) {
+  opacity: 0.5;
+}
+.mk-layer-toggle:has(input:disabled) input {
+  cursor: default;
+}
+.mk-sidebar-pages {
+  flex-shrink: 0;
+  padding: 8px 10px;
+  border-top: 1px solid var(--border-base, #ddd);
+}
+.mk .mk-pages-toggle {
+  width: 100%;
+  padding: 7px 8px;
+  font-size: 12px;
+}
+.mk-pages-toggle span {
+  flex: 1;
+  text-align: left;
+}
+.mk-design-sidebar .mk-page-list .mk-card {
+  display: grid;
+  gap: 6px;
+}
+.mk-design-sidebar .mk-page-list button {
+  font-size: 11px;
+}
+.mk-design-workspace .mk-design-stage {
+  position: relative;
+  top: auto;
+  grid-column: auto;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  min-width: 0;
+  max-height: none;
+  overflow: hidden;
+  padding: 8px;
+}
+.mk-canvas-toolbar {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-bottom: 8px;
+}
+.mk-design-workspace .mk-canvas-toolbar label {
+  margin: 0;
+  flex: 1;
+  min-width: 0;
+}
+.mk-design-workspace .mk-canvas-toolbar select {
+  margin: 0;
+  font-size: 12px;
+}
+.mk-design-workspace .mk-canvas-scroll {
+  flex: 1;
+  min-height: 0;
+  max-height: none;
+  display: flex;
+  padding: 16px;
+  border-radius: 4px;
+  background: var(--bg-subtle, #e9e9e9);
+  overscroll-behavior: contain;
+}
+.mk-design-workspace .mk-canvas-wrap {
+  flex: 0 0 auto;
+  margin: auto;
+  box-shadow: 0 3px 18px #0002;
+}
+.mk-design-workspace .mk-zoom {
+  flex-shrink: 0;
+  margin: 8px 0 0;
+  gap: 5px;
+}
+.mk-design-workspace .mk-zoom button {
+  padding: 4px 8px;
+}
+.mk-design-workspace .mk-zoom span {
+  font-size: 11px;
+}
+.mk-design-workspace .mk-zoom label {
+  margin: 0 0 0 auto;
+  font-size: 11px;
+  gap: 4px;
+}
+.mk-canvas-help {
+  cursor: help;
+  color: var(--fg-subtle, #666);
+}
+.mk-design-workspace .mk-design-stage > p {
+  position: absolute;
+  bottom: 48px;
+  left: 10px;
+  right: 10px;
+  padding: 8px;
+  background: var(--bg-base, #fff);
+  font-size: 11px;
+}
+.mk-mobile-pane-tabs {
+  display: none;
+}
+@container (max-width: 700px) {
+  .mk-design-workspace .mk-mobile-pane-tabs {
+    display: flex;
+    flex-shrink: 0;
+    gap: 6px;
+  }
+  .mk .mk-mobile-pane-tabs button {
+    flex: 1;
+    font-size: 11px;
+    padding: 4px 8px;
+  }
+  .mk .mk-mobile-pane-tabs button[aria-pressed="true"] {
+    background: var(--bg-highlight, #eff6ff);
+    color: var(--fg-base, #18181b);
+  }
+  .mk-design-workspace .mk-designer {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: minmax(150px, 1fr) minmax(180px, 0.9fr);
+    gap: 8px;
+  }
+  .mk-design-workspace .mk-designer > * {
+    width: auto;
+  }
+  .mk-design-workspace .mk-design-stage {
+    grid-row: 1;
+    grid-column: 1;
+  }
+  .mk-design-workspace .mk-design-library,
+  .mk-design-workspace .mk-design-controls {
+    grid-row: 2;
+    grid-column: 1;
+  }
+  .mk-design-workspace[data-mobile-pane="library"] .mk-design-controls,
+  .mk-design-workspace[data-mobile-pane="tools"] .mk-design-library {
+    display: none;
+  }
+  .mk-design-workspace .mk-design-actions {
+    flex-wrap: wrap;
+  }
+  .mk-design-workspace .mk-design-actions > label {
+    max-width: none;
+  }
+  .mk-design-workspace .mk-design-actions .mk-toolbar {
+    gap: 4px;
+  }
+  .mk-design-workspace .mk-design-actions button {
+    padding: 6px 7px;
+  }
+  .mk-design-workspace .mk-canvas-scroll {
+    padding: 8px;
+  }
+  .mk-design-workspace .mk-zoom label {
+    margin-left: auto;
+  }
+}
+@container (min-width: 701px) and (max-width: 1000px) {
+  .mk-design-workspace .mk-panel-tabs {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .mk-design-workspace .mk-design-product .mk-thumb {
+    width: 56px;
+    height: 56px;
+  }
+}
+
+.mk-design-controls fieldset {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 8px;
+  min-width: 0;
+}
+.mk-design-controls label {
+  margin: 6px 0;
+}
+.mk-design-controls label > input,
+.mk-design-controls label > select,
+.mk-design-controls label > textarea {
+  margin-top: 3px;
+}
+.mk-design-controls
+  input:not([type="checkbox"]):not([type="range"]):not([type="color"]),
+.mk-design-controls select,
+.mk-design-controls textarea {
+  padding: 6px;
+  font-size: 12px;
+  min-height: 32px;
+}
+.mk-design-controls textarea {
+  min-height: 80px;
+  resize: vertical;
+}
+.mk-design-controls .mk-inspector-fields,
+.mk-design-controls .mk-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin: 6px 0;
+}
+.mk-inspector-fields > label {
+  min-width: 0;
+  margin: 0;
+}
+.mk-design-controls .mk-grid button {
+  padding: 6px;
+  font-size: 12px;
+}
+.mk-inspector-choice {
+  margin-bottom: 10px;
+}
+.mk-inspector-more {
+  border-top: 1px solid var(--border-base, #ddd);
+  padding-top: 8px;
+  margin-top: 4px;
+  font-size: 12px;
+}
+.mk-inspector-more summary {
+  cursor: pointer;
+  padding: 4px 0;
+  font-weight: 600;
+}
+.mk-swatches {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.mk-swatches span {
+  width: 24px;
+  height: 24px;
+  border: 1px solid var(--mk-border);
+  border-radius: 4px;
+}
+.mk-animation-preview .mk-canvas-interaction {
+  visibility: hidden;
+}
+.mk-animation-panel > button {
+  width: 100%;
+  margin-top: 10px;
+}
+.mk-animation-panel > p {
+  font-size: 12px;
+  line-height: 1.5;
+}
+.mk-element-library {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  min-width: 0;
+  display: grid;
+  gap: 10px;
+}

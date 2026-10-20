@@ -1,19 +1,55 @@
 {
-  "name": "flow-landingpage-mail-relay",
+  "name": "smartwerk-website",
   "version": "1.0.0",
   "private": true,
-  "description": "SMTP relay for Flow landingpage form",
+  "description": "Smartwerk website and independent marketing backend",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js",
-    "dev": "node server.js"
+    "start": "node --import tsx server.js",
+    "dev": "node --import tsx server.js",
+    "build:marketing": "node marketing/scripts/build.mjs",
+    "test:marketing": "node --import tsx --test marketing/lib/marketing/*.test.ts marketing/tests/*.test.ts",
+    "db:migrate": "node --import tsx marketing/server/migrate.ts",
+    "admin:password": "node marketing/scripts/password.mjs",
+    "typecheck:marketing": "tsc -p marketing/tsconfig.json --noEmit",
+    "test:marketing-db": "node --import tsx --test --test-concurrency=1 marketing/tests/database.test.js marketing/tests/linkedin-database.test.js",
+    "test:marketing-ui": "playwright test --config marketing/playwright.config.ts",
+    "prestart": "npm run build:marketing",
+    "predev": "npm run build:marketing",
+    "setup:local": "node marketing/scripts/setup-local.mjs",
+    "db:up": "docker compose -f compose.marketing.yml up -d --wait",
+    "db:stop": "docker compose -f compose.marketing.yml stop"
   },
   "dependencies": {
+    "@tanstack/react-query": "5.64.2",
     "compression": "^1.8.1",
+    "connect-pg-simple": "10.0.0",
+    "cookie-parser": "1.4.7",
     "dotenv": "^16.6.1",
-    "express-rate-limit": "^7.5.1",
     "express": "^4.21.2",
+    "express-rate-limit": "^7.5.1",
+    "express-session": "1.18.2",
+    "fontkit": "2.0.4",
     "helmet": "^8.1.0",
-    "nodemailer": "^6.10.1"
+    "knex": "3.1.0",
+    "nodemailer": "^6.10.1",
+    "pg": "8.16.3",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "react-router-dom": "6.30.1",
+    "sharp": "0.35.5",
+    "tsx": "4.20.6",
+    "zod": "3.25.76"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.61.1",
+    "@types/connect-pg-simple": "7.0.3",
+    "@types/cookie-parser": "1.4.9",
+    "@types/express": "4.17.23",
+    "@types/express-session": "1.18.2",
+    "@types/fontkit": "2.0.9",
+    "@types/node": "24.10.0",
+    "esbuild": "0.25.11",
+    "typescript": "5.9.3"
   }
 }

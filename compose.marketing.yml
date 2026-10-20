@@ -1,0 +1,22 @@
+name: smartwerk-marketing-local
+
+services:
+  database:
+    image: postgres:17-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: smartwerk_marketing
+      POSTGRES_USER: smartwerk
+      POSTGRES_PASSWORD: ${MARKETING_DB_PASSWORD:?Run npm run setup:local first}
+    ports:
+      - "127.0.0.1:${MARKETING_DB_PORT:-55432}:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U smartwerk -d smartwerk_marketing"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+
+volumes:
+  postgres-data:

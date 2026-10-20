@@ -1,0 +1,3 @@
+create table marketing_account (id text primary key, revision integer not null default 1, value jsonb not null, encrypted text null, created_at timestamptz not null default now(), updated_at timestamptz not null default now(), deleted_at timestamptz null);
+create table marketing_oauth_state (id text primary key, actor text not null, channel text not null, nonce_hash text not null, account_revision integer not null, expires_at timestamptz not null, used_at timestamptz null, created_at timestamptz not null default now(), updated_at timestamptz not null default now(), deleted_at timestamptz null);
+create index marketing_oauth_state_expiry on marketing_oauth_state (expires_at);

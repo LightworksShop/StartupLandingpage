@@ -1,0 +1,91 @@
+/* Layered marketing editor; the shared SVG scene also drives JPEG exports. */
+.mk-canvas-wrap {
+  position: relative;
+  margin: auto;
+}
+.mk-scene > svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.mk-canvas-interaction {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  touch-action: none;
+}
+.mk-guides {
+  fill: none;
+  stroke: #f97316;
+  stroke-width: 1.5;
+  stroke-dasharray: 8 8;
+  opacity: 0.65;
+}
+.mk-layers {
+  margin-top: 16px;
+}
+.mk-layer {
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border-base, #ddd);
+}
+.mk-layer > button {
+  width: 100%;
+  justify-content: flex-start;
+}
+.mk-layer .mk-toolbar {
+  gap: 6px;
+  margin-top: 8px;
+}
+.mk-layer .mk-toolbar button {
+  padding: 5px 8px;
+}
+.mk-channel-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 12px;
+}
+.mk-channel-grid strong {
+  display: block;
+  font-size: 11px;
+  margin-bottom: 8px;
+  overflow-wrap: anywhere;
+}
+.mk-channel-grid .mk-scene {
+  max-width: 100%;
+}
+.mk-export-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 8px 0;
+  overflow-wrap: anywhere;
+}
+.mk-export-link .mk-thumb {
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+}
+.mk-design-controls .mk-segment {
+  flex-wrap: wrap;
+}
+.mk-design-controls .mk-segment button {
+  font-size: 10px;
+  min-width: 65px;
+}
+.mk-design-library .mk-card {
+  margin-top: 12px;
+}
+@media (max-width: 600px) {
+  .mk-channel-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (min-width: 601px) {
+  .mk-design-stage {
+    max-height: calc(100vh - 40px);
+    overflow: auto;
+  }
+}

@@ -342,3 +342,27 @@ Diese Seiten sind bereits am Theme orientiert, aber bei groesseren globalen Desi
 ## Pflegehinweis
 
 Dieses Dokument soll bei relevanten Projektentscheidungen aktualisiert werden. Es ist keine allgemeine Ideensammlung, sondern eine operative Uebergabedatei.
+
+## Marketing-Backend (20.10.2026)
+
+- Separater Adminbereich unter `/marketing` mit persönlicher Session-Anmeldung.
+- Kalender, Medienpool, Gestalter und Freigaben aus dem Export entkoppelt;
+  kein Medusa-/Shop-/Redis-Betrieb für Smartwerk erforderlich.
+- PostgreSQL-Migrationen: `npm run db:migrate`; Frontend-Build:
+  `npm run build:marketing`. `npm start` und `npm run dev` bauen zuerst.
+- LinkedIn unterstützt persönliches Profil und Unternehmensseiten, einschließlich
+  Zielwahl pro Beitrag. Der Versand bleibt standardmäßig deaktiviert und pausiert.
+- Agentenzugang unter `/api/marketing-agent` ist von persönlicher Anmeldung getrennt.
+- `server.js` liefert öffentliche Dateien explizit aus; Backendcode, Konfiguration
+  und Exportarchiv sind keine öffentlichen statischen Dateien.
+- Einrichtung, Berechtigungen, Datensicherung, Tests und noch ausstehende Live-Abnahme:
+  `Docs/Marketing-Backend.md`. Marketing-Konfigurationsvorlage: `marketing/.env.example`.
+- Lokale Konfiguration: `npm run setup:local`, danach `npm run db:up` und
+  `npm run db:migrate`. Die Docker-Datenbank verwendet ein eigenes dauerhaftes Volume
+  und bindet nur an `127.0.0.1:55432`. Lokale Zugangsdaten liegen ausschließlich in
+  der ignorierten Datei `marketing/var/local-access.txt` (Modus 600).
+- Sicherheitskorrektur: Admin-Sitzungen sind an Benutzername und Passwort-Hash
+  gebunden; bisherige Sitzungen ohne diese Bindung benötigen erneut eine Anmeldung.
+- Wiederherstellung teilweise veröffentlichter Beiträge: Freigaben prüfen nur
+  verbleibende Kanäle. Abgeschlossene Kanäle werden nicht erneut versendet;
+  aktive oder unklare Versandvorgänge blockieren weiterhin die erneute Freigabe.

@@ -5,6 +5,7 @@ const helmet = require("helmet");
 const compression = require("compression");
 const rateLimit = require("express-rate-limit");
 const path = require("path");
+const { mountMarketing } = require("./marketing/server/index.ts");
 
 dotenv.config();
 
@@ -19,7 +20,7 @@ const allowedOrigins = String(
   .filter(Boolean);
 const cspConnectSrc = ["'self'", ...allowedOrigins];
 
-app.set("trust proxy", 1);
+app.set("trust proxy", Number(process.env.TRUST_PROXY_HOPS || 0));
 
 app.use(compression());
 app.use(
@@ -33,7 +34,9 @@ app.use(
         frameAncestors: ["'none'"],
         objectSrc: ["'none'"],
         imgSrc: ["'self'", "data:"],
-        styleSrc: ["'self'"],
+        styleSrc: ["'self'", (req) => req.path === "/marketing" || req.path.startsWith("/marketing/") ? "'unsafe-inline'" : "'self'"],
+        fontSrc: ["'self'"],
+        mediaSrc: ["'self'", "blob:"],
         scriptSrc: ["'self'"],
         connectSrc: cspConnectSrc
       }
@@ -41,6 +44,7 @@ app.use(
   })
 );
 
+const marketing = mountMarketing(app);
 app.use(express.json({ limit: "100kb" }));
 
 function isAllowedOrigin(origin) {
@@ -188,20 +192,15 @@ app.post("/api/contact", apiCors, contactRateLimiter, async (req, res) => {
   }
 });
 
-app.use(
-  express.static(rootDir, {
-    etag: true,
-    maxAge: "7d",
-    setHeaders: (res, filePath) => {
-      const normalized = filePath.replace(/\\/g, "/");
-      if (normalized.endsWith(".html")) {
-        res.setHeader("Cache-Control", "no-cache");
-      } else if (normalized.includes("/assets/")) {
-        res.setHeader("Cache-Control", "public, max-age=2592000, immutable");
-      }
-    }
-  })
-);
+// Serve only the public website. Backend source, exports and manifests stay private.
+app.use("/assets", express.static(path.join(rootDir, "assets"), {
+  etag: true, maxAge: "30d", immutable: true, index: false, dotfiles: "deny"
+}));
+for (const file of ["index.html", "404.html", "impressum.html", "datenschutz.html", "app.js", "content.js", "legal.js", "styles.css", "robots.txt", "sitemap.xml"]) {
+  app.get(`/${file}`, (_req, res) => res.sendFile(path.join(rootDir, file), {
+    headers: { "Cache-Control": file.endsWith(".html") ? "no-cache" : "public, max-age=3600" }
+  }));
+}
 
 app.get("/", (_req, res) => {
   res.sendFile(path.join(rootDir, "index.html"));
@@ -219,6 +218,13 @@ app.use((req, res, next) => {
   return res.status(404).sendFile(path.join(rootDir, "404.html"));
 });
 
-app.listen(port, () => {
-  process.stdout.write(`SMTP relay running on http://localhost:${port}\n`);
+app.use((error, _req, res, _next) => {
+  const status = error.type === "entity.too.large" ? 413 : error.type === "entity.parse.failed" ? 400 : 500;
+  res.status(status).json({ message: status === 413 ? "Datei zu groß." : status === 400 ? "Ungültiges JSON." : "Servervorgang fehlgeschlagen." });
+});
+const server = app.listen(port, process.env.HOST || "127.0.0.1", () => {
+  process.stdout.write(`Smartwerk running on http://localhost:${port}\n`);
+});
+for (const signal of ["SIGTERM", "SIGINT"]) process.once(signal, () => {
+  server.close(() => marketing.close().finally(() => process.exit(0)));
 });
