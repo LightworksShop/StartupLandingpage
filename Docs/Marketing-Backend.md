@@ -5,6 +5,71 @@ Kalender, Beitragsversionen, Medienbibliothek, Bildgestalter, Vorlagen, JPEG-/MP
 Planung, persönliche Freigaben, Veröffentlichungshistorie und Kontoverwaltung.
 Die öffentliche Website und `/api/contact` laufen im selben Prozess weiter.
 
+## Veröffentlichung auf dem bestehenden Server
+
+Die öffentliche Landingpage liegt auf `smartwerk-vps` unter
+`/var/www/landingpage`. Bisher wurde dieser Git-Checkout über
+`git pull --ff-only origin main` aktualisiert; Nginx liefert die Website statisch
+aus. GitHub-Push allein veröffentlicht dort keine Änderungen.
+
+Das Marketing-Backend erhält einen eigenen Checkout außerhalb des öffentlichen
+Webverzeichnisses: `/opt/smartwerk/apps/marketing`. Der SSH-Alias `smartwerk`
+verwendet lokal eine IPv6-Adresse; beim geprüften Zugriff am 20.10.2026 war
+IPv4 mit `ssh -4 -o HostName=82.165.176.219 smartwerk` erreichbar.
+Der Git-Checkout auf dem Server verwendet den vorhandenen Deploy-Key über
+`core.sshCommand = ssh -i ~/.ssh/startuplandingpage_deploy -o IdentitiesOnly=yes`.
+
+`compose.marketing.production.yml` betreibt PostgreSQL und das Backend getrennt
+von den übrigen Anwendungen. Nur `127.0.0.1:3030` ist für Nginx erreichbar;
+PostgreSQL hat keinen veröffentlichten Port. Node und FFmpeg sind im Image
+enthalten. Datenbank und Medien verwenden eigene dauerhafte Docker-Volumes.
+Die private `.env` im Backend-Checkout enthält die Produktionswerte, insbesondere
+`MARKETING_DATABASE_URL` mit Host `database`, `MARKETING_DB_PASSWORD` und
+`MARKETING_PUBLIC_URL=https://smartwerk-software.de`. Keine lokale `.env` kopieren.
+
+Nach Bereitstellung der privaten Konfiguration im Backend-Checkout:
+
+```sh
+docker compose -f compose.marketing.production.yml build app
+docker compose -f compose.marketing.production.yml up -d --wait database
+docker compose -f compose.marketing.production.yml run --rm --no-deps app npm run db:migrate
+docker compose -f compose.marketing.production.yml up -d --wait app
+```
+
+Die vorbereitete Nginx-Konfiguration unter `deploy/marketing/nginx.conf` erhält
+die statische Website und leitet ausschließlich die Marketing-Pfade an das
+Backend weiter. Andere Repository-Dateien werden nicht öffentlich ausgeliefert.
+Der vorhandene statische Betrieb hatte keine Weiterleitung für `/api/contact`;
+SMTP und eine entsprechende Weiterleitung sind separat einzurichten.
+
+Die einmalige Nginx-Aktivierung benötigt Administratorrechte. Vorher die aktuelle
+Konfiguration und den Unterschied zum Vorschlag prüfen, dann deren SHA-256
+übergeben:
+
+```sh
+sha256sum /etc/nginx/sites-available/smartwerk-software.de
+sudo bash deploy/marketing/activate.sh GEPRUEFTER_SHA256
+```
+
+Das Skript sichert die bestehende Konfiguration, verhindert das Überschreiben
+eines zwischenzeitlich geänderten Stands, prüft `nginx -t`, lädt Nginx neu und
+prüft `/marketing` über HTTPS. Bei Fehlern wird die alte Konfiguration
+wiederhergestellt. Der erzeugte Adminzugang liegt ausschließlich in
+`marketing/var/admin-access.txt` auf dem Server (Modus 600). Veröffentlichung auf
+Social-Media-Plattformen bleibt deaktiviert.
+
+Bei späteren Updates zunächst Datenbank, Medien und `.env` gesichert halten,
+den Backend-Checkout aktualisieren und die vier Compose-Befehle erneut ausführen.
+Die Nginx-Aktivierung ist nur bei Änderungen der Weiterleitungen nötig.
+Docker-Volumes beim Update nicht entfernen.
+
+Bei der Produktionsvorbereitung wurden die gemeldeten npm-Sicherheitslücken
+durch Aktualisierung auf [React Router 7.18.4](https://github.com/remix-run/react-router/releases/tag/react-router%407.18.4)
+und [Nodemailer 10.1.7](https://github.com/nodemailer/nodemailer/releases/tag/v10.1.7)
+behoben. Installation/Audit meldeten am 20.10.2026 keine bekannten
+Schwachstellen mehr. TypeScript, 65 Unit-/Vertragstests, sechs Datenbanktests,
+vier Browsertests und ein lokaler SMTP-Kompatibilitätstest waren erfolgreich.
+
 ## Lokale Einrichtung mit Docker
 
 Im Projektverzeichnis ausführen:

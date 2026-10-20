@@ -82,6 +82,18 @@ Die Seite ist aktuell kein Framework-Projekt, sondern eine statische Frontend-St
 
 ### SMTP / Backend
 
+Verifizierter Veröffentlichungsweg (20.10.2026):
+
+- Bestehende statische Website: `smartwerk-vps`, `/var/www/landingpage`,
+  Aktualisierung per `git pull --ff-only origin main`; Nginx liefert Dateien aus.
+- GitHub-Push startet dort kein automatisches Deployment.
+- Marketing-Produktionsdienst: `/opt/smartwerk/apps/marketing`,
+  `compose.marketing.production.yml`, ausschließlich `127.0.0.1:3030`.
+- Nginx-Vorschlag und abgesicherte Aktivierung: `deploy/marketing/`.
+  Details und Betriebsbefehle in `Docs/Marketing-Backend.md`.
+- SSH-Alias `smartwerk`: bei nicht verfügbarem IPv6
+  `ssh -4 -o HostName=82.165.176.219 smartwerk`.
+
 Relevante Stellen:
 
 - `content.js`: `flowContent.form.smtpRelayUrl`
