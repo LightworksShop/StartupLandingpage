@@ -1,5 +1,0 @@
-/* Keep this order: later files deliberately refine earlier shared styles. */
-@import "./styles/workspace.css";
-@import "./styles/design-scene.css";
-@import "./styles/design-layout.css";
-@import "./styles/design-panels.css";

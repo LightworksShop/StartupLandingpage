@@ -378,3 +378,14 @@ Dieses Dokument soll bei relevanten Projektentscheidungen aktualisiert werden. E
 - Wiederherstellung teilweise veröffentlichter Beiträge: Freigaben prüfen nur
   verbleibende Kanäle. Abgeschlossene Kanäle werden nicht erneut versendet;
   aktive oder unklare Versandvorgänge blockieren weiterhin die erneute Freigabe.
+
+## Gemeinsame Marketing-Anwendung (02.11.2026)
+
+- Gemeinsamer Quellcode: privates Repository `LightworksShop/marketing-tool`.
+- Marketing-Funktionen ausschließlich dort ändern; keine Quellkopien hier pflegen.
+- Die Website startet direkt mit `node server.js`, ohne Marketing-Build und Datenbank.
+- Smartwerk verwendet weiterhin dieselben Produktions-Volumes und privaten Schlüssel;
+  neue Releases liegen unter `/opt/smartwerk/apps/marketing-tool`.
+- Aktualisierung beider Firmeninstallationen über einen regulären Release im
+  gemeinsamen Repository. Details: aktueller Abschnitt in `Docs/Marketing-Backend.md`.
+- HTML-Animationen und deren Renderer verbleiben als kundenspezifische Autorenquellen hier.

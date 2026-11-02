@@ -5,7 +5,6 @@ const helmet = require("helmet");
 const compression = require("compression");
 const rateLimit = require("express-rate-limit");
 const path = require("path");
-const { mountMarketing } = require("./marketing/server/index.ts");
 
 dotenv.config();
 
@@ -44,7 +43,6 @@ app.use(
   })
 );
 
-const marketing = mountMarketing(app);
 app.use(express.json({ limit: "100kb" }));
 
 function isAllowedOrigin(origin) {
@@ -226,5 +224,5 @@ const server = app.listen(port, process.env.HOST || "127.0.0.1", () => {
   process.stdout.write(`Smartwerk running on http://localhost:${port}\n`);
 });
 for (const signal of ["SIGTERM", "SIGINT"]) process.once(signal, () => {
-  server.close(() => marketing.close().finally(() => process.exit(0)));
+  server.close(() => process.exit(0));
 });
