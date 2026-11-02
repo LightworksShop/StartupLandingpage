@@ -1,3 +1,32 @@
+# Gemeinsames Marketing-Backend (aktueller Betrieb)
+
+Die Anwendung wird ausschließlich im privaten Repository
+[LightworksShop/marketing-tool](https://github.com/LightworksShop/marketing-tool)
+weiterentwickelt. Smartwerk und Lightworks erhalten gemeinsam geprüfte Releases;
+Firmeneinstellungen, Daten, Medien und Konten bleiben getrennt.
+
+Smartwerk läuft aus `/opt/smartwerk/apps/marketing-tool/current` auf Port 3030.
+Das bestehende Compose-Projekt, die PostgreSQL- und Medien-Volumes sowie die
+private Umgebung `/opt/smartwerk/apps/marketing/.env` bleiben erhalten.
+Nginx verwendet seine bisherigen Marketing-Weiterleitungen. Die öffentliche
+Landingpage und `/api/contact` benötigen keine Marketing-Dependencies mehr.
+
+Neue Funktionen im gemeinsamen Repository ändern und dort einen regulären
+Release veröffentlichen. Dessen Pipeline prüft beide Firmenprofile und
+aktualisiert beide Installationen einschließlich Backup, Migration und
+Healthcheck. Ein Push in dieses Landingpage-Repository aktualisiert das
+Marketing-Tool nicht. Die vollständige Betriebsanleitung liegt im neuen Repository.
+
+Kundenspezifische Quellen unter `marketing/animations/` und das Autorenwerkzeug
+`marketing/scripts/render-html-animation.mjs` verbleiben hier. Sie werden nicht
+als allgemeiner Bestandteil des gemeinsamen Tools verteilt.
+
+Die nachfolgende Dokumentation beschreibt den bisherigen integrierten Stand
+und bleibt als Umzugs- und Rückfallreferenz erhalten. Ihre Installationsbefehle
+nicht für neue Releases verwenden.
+
+---
+
 # Smartwerk Marketing-Backend
 
 Der bestehende Express-Server bietet unter `/marketing` einen eigenen Adminbereich:
